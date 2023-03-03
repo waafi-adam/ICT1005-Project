@@ -24,7 +24,7 @@
           rest, relax, unwind
         </h1>
         <h3>embrace your choices - we do</h3>
-        <a href="products.html" class="hero-btn">Shop Now</a>
+        <a href="/products.php" class="hero-btn">Shop Now</a>
       </div>
     </section>
     <!-- sidebar -->
