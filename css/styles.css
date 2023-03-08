@@ -775,3 +775,254 @@ Single Product Page
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/*
+===================
+Admin Page
+===================
+*/
+.dashboard-center {
+  margin-top: 50px;
+}
+.dashboard {
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  box-shadow: 5px 10px 35px -23px rgba(0, 0, 0, 0.83);
+  -webkit-box-shadow: 5px 10px 35px -23px rgba(0, 0, 0, 0.83);
+  -moz-box-shadow: 5px 10px 35px -23px rgba(0, 0, 0, 0.83);
+}
+.btn-container {
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.tab-btn:nth-child(1) {
+  border-top-left-radius: var(--radius);
+}
+.tab-btn:nth-child(3) {
+  border-top-right-radius: var(--radius);
+}
+.tab-btn {
+  padding: 1rem 0;
+  border: none;
+  text-transform: capitalize;
+  font-size: 1rem;
+  display: block;
+  background: var(--clr-grey-9);
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: var(--spacing);
+}
+.tab-btn:hover:not(.active) {
+  background: var(--clr-primary-10);
+  color: var(--clr-primary-5);
+}
+.dashboard-content {
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  padding: 2rem 1.5rem;
+}
+/* hide content */
+.content {
+  display: none;
+}
+.tab-btn.active {
+  background: var(--clr-white);
+}
+.content.active {
+  display: block;
+}
+/* table */
+.table-center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.table-row {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+}
+.item-display {
+  display: flex;
+}
+.table-row:first-of-type {
+  font-weight: bold;
+}
+.table-row .btn {
+  border: none;
+  box-shadow: none;
+  color: var(--clr-white);
+}
+.item-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+}
+.item-col {
+  width: 100%;
+  /* padding: 0 20px; */
+}
+.table-row:not(:first-child) {
+  border-top: 1px solid var(--clr-grey-9);
+  padding: 20px 5px;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+  transition: var(--transition);
+  visibility: hidden;
+  z-index: -10;
+}
+/* OPEN/CLOSE MODAL */
+.open-modal {
+  visibility: visible;
+  z-index: 10;
+}
+.modal-container {
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  width: 90vw;
+  height: 30vh;
+  max-width: var(--fixed-width);
+  text-align: center;
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  background: transparent;
+  border-color: transparent;
+  color: var(--clr-red-dark);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.close-btn:hover {
+  color: var(--clr-red-light);
+}
+/* EDIT SECTION */
+/* hide text */
+.item-edit {
+  display: none;
+}
+.show-edit .item-edit {
+  display: block;
+}
+/* .item-display{
+  display: flex;
+} */
+.show-edit .item-display {
+  display: none;
+}
+.item-edit .form {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-between;
+  width: 100%;
+}
+
+.item-edit .form-inputs {
+  display: flex;
+  flex-direction: column;
+  max-width: 45%;
+}
+
+.item-edit .thumbnail-img {
+  width: 100%;
+}
+
+.item-edit .form-imgs {
+  max-width: 45%;
+}
+
+.item-edit .form-input {
+  width: 100%;
+}
+
+.item-edit .btn {
+  margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+  .item-edit .form {
+    flex-direction: column;
+  }
+
+  .item-edit .form-inputs {
+    order: 2;
+    max-width: 100%;
+  }
+
+  .item-edit .form-imgs {
+    order: 1;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+}
+
+/* form gallery */
+.form-imgs .image-gallery .image-item {
+  display: inline-block;
+  width: 20%;
+}
+.image-item > img {
+  width: 100%;
+}
+
+/* delete modal */
+.modal-container .form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.form-input {
+  padding: 5px 20px;
+}
+
+@media (max-width: 767px) {
+  .table {
+    width: 100%;
+  }
+  .item-display {
+    flex-direction: column;
+  }
+  .item-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .item-btns {
+    margin: 10px auto;
+  }
+
+  .table-row {
+    padding: 10px 5px;
+  }
+  .dashboard-content {
+    padding: 5px;
+  }
+}
