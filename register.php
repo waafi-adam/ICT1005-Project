@@ -51,7 +51,7 @@
                             </label>
                         </div>
                     </div>
-                    <button class="btn btn-primary" id="submit" type="submit">Submit</button>
+                    <button class="btn btn-primary" id="submit"  type="submit">Submit</button>
                     <p>
                         Already a member with us? <a href="login.php">Login here.</a>.
                     </p>

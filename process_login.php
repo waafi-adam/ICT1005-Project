@@ -1,3 +1,12 @@
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'path/to/PHPMailer/src/Exception.php';
+require 'path/to/PHPMailer/src/PHPMailer.php';
+require 'path/to/PHPMailer/src/SMTP.php';
+$mail = new PHPMailer(true);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -40,8 +49,7 @@
             if ($success) {
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Login successful!</h4>";
-                echo "<p>Welcome back," . $fname . " " . $lname . "</p>";
-                setcookie('username', $email, time() + 3600, '/');
+                echo "<p>Welcome back," . $username. "</p>";
                 echo "<button id='loginbtn' class='btn btn-primary' type='login'>Return to Home</button>";
             } else {
                 echo "<main class='jumbotron text-left'>";

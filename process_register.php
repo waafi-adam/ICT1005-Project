@@ -17,7 +17,17 @@
         <?php include "includes/nav-white.inc.php"; ?> 
         <section class="register-section">
             <?php
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+
+            use PHPMailer\PHPMailer\PHPMailer;
+            use PHPMailer\PHPMailer\Exception;
+
+            require 'phpmailer/src/Exception.php';
+            require 'phpmailer/src/PHPMailer.php';
+            require 'phpmailer/src/SMTP.php';
             $email = $errorMsg = $username = $pwd = $pwd_confirm = $pwd_hashed = "";
+            $OTP = rand(100000,999999);
             $success = true;
             if (empty($_POST['username'])) {
                 $errorMsg .= "User name is required.<br>";
@@ -48,13 +58,36 @@
                 }
             }
             $pwd_hashed = password_hash($pwd, PASSWORD_DEFAULT);
+
             saveMemberToDB();
             if ($success) {
-                echo "<main class='jumbotron text-left'>";
-                echo "<h4>Your registration is successful!</h4>";
-                echo "<p> Thank you for  up," . $fname . " " . $lname . "</p>";
-                echo "<p>Email: " . $email . "<br>";
-                echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
+                $mail = new PHPMailer(true);
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = 465;
+                $mail->SMTPSecure = 'ssl';
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->Username = '2201113.sit@gmail.com';
+                $mail->Password = 'fhykfzntptcayquz';
+                $mail->setFrom('2201113.sit@gmail.com');
+                $mail->addAddress($email);
+                $mail->isHTML(true);
+                $mail->Subject = 'Welcome to Comfy!';
+                $mail->Body = "Dear $username,\n\nThank you for signing up with Comfy!"
+                        . "\n\n Your OTP Code is rand(100000,999999);";
+
+                if ($mail->send()) {
+                    debug_to_console("inside if");
+                    echo "<main class='jumbotron text-left'>";
+                    echo "<h4>Your registration is successful!</h4>";
+                    echo "<p> Thank you for  up," . $username . "</p>";
+                    echo "<p>Email: " . $email . "<br>";
+                    echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
+                } else {
+                    debug_to_console("Inside else");
+                    echo "<main class='jumbotron text-left'>";
+                    echo "<h4>Can't send email to " . $email . " </h4>";
+                }
             } else {
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Oops!</h3>";
@@ -100,7 +133,6 @@
                     $success = false;
                 } else {
                     // Prepare the statement:
-                    debug_to_console("test1");
 //                    $stmt = $conn->prepare("INSERT INTO User (userName,
 //            userEmail, userPassword) VALUES (?, ?, ?)");
                     $stmt = $conn->prepare("INSERT INTO shoeStore_user (userName,
@@ -110,11 +142,9 @@
                         $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                         $success = false;
                     }
-                    debug_to_console("test3");
                     $stmt->close();
                 }
                 $conn->close();
-                debug_to_console("Working");
             }
             ?>
         </section>
