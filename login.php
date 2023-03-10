@@ -20,16 +20,11 @@
         <section class="register-section">
             <div class="register">
                 <h1>
-                    Sign up now!
+                    Login to your account
                 </h1>
-                <form id='form' class= "text-slanted" action="process_register.php" method="post">
+                <form class= "text-slanted" action="process_login.php" method="post">
                     <div class="form-group">
-                        <label for="lname">User Name:</label>
-                        <input type="text" id="username" name="username" class="form-control" required maxlength="45"
-                               placeholder="Enter user name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
+                        <label for="email">Enter your email:</label>
                         <input type="email" id="email" name="email" class="form-control"  required
                                placeholder="Enter email">
                     </div>
@@ -38,22 +33,9 @@
                         <input type="password" id="pwd" name="pwd" class="form-control" type="password" required
                                placeholder="Enter password">
                     </div>
-                    <div class="form-group">
-                        <label for="pwd_confirm">Confirm Password:</label>
-                        <input type="password" id="pwd_confirm" name="pwd_confirm" class="form-control" 
-                               required type="password" placeholder="Confirm password">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check"
-                             <label>
-                            <input type="checkbox" name="agree" required>
-                            I agree to the terms and conditions.
-                            </label>
-                        </div>
-                    </div>
                     <button class="btn btn-primary" id="submit" type="submit">Submit</button>
                     <p>
-                        Already a member with us? <a href="login.php">Login here.</a>.
+                        Not registered yet? <a href="register.php">Register here!</a>.
                     </p>
                 </form>
             </div>

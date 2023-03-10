@@ -777,7 +777,7 @@ Single Product Page
 }
 /*
 =============== 
-Register Page
+Register/Login Pages
 ===============
 */
 
@@ -789,8 +789,6 @@ Register Page
     display: grid;
     place-items: center;
     color: var(--clr-white);
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 
 .register {
@@ -800,6 +798,10 @@ Register Page
     height: auto;
     transform: translate(-50%, -50%);
     position: fixed;
+    background:transparent;
+    backdrop-filter:blur(25px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    padding:1rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -825,9 +827,13 @@ Register Page
 
 #submit {
     font-family: 'Kaushan Script', cursive;
+    margin-top: 20px; /* add margin to the top of the submit button */
 }
 
 .text-slanted p {
     font-family: 'Kaushan Script', cursive;
     color: white;
+}
+.btn btn-primary{
+
 }
