@@ -61,14 +61,15 @@
 
             saveMemberToDB();
             if ($success) {
+                $smtpconfig = parse_ini_file('../private/smtp.ini');
                 $mail = new PHPMailer(true);
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 465;
                 $mail->SMTPSecure = 'ssl';
                 $mail->isSMTP();
                 $mail->SMTPAuth = true;
-                $mail->Username = '2201113.sit@gmail.com';
-                $mail->Password = 'fhykfzntptcayquz';
+                $mail->Username = $smtpconfig['email'];
+                $mail->Password = $smtpconfig['password'];
                 $mail->setFrom('2201113.sit@gmail.com');
                 $mail->addAddress($email);
                 $mail->isHTML(true);
