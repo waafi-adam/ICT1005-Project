@@ -1,11 +1,3 @@
-<?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require 'path/to/PHPMailer/src/Exception.php';
-require 'path/to/PHPMailer/src/PHPMailer.php';
-require 'path/to/PHPMailer/src/SMTP.php';
-$mail = new PHPMailer(true);
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +41,7 @@ $mail = new PHPMailer(true);
             if ($success) {
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Login successful!</h4>";
-                echo "<p>Welcome back," . $username. "</p>";
+                echo "<p>Welcome back," . $username . "</p>";
                 echo "<button id='loginbtn' class='btn btn-primary' type='login'>Return to Home</button>";
             } else {
                 echo "<main class='jumbotron text-left'>";
@@ -93,6 +85,11 @@ userEmail=?");
 // Don't be too specific with the error message - hackers don't
 // need to know which one they got right or wrong. :)
                             $errorMsg = "Email not found or password doesn't match";
+                            $success = false;
+                        }
+                        $verified = $row["verified"];
+                        if ($verified === 0) {
+                            $errorMsg = "Please register through your email first!";
                             $success = false;
                         }
                     } else {

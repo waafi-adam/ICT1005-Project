@@ -777,13 +777,21 @@ Single Product Page
 }
 /*
 =============== 
-Register/Login Pages
+Register/Login/Verification Pages
 ===============
 */
 
 .register-section {
     min-height: 100vh;
     margin-top: -6rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(../images/main-bcg.jpeg) center/cover;
+    display: grid;
+    place-items: center;
+    color: var(--clr-white);
+}
+.verification {
+    min-height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url(../images/main-bcg.jpeg) center/cover;
     display: grid;
@@ -833,7 +841,4 @@ Register/Login Pages
 .text-slanted p {
     font-family: 'Kaushan Script', cursive;
     color: white;
-}
-.btn btn-primary{
-
 }

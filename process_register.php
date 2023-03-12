@@ -20,14 +20,15 @@
             ini_set('display_errors', 1);
             error_reporting(E_ALL);
 
+            //set up PHPMailer variables
             use PHPMailer\PHPMailer\PHPMailer;
             use PHPMailer\PHPMailer\Exception;
 
-            require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/Exception.php';
             require 'phpmailer/src/PHPMailer.php';
             require 'phpmailer/src/SMTP.php';
             $email = $errorMsg = $username = $pwd = $pwd_confirm = $pwd_hashed = "";
-            $OTP = rand(100000,999999);
+            $verify_token = md5(rand());
             $success = true;
             if (empty($_POST['username'])) {
                 $errorMsg .= "User name is required.<br>";
@@ -61,7 +62,10 @@
 
             saveMemberToDB();
             if ($success) {
+                //test
                 $smtpconfig = parse_ini_file('../private/smtp.ini');
+                //prod
+                //$smtpconfig = parse_ini_file('../private/smtp_cred.ini');
                 $mail = new PHPMailer(true);
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 465;
@@ -74,18 +78,22 @@
                 $mail->addAddress($email);
                 $mail->isHTML(true);
                 $mail->Subject = 'Welcome to Comfy!';
-                $mail->Body = "Dear $username,\n\nThank you for signing up with Comfy!"
-                        . "\n\n Your OTP Code is rand(100000,999999);";
+                $email_template = "
+                    <h2>Thank you for registering with Comfy!</h2>
+                    <h5>Verify your account with the link below</h5>
+                    <br/><br/>
+                    <a href='http://35.212.189.116/verify-email.php?token=$verify_token'>Click me</a>
+                ";
+                $mail->Body = $email_template;
 
                 if ($mail->send()) {
                     debug_to_console("inside if");
                     echo "<main class='jumbotron text-left'>";
                     echo "<h4>Your registration is successful!</h4>";
-                    echo "<p> Thank you for  up," . $username . "</p>";
+                    echo "<p> Thank you for signing up," . $username . "</p>";
                     echo "<p>Email: " . $email . "<br>";
-                    echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
+                    echo "<p> Please check your email to verify your account! </p>";
                 } else {
-                    debug_to_console("Inside else");
                     echo "<main class='jumbotron text-left'>";
                     echo "<h4>Can't send email to " . $email . " </h4>";
                 }
@@ -119,13 +127,13 @@
              */
 
             function saveMemberToDB() {
-                global $username, $email, $pwd_hashed, $errorMsg, $success;
-                // Create database connection.
-                //$config = parse_ini_file('../../private/db-config.ini');
+                global $username, $email, $pwd_hashed, $errorMsg, $success, $verify_token;
+                // Create database connection.prod
+//                $config = parse_ini_file('../private/db-config.ini');
 //                $conn = new mysqli($config['servername'], $config['username'],
 //                        $config['password'], $config['dbname']);
                 //Production
-                //$conn = new mysqli("localhost", "project", "password", "shoeStore");
+//                $conn = new mysqli("localhost", "project", "password", "shoeStore");
                 //Test
                 $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
                 // Check connection
@@ -134,11 +142,15 @@
                     $success = false;
                 } else {
                     // Prepare the statement:
+                    // prod
 //                    $stmt = $conn->prepare("INSERT INTO User (userName,
-//            userEmail, userPassword) VALUES (?, ?, ?)");
+//            userEmail, userPassword,verified,verify_token) VALUES (?, ?, ?, ?,?)");
+                    //test
                     $stmt = $conn->prepare("INSERT INTO shoeStore_user (userName,
-            userEmail, userPassword) VALUES (?, ?, ?)");
-                    $stmt->bind_param("sss", $username, $email, $pwd_hashed);
+            userEmail, userPassword,verified,verify_token) VALUES (?, ?, ?, ?,?)");
+
+                    $notverified = 0;
+                    $stmt->bind_param("sssis", $username, $email, $pwd_hashed, $notverified, $verify_token);
                     if (!$stmt->execute()) {
                         $errorMsg = "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
                         $success = false;
