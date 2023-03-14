@@ -927,58 +927,62 @@ Admin Page
 }
 /* EDIT SECTION */
 /* hide text */
-.item-edit {
+.item-form {
   display: none;
 }
-.show-edit .item-edit {
+.show-form .item-form {
   display: block;
 }
 /* .item-display{
   display: flex;
 } */
-.show-edit .item-display {
+.show-form .item-display {
   display: none;
 }
-.item-edit .form {
+.show-form .add_product-btn {
+  display: none;
+}
+.item-form .form {
   display: flex;
   /* flex-wrap: wrap; */
   justify-content: space-between;
   width: 100%;
 }
 
-.item-edit .form-inputs {
+.item-form .form-inputs {
   display: flex;
   flex-direction: column;
   max-width: 45%;
 }
 
-.item-edit .thumbnail-img {
+.item-form .thumbnail-img {
   width: 100%;
 }
 
-.item-edit .form-imgs {
+.item-form .form-imgs {
   max-width: 45%;
+  margin-top: 1.25rem;
 }
 
-.item-edit .form-input {
+.item-form .form-input {
   width: 100%;
 }
 
-.item-edit .btn {
+.item-form .btn {
   margin-top: 10px;
 }
 
 @media (max-width: 767px) {
-  .item-edit .form {
+  .item-form .form {
     flex-direction: column;
   }
 
-  .item-edit .form-inputs {
+  .item-form .form-inputs {
     order: 2;
     max-width: 100%;
   }
 
-  .item-edit .form-imgs {
+  .item-form .form-imgs {
     order: 1;
     margin-bottom: 20px;
     max-width: 100%;
@@ -1025,4 +1029,27 @@ Admin Page
   .dashboard-content {
     padding: 5px;
   }
+}
+
+/* alert */
+.alert {
+  margin-bottom: 0;
+  height: 1.25rem;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  font-size: 0.7rem;
+  border-radius: 0.25rem;
+  letter-spacing: var(--spacing);
+  text-transform: capitalize;
+  color: var(--clr-black);
+}
+.alert-danger {
+  background: var(--clr-red-light);
+}
+.alert-success {
+  background: var(--clr-green-light);
+}
+.alert-load{
+  background: var(--clr-grey-8);
 }

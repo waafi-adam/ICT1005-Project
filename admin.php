@@ -10,9 +10,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     </head>
     <body>
          <?php include "includes/nav-black.inc.php"; ?>
+        <!-- modal -->
         <div class="modal-overlay">
             <div class="modal-container">
-                <form class="form">
+                <form class="form"  data-form_type="delete-product">
                     <h3>Product ID: 123</h3>
                     <div class="form-row">
                         <label for="delete" class="form-label">Type the product id to comfirm delete:</label>
@@ -61,7 +62,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                             <div class="item-col">$120.00</div>
                                         </div>
                                         <div class="item-btns item">
-                                            <button type="button" class="edit-open-btn btn">
+                                            <button type="button" class="product_form-open-btn btn" data-form_type="edit">
                                                 <i class="fas fa-edit"></i>
                                             </button>
                                             <button type="button" class="delete-btn btn">
@@ -70,227 +71,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         </div>
                                     </div>
                                     <!-- edit form -->
-                                    <div class="item-edit">
-                                        <h3>Editing product ID: 123</h3>
-                                        <form class="form">
-                                            <div class="form-inputs">
-                                                <div class="form-row">
-                                                    <label for="name" class="form-label">Name:</label>
-                                                    <input type="text" id="name" name="name" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="brand" class="form-label">Brand:</label>
-                                                    <input type="text" id="brand" name="brand" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="price" class="form-label">Price:</label>
-                                                    <input type="text" id="price" name="price" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="description" class="form-label">Description:</label>
-                                                    <textarea id="description" name="description"
-                                                        class="form-input"></textarea>
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="thumbnail" class="form-label">Add/Change Thumbnail:</label>
-                                                    <input type="file" id="thumbnail" name="thumbnail" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="image-gallery" class="form-label">Add Images to Gallery:</label>
-                                                    <input type="file" id="image-gallery" name="image-gallery"
-                                                        class="form-input" multiple>
-                                                </div>
-                                                <input type="submit" class="btn edit-close-btn" value="Submit Changes">
-                                            <input type="button" class="btn edit-close-btn" value="Cancel">
-                                            </div>
-
-                                            <div class="form-imgs">
-                                                <div class="thumbnail-container">
-                                                    <img src="hero-bcg.jpeg" alt="Current Image" class="thumbnail-img">
-                                                </div>
-                                                <div class="image-gallery">
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 1">
-                                                    </div>
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 2">
-                                                    </div>
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 3">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        </div>
                                 </div>
                                 <!-- item end -->
-                                <!-- item -->
-                                <div class="table-row item">
-                                    <!-- item display -->
-                                    <div class="item-display">
-                                        <div class="item-info">
-                                            <div class="item-col">123</div>
-                                            <div class="item-col">AirMax Pro</div>
-                                            <div class="item-col">Brand</div>
-                                            <div class="item-col">$120.00</div>
-                                        </div>
-                                        <div class="item-btns item">
-                                            <button type="button" class="edit-open-btn btn">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="delete-btn btn">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="table-row">
+                                    <!-- add product btn -->
+                                    <button class="btn add_product-btn product_form-open-btn" data-form_type="add">Add Products</button>
                                     <!-- edit form -->
-                                    <div class="item-edit">
-                                        <h3>Editing product ID: 123</h3>
-                                        <form class="form">
-                                            <div class="form-inputs">
-                                                <div class="form-row">
-                                                    <label for="name" class="form-label">Name:</label>
-                                                    <input type="text" id="name" name="name" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="brand" class="form-label">Brand:</label>
-                                                    <input type="text" id="brand" name="brand" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="price" class="form-label">Price:</label>
-                                                    <input type="text" id="price" name="price" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="description" class="form-label">Description:</label>
-                                                    <textarea id="description" name="description"
-                                                        class="form-input"></textarea>
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="thumbnail" class="form-label">Add/Change Thumbnail:</label>
-                                                    <input type="file" id="thumbnail" name="thumbnail" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="image-gallery" class="form-label">Add Images to Gallery:</label>
-                                                    <input type="file" id="image-gallery" name="image-gallery"
-                                                        class="form-input" multiple>
-                                                </div>
-                                                <input type="submit" class="btn edit-close-btn" value="Submit">
-                                            <input type="button" class="btn edit-close-btn" value="Cancel">
-                                            </div>
-
-                                            <div class="form-imgs">
-                                                <div class="thumbnail-container">
-                                                    <img src="hero-bcg.jpeg" alt="Current Image" class="thumbnail-img">
-                                                </div>
-                                                <div class="image-gallery">
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 1">
-                                                    </div>
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 2">
-                                                    </div>
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 3">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        </div>
                                 </div>
-                                <!-- item end -->
-                                <!-- item -->
-                                <div class="table-row item">
-                                    <!-- item display -->
-                                    <div class="item-display">
-                                        <div class="item-info">
-                                            <div class="item-col">123</div>
-                                            <div class="item-col">AirMax Pro</div>
-                                            <div class="item-col">Brand</div>
-                                            <div class="item-col">$120.00</div>
-                                        </div>
-                                        <div class="item-btns item">
-                                            <button type="button" class="edit-open-btn btn">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="delete-btn btn">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- edit form -->
-                                    <div class="item-edit">
-                                        <h3>Editing product ID: 123</h3>
-                                        <form class="form">
-                                            <div class="form-inputs">
-                                                <div class="form-row">
-                                                    <label for="name" class="form-label">Name:</label>
-                                                    <input type="text" id="name" name="name" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="brand" class="form-label">Brand:</label>
-                                                    <input type="text" id="brand" name="brand" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="price" class="form-label">Price:</label>
-                                                    <input type="text" id="price" name="price" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="description" class="form-label">Description:</label>
-                                                    <textarea id="description" name="description"
-                                                        class="form-input"></textarea>
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="thumbnail" class="form-label">Add/Change Thumbnail:</label>
-                                                    <input type="file" id="thumbnail" name="thumbnail" class="form-input">
-                                                </div>
-
-                                                <div class="form-row">
-                                                    <label for="image-gallery" class="form-label">Add Images to Gallery:</label>
-                                                    <input type="file" id="image-gallery" name="image-gallery"
-                                                        class="form-input" multiple>
-                                                </div>
-                                                <input type="submit" class="btn edit-close-btn" value="Submit">
-                                            <input type="button" class="btn edit-close-btn" value="Cancel">
-                                            </div>
-
-                                            <div class="form-imgs">
-                                                <div class="thumbnail-container">
-                                                    <img src="hero-bcg.jpeg" alt="Current Image" class="thumbnail-img">
-                                                </div>
-                                                <div class="image-gallery">
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 1">
-                                                    </div>
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 2">
-                                                    </div>
-                                                    <div class="image-item" draggable="true">
-                                                        <img src="hero-bcg.jpeg" alt="Image 3">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                        </div>
-                                </div>
-                                <!-- item end -->
                             </div>
+                            <!-- delete all & import csv -->
                             <div class="products-btns">
                                 <button class="btn deleteAll-btn">Delete All Products</button>
                                 <button class="btn importCSV-btn">import CSV</button>
@@ -338,6 +127,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
             </article>
         </div>
+        <?php 
+//            echo "hello";
+//            $config = parse_ini_file('../../private/db-config.ini');
+//            echo $config['servername'];
+//            echo $config['username'];
+//            echo $config['password'];
+//            echo $config['dbname'];
+//            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        ?>
         <script type="module" src="js/pages/admin.js"></script>
     </body>
 </html>
