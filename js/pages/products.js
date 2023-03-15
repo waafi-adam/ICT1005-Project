@@ -10,31 +10,31 @@ import setupPrice from '../filters/price.js';
 
 // specific imports
 import { getElement, getStorageItem } from '../utils.js';
-import { store, setupStore } from '../Product/store.js';
+import { product, store, setupStore } from '../Product/store.js';
 import display from '../Product/displayProducts.js';
 import fetchProducts from '../Product/fetchProducts.js';
 
-const haveStore = getStorageItem('store')[0];
+const haveStore = getStorageItem('product')[0];
 
 if(haveStore){
     const load = getElement('.page-loading');
-    display(store, getElement('.products-container'));
+    console.log("test");
+    display(product, getElement('.products-container'));
     load.style.display = 'none';
 } else {
     const init = async()=>{
         const load = getElement('.page-loading');
-        const products = await fetchProducts();
-        if (products){
-            setupStore(products);
-        }
-        display(store, getElement('.products-container'));
+        fetch("http://35.212.148.163/index.php");
+        
+        display(product, getElement('.products-container'));
         load.style.display = 'none';
-        setupSearch(store);
-        setupCompanies(store);
-        setupPrice(store);
+        setupSearch(product);
+        setupCompanies(product);
+        setupPrice(product);
     };
     init();
 }
-setupSearch(store);
-setupCompanies(store);
-setupPrice(store);
+
+setupSearch(product);
+setupCompanies(product);
+setupPrice(product);

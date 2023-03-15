@@ -5,9 +5,9 @@ const priceForm = getElement('.price-form');
 const priceFilter = getElement('.price-filter');
 const priceValue = getElement('.price-value');
 
-const setupPrice = (store) => {
+const setupPrice = (product) => {
     // find max price product
-    const prices = store.map(product => product.price);
+    const prices = product.map(product => product.productPrice);
     const max = Math.max(...prices);
     // set min & max value on filter
     priceFilter.max = max;
@@ -19,7 +19,7 @@ const setupPrice = (store) => {
         // display max value
         priceValue.textContent = `Max Value: ${value}`;
         // filter product
-        const newStore = store.filter(product => product.price <= value);
+        const newStore = product.filter(product => product.productPrice <= value);
         // diplay filtered product
         const notEmpty = newStore[0];
         if (notEmpty){
