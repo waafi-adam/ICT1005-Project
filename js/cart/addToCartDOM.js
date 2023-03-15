@@ -2,16 +2,16 @@ import { getElement } from '../utils.js';
 
 const addToCartDOM = (item) => {
     const cartItemsContainer = getElement('.cart-items');
-    const {id, name, img, price} = item;
+    //const {id, productName, img, price} = item;
     const newItem = document.createElement('article');
     newItem.classList.add('cart-item');
-    newItem.dataset.id = id;
+    newItem.dataset.id = item.productID;
     newItem.innerHTML = `
-        <img src="${img}" class="cart-item-img" alt="${name}-img">
+        <img src="data:image/png;base64,${item.productImage}" class="cart-item-img" alt="${item.productName}-img">
         <!-- item info -->
         <div>
-            <h4 class="cart-item-name">${name}</h4>
-            <p class="cart-item-price">$${price / 100}</p>
+            <h4 class="cart-item-name">${item.productName}</h4>
+            <p class="cart-item-price">$${item.productPrice}</p>
             <button class="cart-item-remove-btn">remove</button>
         </div>
         <!-- amount toggle -->
@@ -19,7 +19,7 @@ const addToCartDOM = (item) => {
             <button class="cart-item-increase-btn">
                 <i class="fas fa-chevron-up"></i>
             </button>
-            <p class="cart-item-amount" id="${id}">1</p>
+            <p class="cart-item-amount" id="${item.productID}">1</p>
             <button class="cart-item-decrease-btn">
                 <i class="fas fa-chevron-down"></i>
             </button>

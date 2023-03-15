@@ -20,6 +20,8 @@ const descDOM = getElement('.single-product-desc');
 const cartBtn = getElement('.addToCartBtn');
 
 
+
+
 const init = async()=>{
     const data = await fetchProduct();
     displayProduct(data);
@@ -27,6 +29,8 @@ const init = async()=>{
 };
 
 const fetchProduct = async()=>{
+    var test = document.forms['getID'].submit();
+    console.log(test);
     let id = window.location.search;
     const reponse = await fetch(singleProductUrl + id);
     const data = await reponse.json();

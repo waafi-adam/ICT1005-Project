@@ -97,6 +97,11 @@
     <div class="page-loading">
       <h2>Loading...</h2>
     </div>
+    
+    <form action="./includes/fetchProduct.php" method="post" name="getID">
+        <input type=hidden name="id" value="">
+    </form>
+    
     <script type="module" src="/js/pages/product.js"></script>
   </body>
 </html>
