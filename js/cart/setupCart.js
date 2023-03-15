@@ -6,11 +6,12 @@ import addToCartDOM from './addToCartDOM.js';
 // set items
 const cartItemsContainer = getElement('.cart-items');
 let cart = getStorageItem('cart');
+let product = getStorageItem('product');
   
 // ADD TO CART
 export const addToCart = (id) => {
   // check if exist in cart
-  const cartIds = cart.map(item => item.id);
+  const cartIds = cart.map(item => item.productID);
   // if doesn't exist
   if(cartIds.includes(id) == false){
     // add to storage
@@ -25,11 +26,12 @@ export const addToCart = (id) => {
     // update existing storage
     const amount = increaseItemStorage(id);
     // update existing DOM
-    const itemAmountDOM = getElement(`#${id}`);
+    const itemAmountDOM = document.getElementById(`${id}`);
+    
     itemAmountDOM.textContent = amount;
   }
   updateItemCount();
-  updateTotalPrice()
+  updateTotalPrice();
   setStorageItem('cart', cart);
   openCart();
 };
@@ -43,7 +45,7 @@ const init = ()=>{
     itemAmountDOM.textContent = item.amount;
   }
   updateItemCount();
-  updateTotalPrice()
+  updateTotalPrice();
   // add click events on cart items
   cartItemsContainer.addEventListener('click', (e)=>{
     const parent = e.target.parentElement;
@@ -52,10 +54,10 @@ const init = ()=>{
       const amountDOM = parent.nextElementSibling;
       const id = amountDOM.getAttribute('id');
       // update storage
-      increaseItemStorage(id);
+      const amount = increaseItemStorage(id);
       // update DOM
-      const item = cart.find(item => item.id == id);
-      amountDOM.textContent = item.amount
+      //const item = cart.find(item => item.productID == id);
+      amountDOM.textContent = amount;
     }
     // decrease btn
     if(parent.classList.contains('cart-item-decrease-btn')){
@@ -80,17 +82,17 @@ const init = ()=>{
       itemDOM.remove();
     }
     updateItemCount();
-    updateTotalPrice()
+    updateTotalPrice();
     setStorageItem('cart', cart);
-  })
-}
+  });
+};
 init();
 
 // REPEATED FUNCTIONS
 function increaseItemStorage(id){
   let newAmount;
   cart = cart.map(item =>{
-      if(item.id == id){
+      if(item.productID == id){
         newAmount = item.amount + 1;
         item = {...item, amount:newAmount};
         return item;
@@ -102,7 +104,7 @@ function increaseItemStorage(id){
 function decreaseItemStorage(id){
   let newAmount;
   cart = cart.map(item =>{
-      if(item.id == id){
+      if(item.productID == id){
         newAmount = item.amount - 1;
         item = {...item, amount:newAmount};
         return item
@@ -113,7 +115,7 @@ function decreaseItemStorage(id){
 }
 
 function removeItemStorage(id){
-  cart = cart.filter(item => item.id !== id);
+  cart = cart.filter(item => item.productID !== id);
 }
 
 function updateItemCount(){
@@ -125,7 +127,7 @@ function updateItemCount(){
 
 function updateTotalPrice(){
   const cartTotalDOM = getElement('.cart-total');
-  const eachItemPrice = cart.map(item => item.amount * item.price);
+  const eachItemPrice = cart.map(item => item.amount * item.productPrice);
   const totalCount = eachItemPrice.reduce((acc, curr) => acc + curr, 0);
-  cartTotalDOM.textContent = totalCount;
+  cartTotalDOM.textContent = "$" + totalCount;
 }

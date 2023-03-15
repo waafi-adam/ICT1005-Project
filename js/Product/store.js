@@ -1,6 +1,7 @@
 import { getStorageItem, setStorageItem } from '../utils.js';
 
 let store = getStorageItem('store');
+let product = getStorageItem('product');
 
 const setupStore = (products) => {
     store = products.map(product =>{
@@ -11,8 +12,8 @@ const setupStore = (products) => {
     setStorageItem('store', store);
 };
 const findProduct = (id) => {
-    const newCartItem = store.find(product => product.id == id);
+    const newCartItem = product.find(product => product.productID == id);
     return newCartItem;
 };
 
-export { store, setupStore, findProduct };
+export { store, product , setupStore, findProduct };

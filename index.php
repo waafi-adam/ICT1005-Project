@@ -1,21 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- font-awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
-
-    <!-- styles css -->
-    <link rel="stylesheet" href="css/styles.css" />
+      <?php include "includes/head.inc.php" ?>
     <title>Home | Comfy</title>
   </head>
   <body>
       
      <?php include "includes/nav-white.inc.php"; ?> 
+      
+     <?php include "includes/fetchProducts.php"; ?>
       
     <!-- hero -->
     <section class="hero">
@@ -68,16 +61,17 @@
         </header>
         <!-- cart items -->
         <div class="cart-items">
-          <!-- single item -->
-          <article class="cart-item" data-id="">
+            
+          <!--
+           <article class="cart-item" data-id="">
             <img src="./images/main-bcg.jpeg" class="cart-item-img" alt="name">
-            <!-- item info -->
+
             <div>
               <h4 class="cart-item-name">high-back bench</h4>
               <p class="cart-item-price">$13.30</p>
               <button class="cart-item-remove-btn">remove</button>
             </div>
-            <!-- amount toggle -->
+
             <div>
               <button class="cart-item-increase-btn">
                 <i class="fas fa-chevron-up"></i>
@@ -87,7 +81,9 @@
                 <i class="fas fa-chevron-down"></i>
               </button>
             </div>
-          </article>
+          </article> 
+           -->
+           
           <!-- end of single item -->
         </div>
         <!-- footer -->

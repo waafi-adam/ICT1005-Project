@@ -1,26 +1,27 @@
 import { addToCart } from '../cart/setupCart.js';
 
+console.log("hello");
 
 const display = (products, element, isFilter) => {
     element.innerHTML = products.map(product =>{
-        const {id, img, name, price} = product;
+        //const {id, img, name, price} = product;
         return `
             <!-- single product -->
             <article class="product">
             <div class="product-container">
-                <img src="${img}" alt="${name}-img" class="product-img img">
+                <img src="data:image/png;base64,${product.productImage}" alt="${product.productName}-img" class="product-img img">
                 <div class="product-icons">
-                    <a href="product.php?id=${id}" class="product-icon">
+                    <a href="product.php?id=${product.productID}" class="product-icon">
                         <i class="fas fa-search"></i>
                     </a>
-                    <button class="product-cart-btn product-icon ${id}" data-id="${id}">
+                    <button class="product-cart-btn product-icon ${product.productID}" data-id="${product.productID}">
                         <i class="fas fa-shopping-cart"></i>
                     </button>
                 </div>
             </div>
             <footer>
-                <h5 class="product-name">${name}</h5>
-                <span class="product-price">${price}</span>
+                <h5 class="product-name">${product.productName}</h5>
+                <span class="product-price">${product.productPrice}</span>
             </footer>
             </article>
             <!-- end of single product -->
@@ -31,6 +32,7 @@ const display = (products, element, isFilter) => {
     element.addEventListener('click', e=>{
         const parent = e.target.parentElement;
         if(parent.classList.contains('product-cart-btn')){
+            console.log(parent.dataset.id)
             addToCart(parent.dataset.id);
         }
     })
