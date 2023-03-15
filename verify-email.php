@@ -14,7 +14,10 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <section class="verification-section">
+
+        <?php include "includes/nav-white.inc.php"; ?> 
+        <section class="register-section">
+
             <?php
             $token = $username = $success = "";
             $success = true;

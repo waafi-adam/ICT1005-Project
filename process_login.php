@@ -18,6 +18,8 @@
         <?php include "includes/nav-white.inc.php"; ?> 
         <section class="register-section">
             <?php
+            require 'zebra_session/Zebra_Session.php';
+
             $username = $email = $pwd_hashed = $errorMsg = $success = "";
             $success = true;
             if (empty($_POST["email"])) {
@@ -42,13 +44,25 @@
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Login successful!</h4>";
                 echo "<p>Welcome back," . $username . "</p>";
-                echo "<button id='loginbtn' class='btn btn-primary' type='login'>Return to Home</button>";
+                echo '<button class="btn btn-primary"><a href="index.php">Return back to home page</a></button>';
+                $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
+                $session = new Zebra_Session($conn, 'sEcUr1tY_c0dE');
+                $_SESSION['username'] = $username;
             } else {
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following errors were detected:</h4>";
                 echo "<p>" . $errorMsg . "</p>";
-                echo "<button id='returnbtn' class='btn btn-primary' type='signup'>Return to Sign-up</button>" . "<br>";
+                echo '<button class="btn btn-primary"><a href="login.php">Return back to login page</a></button>';
+            }
+
+            function debug_to_console($data) {
+                $output = $data;
+                if (is_array($output)) {
+                    $output = implode(',', $output);
+                }
+
+                echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
             }
 
             function authenticateUser() {

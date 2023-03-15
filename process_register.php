@@ -17,6 +17,7 @@
         <?php include "includes/nav-white.inc.php"; ?> 
         <section class="register-section">
             <?php
+            //For debugging purposes (Delete once onto production)
             ini_set('display_errors', 1);
             error_reporting(E_ALL);
 
