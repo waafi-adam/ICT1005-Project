@@ -8,6 +8,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     />
+    <!-- Stripe JavaScript library -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
     <!-- styles css -->
     <link rel="stylesheet" href="css/styles.css" />
@@ -91,11 +93,14 @@
           <!-- end of single item -->
         </div>
         <!-- footer -->
-        <footer>
+        <footer></footer>
           <h3 class="cart-total text-slanted">
             total: $12.00
           </h3>
-          <button class="cart-checkout btn">checkout</button>
+            <form>
+                <button type="submit" class="cart-checkout btn" formaction="payment_addr.php">Checkout</button>
+            </form>
+<!--          <button class="cart-checkout btn" onclick="payment_addr.php">checkout</button>-->
         </footer>
       </aside>
     </div>

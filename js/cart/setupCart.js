@@ -29,7 +29,7 @@ export const addToCart = (id) => {
     itemAmountDOM.textContent = amount;
   }
   updateItemCount();
-  updateTotalPrice()
+  updateTotalPrice();
   setStorageItem('cart', cart);
   openCart();
 };
@@ -43,7 +43,7 @@ const init = ()=>{
     itemAmountDOM.textContent = item.amount;
   }
   updateItemCount();
-  updateTotalPrice()
+  updateTotalPrice();
   // add click events on cart items
   cartItemsContainer.addEventListener('click', (e)=>{
     const parent = e.target.parentElement;
@@ -80,7 +80,7 @@ const init = ()=>{
       itemDOM.remove();
     }
     updateItemCount();
-    updateTotalPrice()
+    updateTotalPrice();
     setStorageItem('cart', cart);
   })
 }
@@ -105,7 +105,7 @@ function decreaseItemStorage(id){
       if(item.id == id){
         newAmount = item.amount - 1;
         item = {...item, amount:newAmount};
-        return item
+        return item;
       }
       return item
     });
