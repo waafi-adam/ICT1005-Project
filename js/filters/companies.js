@@ -3,16 +3,18 @@ import display from '../Product/displayProducts.js';
 
 const companiesContainer = getElement('.companies');
 
-const setupCompanies = (store) => {
+const setupCompanies = (product) => {
     // find all unique companies in store
-    let companies = new Set(store.map(product => product.company));
+    let companies = new Set(product.map(product => product.productCompany));
     companies = ['all', ...companies];
+    
     // display unique companies
     companiesContainer.innerHTML = companies.map(company=>{
         return `
             <button class="company-btn">${company}</button>
         `
     }).join('');
+    
     // companies click event
     companiesContainer.addEventListener('click',e=>{
         const btn = e.target
@@ -21,9 +23,9 @@ const setupCompanies = (store) => {
         if (isBtn){
             const company = btn.textContent;
             if(company == 'all'){
-                display(store, getElement('.products-container'), true);
+                display(product, getElement('.products-container'), true);
             } else {
-                const newStore = store.filter(product => product.company == company);
+                const newStore = product.filter(product => product.productCompany == company);
                 display(newStore, getElement('.products-container'), true);
             }
         }
