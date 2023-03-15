@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <?php include "includes/head.inc.php" ?>
+    <!-- Stripe JavaScript library -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <?php include "includes/head.inc.php" ?>
     <title>Home | Comfy</title>
   </head>
   <body>
@@ -87,11 +89,14 @@
           <!-- end of single item -->
         </div>
         <!-- footer -->
-        <footer>
+        <footer></footer>
           <h3 class="cart-total text-slanted">
             total: $12.00
           </h3>
-          <button class="cart-checkout btn">checkout</button>
+            <form>
+                <button type="submit" class="cart-checkout btn" formaction="payment_addr.php">Checkout</button>
+            </form>
+<!--          <button class="cart-checkout btn" onclick="payment_addr.php">checkout</button>-->
         </footer>
       </aside>
     </div>

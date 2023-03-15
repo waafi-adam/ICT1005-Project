@@ -107,7 +107,7 @@ function decreaseItemStorage(id){
       if(item.productID == id){
         newAmount = item.amount - 1;
         item = {...item, amount:newAmount};
-        return item
+        return item;
       }
       return item
     });
