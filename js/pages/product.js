@@ -28,13 +28,27 @@ const init = async()=>{
     loading.style.display = 'none';
 };
 
+
+const postData = async(url, data) =>{
+    const resp = await fetch(url, {
+        method: 'POST',
+        body: data
+    });
+    return resp.json();
+};
+
 const fetchProduct = async()=>{
-    var test = document.forms['getID'].submit();
-    console.log(test);
-    let id = window.location.search;
-    const reponse = await fetch(singleProductUrl + id);
-    const data = await reponse.json();
-    return data;
+    let id = window.location.search.split('id=')[1];
+    console.log(id);
+    const formData = new FormData();
+    formData.set("productID", "id");
+    const resp = await postData('../../includes/fetchProduct.php', formData);
+    console.log(resp);
+    
+    
+    //const reponse = await fetch(singleProductUrl + id);
+    //const data = await reponse.json();
+    //return data;
 };
 
 const displayProduct = (product)=>{

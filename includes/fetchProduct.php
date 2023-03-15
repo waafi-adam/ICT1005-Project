@@ -1,5 +1,8 @@
 <?php
 
+    echo "hello";
+
+    $id = $_POST["productID"];
 
     $config = parse_ini_file('../private/db-config.ini');
 
@@ -11,22 +14,11 @@
         echo "Connection fail";
     }
     else {
-        $res = $conn->query('SELECT * FROM Product');
-        $rowstest = [];
-        foreach ($res as $row) {
-            $rowstest[] = [
-                'productID' => $row['productID'], 
-                'productName' => $row['productName'],
-                'productPrice' => $row['productPrice'],
-                'productCompany' => $row['productCompany'],
-                'productImage' => base64_encode($row['productImage']),
-                'productDescription' => $row['productDescription']
-            ];
-        }
-        
-        $json = json_encode($rowstest);  
+        $stmt = $conn->prepare("SELECT * FROM Product WHERE email=?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $json = $result;
         echo $json;
-
-      
     }
 
