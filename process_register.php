@@ -63,10 +63,7 @@ require 'phpmailer/src/Exception.php';
 
             saveMemberToDB();
             if ($success) {
-                //test
-                $smtpconfig = parse_ini_file('../private/smtp.ini');
-                //prod
-                //$smtpconfig = parse_ini_file('../private/smtp_cred.ini');
+                $smtpconfig = parse_ini_file('../private/smtp_cred.ini');
                 $mail = new PHPMailer(true);
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 465;
@@ -83,7 +80,7 @@ require 'phpmailer/src/Exception.php';
                     <h2>Thank you for registering with Comfy!</h2>
                     <h5>Verify your account with the link below</h5>
                     <br/><br/>
-                    <a href='http://35.212.189.116/verify-email.php?token=$verify_token'>Click me</a>
+                    <a href='http://35.212.148.163/verify-email.php?token=$verify_token'>Click me</a>
                 ";
                 $mail->Body = $email_template;
 
@@ -130,26 +127,19 @@ require 'phpmailer/src/Exception.php';
             function saveMemberToDB() {
                 global $username, $email, $pwd_hashed, $errorMsg, $success, $verify_token;
                 // Create database connection.prod
-//                $config = parse_ini_file('../private/db-config.ini');
-//                $conn = new mysqli($config['servername'], $config['username'],
-//                        $config['password'], $config['dbname']);
-                //Production
-//                $conn = new mysqli("localhost", "project", "password", "shoeStore");
-                //Test
-                $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
+                $config = parse_ini_file('../private/db-config.ini');
+                $conn = new mysqli($config['servername'], $config['username'],
+                        $config['password'], $config['dbname']);
+                
                 // Check connection
                 if ($conn->connect_error) {
                     $errorMsg = "Connection failed: " . $conn->connect_error;
                     $success = false;
                 } else {
                     // Prepare the statement:
-                    // prod
-//                    $stmt = $conn->prepare("INSERT INTO User (userName,
-//            userEmail, userPassword,verified,verify_token) VALUES (?, ?, ?, ?,?)");
-                    //test
-                    $stmt = $conn->prepare("INSERT INTO shoeStore_user (userName,
+                    
+                    $stmt = $conn->prepare("INSERT INTO User (userName,
             userEmail, userPassword,verified,verify_token) VALUES (?, ?, ?, ?,?)");
-
                     $notverified = 0;
                     $stmt->bind_param("sssis", $username, $email, $pwd_hashed, $notverified, $verify_token);
                     if (!$stmt->execute()) {

@@ -18,6 +18,9 @@
         <?php include "includes/nav-white.inc.php"; ?> 
         <section class="register-section">
             <?php
+            //For debugging purposes (Delete once onto production)
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
             require 'zebra_session/Zebra_Session.php';
 
             $username = $email = $pwd_hashed = $errorMsg = $success = "";
@@ -45,7 +48,9 @@
                 echo "<h3>Login successful!</h4>";
                 echo "<p>Welcome back," . $username . "</p>";
                 echo '<button class="btn btn-primary"><a href="index.php">Return back to home page</a></button>';
-                $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
+                $config = parse_ini_file('../private/db-config.ini');
+                $conn = new mysqli($config['servername'], $config['username'],
+                        $config['password'], $config['dbname']);
                 $session = new Zebra_Session($conn, 'sEcUr1tY_c0dE');
                 $_SESSION['username'] = $username;
             } else {
@@ -68,21 +73,16 @@
             function authenticateUser() {
                 global $username, $email, $pwd_hashed, $errorMsg, $success;
 // Create database connection.
-//                $config = parse_ini_file('../../private/db-config.ini');
-//                $conn = new mysqli($config['servername'], $config['username'],
-//                        $config['password'], $config['dbname']);
-                //Production
-                //$conn = new mysqli("localhost", "project", "password", "shoeStore");
-                //Test
-                $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
-
+                $config = parse_ini_file('../private/db-config.ini');
+                $conn = new mysqli($config['servername'], $config['username'],
+                        $config['password'], $config['dbname']);
 // Check connection
                 if ($conn->connect_error) {
                     $errorMsg = "Connection failed: " . $conn->connect_error;
                     $success = false;
                 } else {
 // Prepare the statement:
-                    $stmt = $conn->prepare("SELECT * FROM shoeStore_user WHERE
+                    $stmt = $conn->prepare("SELECT * FROM User WHERE
 userEmail=?");
 // Bind & execute the query statement:
                     $stmt->bind_param("s", $email);

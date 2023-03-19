@@ -47,19 +47,16 @@
             function verifyUser() {
                 global $token, $username;
 // Create database connection.prod
-//                $config = parse_ini_file('../private/db-config.ini');
-//                $conn = new mysqli($config['servername'], $config['username'],
-//                        $config['password'], $config['dbname']);
-                //Test
-                $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
-
+                $config = parse_ini_file('../private/db-config.ini');
+                $conn = new mysqli($config['servername'], $config['username'],
+                        $config['password'], $config['dbname']);
 // Check connection
                 if ($conn->connect_error) {
                     $errorMsg = "Connection failed: " . $conn->connect_error;
                     $success = false;
                 } else {
 // Prepare the statement:
-                    $stmt = $conn->prepare("SELECT verified FROM shoeStore_user WHERE
+                    $stmt = $conn->prepare("SELECT * FROM User WHERE
 verify_token=? LIMIT 1");
 // Bind & execute the query statement:
                     $stmt->bind_param("s", $token);
@@ -67,20 +64,11 @@ verify_token=? LIMIT 1");
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         //Matches so we will set verified to 1
-                        $row = $result->fetch_assoc();
-                        $verified = $row["verified"];
-                        if ($verified === 1) {
-                            //already verified
-                            $errorMsg = "You have already been verified, please login instead.";
-                            $success = false;
-                        } else {
-                            //Update verified to 1 
-                            $update_stmt = $conn->prepare("UPDATE shoeStore_user SET verified='1' "
-                                    . "WHERE verify_token=? LIMIT 1");
+                        $update_stmt = $conn->prepare("UPDATE User SET verified='1' "
+                                . "WHERE verify_token=? LIMIT 1");
 // Bind & execute the query statement:
-                            $update_stmt->bind_param("s", $token);
-                            $update_stmt->execute();
-                        }
+                        $update_stmt->bind_param("s", $token);
+                        $update_stmt->execute();
                     } else {
                         $errorMsg = "Wrong verification code, please try again.";
                         $success = false;
