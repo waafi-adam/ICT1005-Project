@@ -15,5 +15,3 @@ if ($conn->connect_error) {
     $session = new Zebra_Session($conn, 'sEcUr1tY_c0dE');
 }
 
-// return the $session variable
-return $session;

@@ -16,13 +16,17 @@
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
-
-        <section class="register-section">
+        <?php include "includes/checkSession.php"; ?>
+        <?php
+        global $session;
+        $username=$_SESSION['username'];
+        if (empty($username)) {
+            echo'<section class="register-section">
             <div class="register">
                 <h1>
                     Sign up now!
                 </h1>
-                <form id='form' class= "text-slanted" action="process_register.php" method="post">
+                <form id="form" class= "text-slanted" action="process_register.php" method="post">
                     <div class="form-group">
                         <label for="lname">User Name:</label>
                         <input type="text" id="username" name="username" class="form-control" required maxlength="45"
@@ -57,6 +61,21 @@
                     </p>
                 </form>
             </div>
-        </section>
+        </section>';
+        } else {
+            echo'<section class="register-section">
+            <div class="register">
+                <h1>
+                    You are already logged in!
+                </h1>
+                <p>
+                    Go back to homepage <a href="index.php">Click here to go back to the homepage.</a>.
+                </p>
+                <p>
+                    Logout instead?<a href="logout.php">Click here to logout.</a>.
+                </p>';
+        }
+        ?>
+
     </body>
 </html>
