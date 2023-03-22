@@ -14,7 +14,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/nav-session.inc.php"; ?> 
         <section class="register-section">
             <?php
             //For debugging purposes (Delete once onto production)

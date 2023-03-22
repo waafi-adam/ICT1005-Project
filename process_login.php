@@ -15,7 +15,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/nav-session.inc.php"; ?> 
         <section class="register-section">
             <?php
             //For debugging purposes (Delete once onto production)
@@ -24,6 +24,7 @@
             require 'zebra_session/Zebra_Session.php';
 
             $username = $email = $pwd_hashed = $errorMsg = $success = "";
+            $userID="";
             $success = true;
             if (empty($_POST["email"])) {
                 $errorMsg .= "Email is empty.<br>";
@@ -47,12 +48,13 @@
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Login successful!</h4>";
                 echo "<p>Welcome back," . $username . "</p>";
-                echo '<button class="btn btn-primary"><a href="index.php">Return back to home page</a></button>';
+                echo '<button class="btn btn-primary"><a href="orderHistory.php">Order History</a></button>';
                 $config = parse_ini_file('../private/db-config.ini');
                 $conn = new mysqli($config['servername'], $config['username'],
                         $config['password'], $config['dbname']);
                 $session = new Zebra_Session($conn, 'sEcUr1tY_c0dE');
                 $_SESSION['username'] = $username;
+                $_SESSION['userID']=$userID;
             } else {
                 echo "<main class='jumbotron text-left'>";
                 echo "<h3>Oops!</h3>";
@@ -72,6 +74,7 @@
 
             function authenticateUser() {
                 global $username, $email, $pwd_hashed, $errorMsg, $success;
+                global $userID;
 // Create database connection.
                 $config = parse_ini_file('../private/db-config.ini');
                 $conn = new mysqli($config['servername'], $config['username'],
@@ -102,10 +105,13 @@ userEmail=?");
                             $success = false;
                         }
                         $verified = $row["verified"];
+                        
                         if ($verified === 0) {
                             $errorMsg = "Please register through your email first!";
                             $success = false;
                         }
+                        $userID=$row["userID"];
+                        debug_to_console("Inside function".$userID);
                     } else {
                         $errorMsg = "Email not found or password doesn't match...";
                         $success = false;
