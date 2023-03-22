@@ -19,66 +19,74 @@ dashboard.addEventListener('click', function (e) {
 });
 
 // FORMS & MODALS
-const rows = document.querySelectorAll('.table-row:not(:first-of-type)');
-const modal = document.querySelector('.modal-overlay');
-const modalCloseBtn = document.querySelector('.close-btn');
 
-rows.forEach((row) => {
-  const editOpenBtn = row.querySelector('.product_form-open-btn');
-  let modalOpenBtn = null;
-  if (row.classList.contains('item')) {
-    modalOpenBtn = row.querySelector('.delete-btn');
-  }
+const selectAndListenRows = () => {
+    const rows = document.querySelectorAll('.table-row:not(:first-of-type)');
+    const modal = document.querySelector('.modal-overlay');
+    const modalCloseBtn = document.querySelector('.close-btn');
 
-  // form toggle
-  editOpenBtn.addEventListener('click', () => {
-    renderForm(editOpenBtn.dataset.form_type, row);
-    selectAndListenForm();
-    row.classList.add('show-form');
-  });
-  const selectAndListenForm = () => {
-    // select & listen close btns
-    const editCloseBtns = row.querySelectorAll('.product_form-close-btn');
-    editCloseBtns.forEach((btn) => {
-      btn.addEventListener('click', function () {
-        removeForm(row);
-        row.classList.remove('show-form');
+    rows.forEach((row) => {
+      const editOpenBtn = row.querySelector('.product_form-open-btn');
+      let modalOpenBtn = null;
+      if (row.classList.contains('item')) {
+        modalOpenBtn = row.querySelector('.delete-btn');
+      }
+
+      // form toggle
+      editOpenBtn.addEventListener('click', () => {
+        renderForm(editOpenBtn.dataset.form_type, row);
+        selectAndListenForm();
+        row.classList.add('show-form');
       });
+      const selectAndListenForm = () => {
+        // select & listen close btns
+        const editCloseBtns = row.querySelectorAll('.product_form-close-btn');
+        editCloseBtns.forEach((btn) => {
+          btn.addEventListener('click', function () {
+            removeForm(row);
+            row.classList.remove('show-form');
+          });
+        });
+
+        // select & listen form
+        const form = row.querySelector('.form');
+        form.addEventListener('submit', handleSubmit);
+
+        // select alert
+        const alert = form.querySelector('.alert');
+
+        // file input listener (updates img)
+        const thumbnailInput = form.querySelector(`input[type="file"`);
+        const thumbnailImg = form.querySelector('.thumbnail-img');
+        thumbnailInput.addEventListener('change', () => {
+            replaceImage(thumbnailImg, thumbnailInput);
+        });
+
+      };
+
+
+      // modal toggle
+      if (modalOpenBtn) {
+        modalOpenBtn.addEventListener('click', () => {
+          modal.classList.add('open-modal');
+        });
+      }
+      modalCloseBtn.addEventListener('click', () =>
+        modal.classList.remove('open-modal')
+      );
+
     });
-    
-    // select & listen form
-    const form = row.querySelector('.form');
-    form.addEventListener('submit', handleSubmit);
-    
-    // select alert
-    const alert = form.querySelector('.alert');
-    
-    // file input listener (updates img)
-    const thumbnailInput = form.querySelector(`input[type="file"`);
-    const thumbnailImg = form.querySelector('.thumbnail-img');
-    thumbnailInput.addEventListener('change', () => {
-        replaceImage(thumbnailImg, thumbnailInput);
-    });
-    
-  };
-    
-  
-  // modal toggle
-  if (modalOpenBtn) {
-    modalOpenBtn.addEventListener('click', () => {
-      modal.classList.add('open-modal');
-    });
-  }
-  modalCloseBtn.addEventListener('click', () =>
-    modal.classList.remove('open-modal')
-  );
-  
-});
+};
+
 
 const renderForm = (type, row) => {
   const formContainer = document.createElement('div');
   formContainer.setAttribute('class', `item-form ${type}`);
   const formTitle = (() => {
+    if (type === 'edit') return 'Editting Product ID: 123';
+    else return 'Adding Product:';
+  })();
+  const submitTxt = (() => {
     if (type === 'edit') return 'Editting Product ID: 123';
     else return 'Adding Product:';
   })();
@@ -116,7 +124,7 @@ const renderForm = (type, row) => {
                 <input type="file" id="images" name="images"
                     class="form-input" accept="image/png, image/jpeg" multiple>
             </div>
-            <input type="submit" class="btn " value="Submit Changes">
+            <input type="submit" class="btn " value=${submitTxt}>
             <input type="button" class="btn product_form-close-btn" value="Cancel">
         </div>
 
@@ -211,14 +219,15 @@ function getDragAfterElement(item, y) {
 
 // HANDLE FORMS
 
-const handleSubmit = (e) => {
+const handleSubmit = async(e) => {
   e.preventDefault();
   const form = e.target;
   const formData = new FormData(form);
   if (validateForm(formData, form)) return;
   const formType = form.dataset.form_type;
-  if (formType === 'add-product') addProduct(formData, form);
+  if (formType === 'add-product') await addProduct(formData, form);
   clearInputs(form);
+  setupTable();
 };
 
 const validateForm = (formData, form) => {
@@ -246,7 +255,7 @@ const setAlert = (type, msg, form) => {
   alert.textContent = msg;
 };
 
-// POST DATA
+// POST DATA (CREATE PRODUCT)
 const postData = async(url, data) =>{
     const resp = await fetch(url, {
         method: 'POST',
@@ -261,7 +270,8 @@ const addProduct = async(formData, form)=>{
         const file = fileInput.files[0];
         formData.append('thumbnail', file);
         const resp = await postData('process_addProduct.php', formData);
-        displayAlert('success', resp.msg, form );
+        if (resp.type === "success") form.reset();
+        displayAlert(resp.type, resp.msg, form );
         console.log(resp);
         console.log(JSON.stringify(resp));
     } catch(error) {
@@ -271,9 +281,74 @@ const addProduct = async(formData, form)=>{
     }
 };
 
-const clearInputs = (form) => {
-    const inputs = form.querySelectorAll('input[type="text"], input[type="number"], textarea');
-    inputs.forEach(input => input.value = '');
-    const fileInputs = form.querySelectorAll(`input[type="file"]`);
-    fileInputs.forEach(input => input.parentNode.replaceChild(input.cloneNode(), input));
+
+// GET DATA (READ PRODUCTS)
+const getProducts = async() =>{
+    try{
+        const resp = await fetch("process_getProducts.php");
+        const data = await resp.json();
+        console.log(resp);
+        console.log(data);
+        return data;
+    } catch(err){
+        console.log("Error: "+err);
+    };
 };
+
+const displayProducts = (products) =>{
+    const table = document.querySelector(".table");
+    table.innerHTML = `
+        <div class="table-row">
+            <div class="item-display">
+                <div class="item-btns"></div>
+                <div class="item-info">
+                    <div class="item-col">Product ID</div>
+                    <div class="item-col">Name</div>
+                    <div class="item-col">Brand</div>
+                    <div class="item-col">Price</div>
+                </div>
+            </div>
+        </div>
+       <!--Items here-->
+        <div class="table-row add">
+            <!-- add product btn -->
+            <button class="btn add_product-btn product_form-open-btn" data-form_type="add">Add Products</button>
+            <!-- edit form -->
+        </div>
+    `;
+    const addRow = table.querySelector(".table-row.add");
+    for (let product of products){
+        const {productID, productName, productPrice, productCompany, productDescription, productImagePath} = product;
+        const row = document.createElement('div');
+        row.setAttribute('class', `table-row item`);
+        row.innerHTML = `
+        <!-- item display -->
+        <div class="item-display">
+            <div class="item-info">
+                <div class="item-col">${productID}</div>
+                <div class="item-col">${productName}</div>
+                <div class="item-col">${productCompany}</div>
+                <div class="item-col">${productPrice}</div>
+            </div>
+            <div class="item-btns item">
+                <button type="button" class="product_form-open-btn btn" data-form_type="edit">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button type="button" class="delete-btn btn">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <!-- edit form -->
+        </div>
+        <!-- item end -->
+        `;
+        table.insertBefore(row, addRow);
+    }
+    selectAndListenRows();
+};
+
+const setupTable = async() => {
+    const data = await getProducts();
+    displayProducts(data);
+};
+setupTable();

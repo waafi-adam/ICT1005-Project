@@ -51,29 +51,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                                         </div>
                                     </div>
                                 </div>
-                                <!-- item -->
-                                <div class="table-row item">
-                                    <!-- item display -->
-                                    <div class="item-display">
-                                        <div class="item-info">
-                                            <div class="item-col">123</div>
-                                            <div class="item-col">AirMax Pro</div>
-                                            <div class="item-col">Brand</div>
-                                            <div class="item-col">$120.00</div>
-                                        </div>
-                                        <div class="item-btns item">
-                                            <button type="button" class="product_form-open-btn btn" data-form_type="edit">
-                                                <i class="fas fa-edit"></i>
-                                            </button>
-                                            <button type="button" class="delete-btn btn">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <!-- edit form -->
-                                </div>
-                                <!-- item end -->
-                                <div class="table-row">
+                               <!--Items here-->
+                                <div class="table-row add">
                                     <!-- add product btn -->
                                     <button class="btn add_product-btn product_form-open-btn" data-form_type="add">Add Products</button>
                                     <!-- edit form -->
