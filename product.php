@@ -83,10 +83,12 @@
             <h2 class="single-product-title"></h2>
             <p class="single-product-company text-slanted"></p>
             <span class="single-product-price"></span>
+            <!--
             <div class="single-product-colors">
               <span class="product-color"></span>
               <span class="product-color product-color-red"></span>
             </div>
+            -->
             <p class="single-product-desc"></p>
             <button class="addToCartBtn btn" data-id="">add to cart</button>
           </div>
@@ -97,10 +99,6 @@
     <div class="page-loading">
       <h2>Loading...</h2>
     </div>
-    
-    <form action="./includes/fetchProduct.php" method="post" name="getID">
-        <input type=hidden name="id" value="">
-    </form>
     
     <script type="module" src="/js/pages/product.js"></script>
   </body>

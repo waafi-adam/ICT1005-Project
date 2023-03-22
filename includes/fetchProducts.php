@@ -2,9 +2,10 @@
 
 
     $config = parse_ini_file('../private/db-config.ini');
-
-    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+    //echo $config['servername'];
     
+    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+    //echo $config['servername'];
         // Check connection
     if ($conn->connect_error)
     {
@@ -20,7 +21,8 @@
                 'productPrice' => $row['productPrice'],
                 'productCompany' => $row['productCompany'],
                 'productImage' => base64_encode($row['productImage']),
-                'productDescription' => $row['productDescription']
+                'productDescription' => $row['productDescription'],
+                'productImagePath' => $row['productImagePath']
             ];
         }
         

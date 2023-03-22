@@ -15,7 +15,7 @@ const imgDOM = getElement('.single-product-img');
 const titleDOM = getElement('.single-product-title');
 const companyDOM = getElement('.single-product-company');
 const priceDOM = getElement('.single-product-price');
-const colorsDOM = getElement('.single-product-colors');
+//const colorsDOM = getElement('.single-product-colors');
 const descDOM = getElement('.single-product-desc');
 const cartBtn = getElement('.addToCartBtn');
 
@@ -24,37 +24,48 @@ const cartBtn = getElement('.addToCartBtn');
 
 const init = async()=>{
     const data = await fetchProduct();
+    //console.log(data);
     displayProduct(data);
     loading.style.display = 'none';
 };
 
+const postData = async(url, data) =>{
+    const resp = await fetch(url, {
+        method: 'POST',
+        body: data
+    });
+    return resp.json();
+};
+
 const fetchProduct = async()=>{
-    var test = document.forms['getID'].submit();
-    console.log(test);
-    let id = window.location.search;
-    const reponse = await fetch(singleProductUrl + id);
-    const data = await reponse.json();
-    return data;
+    let id = window.location.search.split('id=')[1];
+    
+    let formData = new FormData();
+    formData.set("productID", id);
+    
+    const resp = await postData('includes/fetchProduct.php', formData);
+    console.log(JSON.stringify(resp));
+    
+    return resp[0];
 };
 
 const displayProduct = (product)=>{
-    console.log(product);
-    const {colors, company, description:desc, name, price} = product.fields;
-    const img = product.fields.image[0].thumbnails.full.url;
-    pageTitleDOM.textContent = `home / ${name}`;
-    imgDOM.src = img;
-    titleDOM.textContent = name;
-    companyDOM.textContent = `by ${company}`;
-    priceDOM.textContent = price;
-    colorsDOM.innerHTML = colors.map(color =>{
-        return `
-            <span class="single-product-color" style="background-color:${color};"></span>
-        `;
-    }).join('');
-    descDOM.textContent = desc;
+    console.log(product.productName);
+    pageTitleDOM.textContent = `home / ${product.productName}`;
+    imgDOM.src = product.productImagePath;
+    titleDOM.textContent = product.productName;
+    companyDOM.textContent = `by ${product.productCompany}`;
+    
+    priceDOM.textContent = `$${product.productPrice}`;
+    //colorsDOM.innerHTML = colors.map(color =>{
+    //    return `
+    //        <span class="single-product-color" style="background-color:red;"></span>
+    //    `;
+    //}).join('');
+    descDOM.textContent = product.productName;
     cartBtn.addEventListener('click', (e)=>{
         if(e.currentTarget.classList.contains('addToCartBtn')){
-            addToCart(product.id);
+            addToCart(product.productID);
         }
     });
 };
