@@ -18,10 +18,7 @@
         <?php include "includes/nav-session.inc.php"; ?> 
         <section class="register-section">
             <?php
-            //For debugging purposes (Delete once onto production)
-            ini_set('display_errors', 1);
-            error_reporting(E_ALL);
-            require 'zebra_session/Zebra_Session.php';
+            
 
             $username = $email = $pwd_hashed = $errorMsg = $success = "";
             $userID="";
@@ -49,10 +46,7 @@
                 echo "<h3>Login successful!</h4>";
                 echo "<p>Welcome back," . $username . "</p>";
                 echo '<button class="btn btn-primary"><a href="orderHistory.php">Order History</a></button>';
-                $config = parse_ini_file('../private/db-config.ini');
-                $conn = new mysqli($config['servername'], $config['username'],
-                        $config['password'], $config['dbname']);
-                $session = new Zebra_Session($conn, 'sEcUr1tY_c0dE');
+               
                 $_SESSION['username'] = $username;
                 $_SESSION['userID']=$userID;
             } else {

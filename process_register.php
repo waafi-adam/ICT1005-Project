@@ -17,9 +17,6 @@
         <?php include "includes/nav-session.inc.php"; ?> 
         <section class="register-section">
             <?php
-            //For debugging purposes (Delete once onto production)
-            ini_set('display_errors', 1);
-            error_reporting(E_ALL);
 
             //set up PHPMailer variables
             use PHPMailer\PHPMailer\PHPMailer;
