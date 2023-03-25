@@ -16,24 +16,37 @@
     <body>
 
         <?php include "includes/nav-session.inc.php"; ?> 
+        <main class='jumbotron text-left'>
         <section class="register-section">
 
             <?php
-            $token = $username = $success = "";
+            $errorMsg=$token = $username = $success = "";
             $success = true;
             session_start();
             if (isset($_GET['token'])) {
                 $token = $_GET['token'];
                 verifyUser();
                 if ($success) {
-                    echo "<main class='jumbotron text-left'>";
-                    echo "<h1>Your verification is successful!</h4>";
+                    echo "<h3>Your verification is successful!</h3>";
                     echo "<div>";
                     echo "<p>Click on the button below to login in now!</p>";
-                    echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
+                    echo '<a href="login.php"  class="btn btn-primary">Log in now!</a>';
+                    echo"</div>";
+                }
+                else{
+                    echo "<h3>Your verification is unsuccessful!</h3>";
+                    echo "<div>";
+                    echo "<p>Please try again!</p>";
                     echo"</div>";
                 }
             }
+            else{
+                    echo "<h3>Your verification is unsuccessful!</h3>";
+                    echo "<div>";
+                    echo "<p>Please try again!</p>";
+                    echo"</div>";
+                }
+            
 
             function debug_to_console($data) {
                 $output = $data;
@@ -79,5 +92,6 @@ verify_token=? LIMIT 1");
             }
             ?>
         </section>
-    </body>
+        </main>
+        </body>
 </html>

@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Password:</label>
-                        <input type="password" id="pwd" name="pwd" class="form-control" type="password" required
+                        <input id="pwd" name="pwd" class="form-control" type="password" required
                                placeholder="Enter password">
                     </div>
                     <button class="btn btn-primary" id="submit" type="submit">Submit</button>
@@ -54,7 +54,9 @@
                 </p>
                 <p>
                     Logout instead?<a href="logout.php">Click here to logout.</a>.
-                </p>';
+                </p>
+                </div>
+        </section>';
         }
         ?>
 

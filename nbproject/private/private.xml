@@ -3,14 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/chipp/Documents/NetBeansProjects/ICT1005-Project/register.php</file>
-            <file>file:/C:/Users/chipp/Documents/NetBeansProjects/ICT1005-Project/index.php</file>
-            <file>file:/C:/Users/chipp/Documents/NetBeansProjects/ICT1005-Project/css/styles.css</file>
-            <file>file:/C:/Users/chipp/Documents/NetBeansProjects/ICT1005-Project/js/pages/register.js</file>
-            <file>file:/Users/cheryl/INF1005/Project/ICT1005-Project/products.php</file>
-            <file>file:/C:/Users/malco/Documents/SIT/1005-Web/shoeStore/ICT1005-Project/includes/fetchProduct.php</file>
-            <file>file:/C:/Users/malco/Documents/SIT/1005-Web/shoeStore/ICT1005-Project/product.php</file>
-            <file>file:/C:/Users/malco/Documents/SIT/1005-Web/shoeStore/ICT1005-Project/js/pages/product.js</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/verify-email.php</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/process_login.php</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/logout.php</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/login.php</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/includes/nav-session.inc.php</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/process_register.php</file>
+            <file>file:/C:/Users/chipp/Documents/INF1005%20LatestGrpProject/ICT1005-Project/register.php</file>
         </group>
     </open-files>
 </project-private>

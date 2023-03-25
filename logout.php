@@ -15,23 +15,24 @@
     </head>
     <body>
 
-        <?php include "includes/nav-white.inc.php"; ?> 
-        <?php include "includes/checkSession.php"; ?>
+        <?php include "includes/nav-session.inc.php"; ?> 
         <?php
         global $session;
         $username=$_SESSION['username'];
-        if ($_SESSION['username'] === '') {
+        if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
                 <h1>
                     You are not logged in!
                 </h1>
                 <p>
-                    Login here<a href="login.php">Click here to login.</a>.
+                    Login here <a href="login.php">Click here to login.</a>.
                 </p>
                 <p>
-                    Not registered?<a href="register.php">Click here to register.</a>.
-                </p>';
+                    Not registered? <a href="register.php">Click here to register.</a>.
+                </p>
+                </div>
+                </section>';
         } else {
             $session->stop();
             echo'<section class="register-section">

@@ -15,6 +15,7 @@
     </head>
     <body>
         <?php include "includes/nav-session.inc.php"; ?> 
+        <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
 
@@ -82,8 +83,7 @@ require 'phpmailer/src/Exception.php';
                 $mail->Body = $email_template;
 
                 if ($mail->send()) {
-                    debug_to_console("inside if");
-                    echo "<main class='jumbotron text-left'>";
+                    
                     echo "<h4>Your registration is successful!</h4>";
                     echo "<p> Thank you for signing up," . $username . "</p>";
                     echo "<p>Email: " . $email . "<br>";
@@ -92,12 +92,12 @@ require 'phpmailer/src/Exception.php';
                     echo "<main class='jumbotron text-left'>";
                     echo "<h4>Can't send email to " . $email . " </h4>";
                 }
-            } else {
-                echo "<main class='jumbotron text-left'>";
+            }
+            else {
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following input errors were detected:</h4>";
                 echo "<p>" . $errorMsg . "</p>";
-                echo '<button class="btn btn-primary"><a href="register.php">Return back to sign-in page</a></button>';
+                echo '<a href="register.php" class="btn btn-primary">Return back to sign-in page</a>';
             }
 
             //Helper function that checks input for malicious or unwanted content.
@@ -149,5 +149,6 @@ require 'phpmailer/src/Exception.php';
             }
             ?>
         </section>
+        </main>
     </body>
 </html>

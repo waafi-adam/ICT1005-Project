@@ -16,6 +16,7 @@
     </head>
     <body>
         <?php include "includes/nav-session.inc.php"; ?> 
+        <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
             
@@ -42,19 +43,16 @@
             }
             authenticateUser();
             if ($success) {
-                echo "<main class='jumbotron text-left'>";
-                echo "<h3>Login successful!</h4>";
+                echo "<h3>Login successful!</h3>";
                 echo "<p>Welcome back," . $username . "</p>";
-                echo '<button class="btn btn-primary"><a href="orderHistory.php">Order History</a></button>';
-               
+                echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
                 $_SESSION['username'] = $username;
                 $_SESSION['userID']=$userID;
             } else {
-                echo "<main class='jumbotron text-left'>";
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following errors were detected:</h4>";
                 echo "<p>" . $errorMsg . "</p>";
-                echo '<button class="btn btn-primary"><a href="login.php">Return back to login page</a></button>';
+                echo '<a href="login.php" class="btn btn-primary">Return back to login page</a>';
             }
 
             function debug_to_console($data) {
@@ -99,13 +97,11 @@ userEmail=?");
                             $success = false;
                         }
                         $verified = $row["verified"];
-                        
                         if ($verified === 0) {
                             $errorMsg = "Please register through your email first!";
                             $success = false;
                         }
                         $userID=$row["userID"];
-                        debug_to_console("Inside function".$userID);
                     } else {
                         $errorMsg = "Email not found or password doesn't match...";
                         $success = false;
@@ -116,5 +112,6 @@ userEmail=?");
             }
             ?>
         </section>
+        </main>
     </body>
 </html>
