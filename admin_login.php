@@ -14,6 +14,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
+
         <?php include "includes/nav-session.inc.php"; ?> 
         <?php
         $username=$_SESSION['username'];
@@ -22,52 +23,55 @@
             echo'<section class="register-section">
             <div class="register">
                 <h1>
-                    Sign up now!
+                    Login to Admin Account
                 </h1>
-                <form id="form" class= "text-slanted" action="process_register.php" method="post">
+                <form class= "text-slanted" action="process_admin_login.php" method="post">
                     <div class="form-group">
-                        <label for="username">User Name:</label>
-                        <input type="text" id="username" name="username" class="form-control" required maxlength="45"
-                               placeholder="Enter user name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
+                        <label for="email">Enter your email:</label>
                         <input type="email" id="email" name="email" class="form-control"  required
                                placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="otp">One Time Pin:</label>
+                        <input id="otp" name="otp" class="form-control" required maxlength="6" minlength="6"
+                               placeholder="Enter One time Pin">
                     </div>
                     <div class="form-group">
                         <label for="pwd">Password:</label>
                         <input id="pwd" name="pwd" class="form-control" type="password" required
                                placeholder="Enter password">
                     </div>
-                    <div class="form-group">
-                        <label for="pwd_confirm">Confirm Password:</label>
-                        <input id="pwd_confirm" name="pwd_confirm" class="form-control" 
-                               required type="password" placeholder="Confirm password">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                             <label>
-                            <input type="checkbox" name="agree" required>
-                            I agree to the terms and conditions.
-                            </label>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" id="submit"  type="submit">Submit</button>
+                    <button class="btn btn-primary" id="submit" type="submit">Submit</button>
                     <p>
-                        Already a member with us? <a href="login.php">Login here.</a>.
+                        Not registered yet? <a href="register.php">Register here!</a>.
                     </p>
                 </form>
             </div>
         </section>';
-        } else {
+        } 
+        else if($username==="admin"&&$userID===31){
+             echo'<section class="register-section">
+            <div class="register">
+                <h1>
+                    Welcome back Admin!
+                </h1>
+                <p>
+                    Go back to the homepage? <a href="index.php">Click here to go back to the homepage.</a>.
+                </p>
+                <p>
+                    Logout instead?<a href="logout.php">Click here to logout.</a>.
+                </p>
+                </div>
+        </section>';
+        }
+        else {
             echo'<section class="register-section">
             <div class="register">
                 <h1>
-                    You are already logged in!
+                    You have reached an incorrect page!
                 </h1>
                 <p>
-                    Go back to homepage <a href="index.php">Click here to go back to the homepage.</a>.
+                    Go back to the homepage? <a href="index.php">Click here to go back to the homepage.</a>.
                 </p>
                 <p>
                     Logout instead?<a href="logout.php">Click here to logout.</a>.

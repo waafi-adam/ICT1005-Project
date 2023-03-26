@@ -68,7 +68,7 @@ else{
             <button class="toggle-cart">
                 <i class="fas fa-shopping-cart"></i>
             </button>
-            <span class="cart-item-count">1</span>
+            <span class="cart-item-count">0</span>
         </div>
     </div>
 </nav>
