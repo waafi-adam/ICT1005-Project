@@ -1,6 +1,8 @@
 const dashboard = document.querySelector('.dashboard');
 const btns = document.querySelectorAll('.tab-btn');
 const articles = document.querySelectorAll('.content');
+
+// ========= ADMIN PAGE TABS ============
 dashboard.addEventListener('click', function (e) {
   const id = e.target.dataset.id;
   if (id) {
@@ -18,9 +20,10 @@ dashboard.addEventListener('click', function (e) {
   }
 });
 
-// FORMS & MODALS
+// ========== PRODUCTS TAB ================
 
 const selectAndListenRows = () => {
+    console.log("selecting and listening rows");
     const rows = document.querySelectorAll('.table-row:not(:first-of-type)');
     const modal = document.querySelector('.modal-overlay');
     const modalCloseBtn = document.querySelector('.close-btn');
@@ -35,35 +38,9 @@ const selectAndListenRows = () => {
       // form toggle
       editOpenBtn.addEventListener('click', () => {
         renderForm(editOpenBtn.dataset.form_type, row);
-        selectAndListenForm();
+        selectAndListenForm(row);
         row.classList.add('show-form');
       });
-      const selectAndListenForm = () => {
-        // select & listen close btns
-        const editCloseBtns = row.querySelectorAll('.product_form-close-btn');
-        editCloseBtns.forEach((btn) => {
-          btn.addEventListener('click', function () {
-            removeForm(row);
-            row.classList.remove('show-form');
-          });
-        });
-
-        // select & listen form
-        const form = row.querySelector('.form');
-        form.addEventListener('submit', handleSubmit);
-
-        // select alert
-        const alert = form.querySelector('.alert');
-
-        // file input listener (updates img)
-        const thumbnailInput = form.querySelector(`input[type="file"`);
-        const thumbnailImg = form.querySelector('.thumbnail-img');
-        thumbnailInput.addEventListener('change', () => {
-            replaceImage(thumbnailImg, thumbnailInput);
-        });
-
-      };
-
 
       // modal toggle
       if (modalOpenBtn) {
@@ -78,9 +55,35 @@ const selectAndListenRows = () => {
     });
 };
 
+const selectAndListenForm = (row) => {
+    console.log("select listen Form");
+    // select & listen close btns
+    const editCloseBtns = row.querySelectorAll('.product_form-close-btn');
+    editCloseBtns.forEach((btn) => {
+      btn.addEventListener('click', function () {
+        removeForm(row);
+        row.classList.remove('show-form');
+      });
+    });
+
+    // select & listen form
+    const form = row.querySelector('.form');
+    form.addEventListener('submit', (e)=>handleSubmit(e, row.dataset.product_id));
+
+    // select alert
+    const alert = form.querySelector('.alert');
+
+    // file input listener (updates img)
+    const thumbnailInput = form.querySelector(`input[type="file"`);
+    const thumbnailImg = form.querySelector('.thumbnail-img');
+    thumbnailInput.addEventListener('change', () => {
+        replaceImage(thumbnailImg, thumbnailInput);
+    });
+};
 
 const renderForm = (type, row) => {
   const formContainer = document.createElement('div');
+//  const id = row.dataset.product_id ? `data-product_id="${row.dataset.product_id}"` : "";
   formContainer.setAttribute('class', `item-form ${type}`);
   const formTitle = (() => {
     if (type === 'edit') return 'Editting Product ID: 123';
@@ -92,7 +95,7 @@ const renderForm = (type, row) => {
   })();
   formContainer.innerHTML = `
     <h3>${formTitle}</h3>
-    <form class="form" data-form_type="${type}-product" action="process_addProduct.php">
+    <form class="form" data-form_type="${type}-product" >
         <div class="form-inputs">
             <p class="alert "></p>
             <div class="form-row">
@@ -219,15 +222,18 @@ function getDragAfterElement(item, y) {
 
 // HANDLE FORMS
 
-const handleSubmit = async(e) => {
+const handleSubmit = async(e, id) => {
+  console.log("handling submit");
   e.preventDefault();
   const form = e.target;
   const formData = new FormData(form);
   if (validateForm(formData, form)) return;
   const formType = form.dataset.form_type;
   if (formType === 'add-product') await addProduct(formData, form);
+  if (formType === 'edit-product') await editProduct(formData, form, id);
+
   clearInputs(form);
-  setupTable();
+  location.reload();
 };
 
 const validateForm = (formData, form) => {
@@ -242,6 +248,7 @@ const validateForm = (formData, form) => {
     displayAlert('danger', 'name and price is required', form);
     return true;
   } else displayAlert('load', 'loading', form);
+  
 };
 const displayAlert = (type, msg, form) => {
   setAlert(type, msg, form);
@@ -255,7 +262,8 @@ const setAlert = (type, msg, form) => {
   alert.textContent = msg;
 };
 
-// POST DATA (CREATE PRODUCT)
+// CRUD below
+
 const postData = async(url, data) =>{
     const resp = await fetch(url, {
         method: 'POST',
@@ -264,41 +272,10 @@ const postData = async(url, data) =>{
     return resp.json();
 };
 
-const addProduct = async(formData, form)=>{
-    try {
-        const fileInput = form.querySelector('input[type="file"]#thumbnail');
-        const file = fileInput.files[0];
-        formData.append('thumbnail', file);
-        const resp = await postData('process_addProduct.php', formData);
-        if (resp.type === "success") form.reset();
-        displayAlert(resp.type, resp.msg, form );
-        console.log(resp);
-        console.log(JSON.stringify(resp));
-    } catch(error) {
-        displayAlert('danger', error.msg, form );
-        console.log(error);
-        console.log(JSON.stringify(error));
-    }
-};
-
-
-// GET DATA (READ PRODUCTS)
-const getProducts = async() =>{
-    try{
-        const resp = await fetch("process_getProducts.php");
-        const data = await resp.json();
-        console.log(resp);
-        console.log(data);
-        return data;
-    } catch(err){
-        console.log("Error: "+err);
-    };
-};
-
 const displayProducts = (products) =>{
     const table = document.querySelector(".table");
     table.innerHTML = `
-        <div class="table-row">
+        <div class="table-row" >
             <div class="item-display">
                 <div class="item-btns"></div>
                 <div class="item-info">
@@ -323,7 +300,7 @@ const displayProducts = (products) =>{
         row.setAttribute('class', `table-row item`);
         row.innerHTML = `
         <!-- item display -->
-        <div class="item-display">
+        <div class="item-display" data-product_id="${productID}">
             <div class="item-info">
                 <div class="item-col">${productID}</div>
                 <div class="item-col">${productName}</div>
@@ -345,6 +322,56 @@ const displayProducts = (products) =>{
         table.insertBefore(row, addRow);
     }
     selectAndListenRows();
+};
+
+// UPDATE DATA (EDIT PRODUCTS)
+const editProduct = async(formData, form, id) =>{
+    try {
+        const fileInput = form.querySelector('input[type="file"]#thumbnail');
+        const file = fileInput.files[0];
+        formData.append('thumbnail', file);        
+        if (id) formData.append('id', id);
+        const resp = await postData('process_editProduct.php', formData);
+        if (resp.type === "success") form.reset();
+        displayAlert(resp.type, resp.msg, form );
+        console.log(resp);
+        console.log(JSON.stringify(resp));
+    } catch(error) {
+        displayAlert('danger', error.msg, form );
+        console.log(error);
+        console.log(JSON.stringify(error));
+    }
+};
+
+// CREATE DATA (ADD PRODUCT)
+const addProduct = async(formData, form)=>{
+    try {
+        const fileInput = form.querySelector('input[type="file"]#thumbnail');
+        const file = fileInput.files[0];
+        formData.append('thumbnail', file);
+        const resp = await postData('process_addProduct.php', formData);
+        if (resp.type === "success") form.reset();
+        displayAlert(resp.type, resp.msg, form );
+        console.log(resp);
+        console.log(JSON.stringify(resp));
+    } catch(error) {
+        displayAlert('danger', error.msg, form );
+        console.log(error);
+        console.log(JSON.stringify(error));
+    }
+};
+
+// READ DATA (GET PRODUCTS)
+const getProducts = async() =>{
+    try{
+        const resp = await fetch("process_getProducts.php");
+        const data = await resp.json();
+        console.log(resp);
+        console.log(data);
+        return data;
+    } catch(err){
+        console.log("Error: "+err);
+    };
 };
 
 const setupTable = async() => {
