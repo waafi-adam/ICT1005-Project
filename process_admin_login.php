@@ -19,10 +19,9 @@
         <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
-            
-
-            $username = $email = $pwd_hashed = $errorMsg = $success = "";
+            $username = $email = $pwd_hashed = $errorMsg = $success = $OTP="";
             $userID="";
+            $adminMode=0;
             $success = true;
             if (empty($_POST["email"])) {
                 $errorMsg .= "Email is empty.<br>";
@@ -41,13 +40,22 @@
             } else {
                 $pwd = $_POST["pwd"];
             }
+            if(empty($_POST["otp"])){
+                $errorMsg.="OTP is empty.<br>";
+                $success=false;
+            }
+            else{
+                $OTP=$_POST["otp"];
+            }
             authenticateUser();
             if ($success) {
+                $adminMode=1;
                 echo "<h3>Login successful!</h3>";
                 echo "<p>Welcome back," . $username . "</p>";
-                echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
+                echo '<a href="admin.php" class="btn btn-primary">View User Order History</a>';
                 $_SESSION['username'] = $username;
                 $_SESSION['userID']=$userID;
+                $_SESSION['adminMode']=$adminMode;
             } else {
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following errors were detected:</h4>";
@@ -66,7 +74,7 @@
 
             function authenticateUser() {
                 global $username, $email, $pwd_hashed, $errorMsg, $success;
-                global $userID;
+                global $userID,$OTP;
 // Create database connection.
                 $config = parse_ini_file('../private/db-config.ini');
                 $conn = new mysqli($config['servername'], $config['username'],
@@ -96,10 +104,13 @@ userEmail=?");
                             $errorMsg = "Email not found or password doesn't match";
                             $success = false;
                         }
-                        $verified = $row["verified"];
-                        if ($verified === 0) {
-                            $errorMsg = "Please register through your email first!";
-                            $success = false;
+                        if($OTP==="123456"){
+                            
+                        }
+                        else{
+                            $errorMsg = "OTP is incorrect";
+                            $success=false;
+                            
                         }
                         $userID=$row["userID"];
                     } else {

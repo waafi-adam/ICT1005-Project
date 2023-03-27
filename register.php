@@ -15,17 +15,19 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-
-        <?php include "includes/nav-white.inc.php"; ?> 
-
-        <section class="register-section">
+        <?php include "includes/nav-session.inc.php"; ?> 
+        <?php
+        $username=$_SESSION['username'];
+        $userID=$_SESSION['userID'];
+        if (empty($username)) {
+            echo'<section class="register-section">
             <div class="register">
                 <h1>
                     Sign up now!
                 </h1>
-                <form id='form' class= "text-slanted" action="process_register.php" method="post">
+                <form id="form" class= "text-slanted" action="process_register.php" method="post">
                     <div class="form-group">
-                        <label for="lname">User Name:</label>
+                        <label for="username">User Name:</label>
                         <input type="text" id="username" name="username" class="form-control" required maxlength="45"
                                placeholder="Enter user name">
                     </div>
@@ -36,16 +38,16 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Password:</label>
-                        <input type="password" id="pwd" name="pwd" class="form-control" type="password" required
+                        <input id="pwd" name="pwd" class="form-control" type="password" required
                                placeholder="Enter password">
                     </div>
                     <div class="form-group">
                         <label for="pwd_confirm">Confirm Password:</label>
-                        <input type="password" id="pwd_confirm" name="pwd_confirm" class="form-control" 
+                        <input id="pwd_confirm" name="pwd_confirm" class="form-control" 
                                required type="password" placeholder="Confirm password">
                     </div>
                     <div class="form-group">
-                        <div class="form-check"
+                        <div class="form-check">
                              <label>
                             <input type="checkbox" name="agree" required>
                             I agree to the terms and conditions.
@@ -58,6 +60,23 @@
                     </p>
                 </form>
             </div>
-        </section>
+        </section>';
+        } else {
+            echo'<section class="register-section">
+            <div class="register">
+                <h1>
+                    You are already logged in!
+                </h1>
+                <p>
+                    Go back to homepage <a href="index.php">Click here to go back to the homepage.</a>.
+                </p>
+                <p>
+                    Logout instead?<a href="logout.php">Click here to logout.</a>.
+                </p>
+                </div>
+        </section>';
+        }
+        ?>
+
     </body>
 </html>
