@@ -295,6 +295,19 @@ const getProducts = async() =>{
     };
 };
 
+//GET Order Data
+const getOrderDetails = async() =>{
+    try{
+        const resp = await fetch("process_getOrders.php");
+        const data = await resp.json();
+        console.log(resp);
+        console.log(data);
+        return data;
+    } catch(err){
+        console.log("Error: "+err);
+    };
+};
+
 const displayProducts = (products) =>{
     const table = document.querySelector(".table");
     table.innerHTML = `
@@ -347,8 +360,66 @@ const displayProducts = (products) =>{
     selectAndListenRows();
 };
 
+
+const displayOrders = (orders) => {
+    const table = document.querySelectorAll(".table")[1];
+    table.innerHTML = `
+        <div class="table-row">
+            <div class="item-display">
+                <div class="item-btns"></div>
+                <div class="item-info">
+                    <div class="item-col">ID</div>
+                    <div class="item-col">Name</div>
+                    <div class="item-col">Price</div>
+                    <div class="item-col">Quantity</div>
+                    <div class="item-col">UserID</div>
+                </div>
+            </div>
+        </div>
+       <!--Items here-->
+
+    `;
+    
+    const addRow = table.querySelector(".table-row");
+    
+    for (let order of orders){
+        const {orderID, orderQuantity, orderName, orderPrice, orderUserID} = order;
+        const row = document.createElement('div');
+        row.setAttribute('class', `table-row item`);
+        row.innerHTML = `
+        <!-- item display -->
+        <div class="item-display">
+            <div class="item-info">
+                <div class="item-col">${orderID}</div>
+                <div class="item-col">${orderName}</div>
+                <div class="item-col">${orderPrice}</div>
+                <div class="item-col">${orderQuantity}</div>
+                <div class="item-col">${orderUserID}</div>
+            </div>
+            <div class="item-btns item">
+                <button type="button" class="product_form-open-btn btn" data-form_type="edit">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button type="button" class="delete-btn btn">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+            <!-- edit form -->
+        </div>
+        <!-- item end -->
+        `;
+        addRow.parentNode.insertBefore(row, addRow.nextSibling);
+        //table.insertBefore(row, addRow);
+    }
+
+    };
+
+
 const setupTable = async() => {
     const data = await getProducts();
     displayProducts(data);
+    
+    const orderData = await getOrderDetails();
+    displayOrders(orderData);
 };
 setupTable();

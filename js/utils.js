@@ -1,8 +1,3 @@
-
-const allProductsUrl = 'https://course-api.com/javascript-store-products';
-
-const singleProductUrl = 'https://course-api.com/javascript-store-single-product';
-
 const getElement = (selection) => {
   const element = document.querySelector(selection);
   if (element) return element;
@@ -22,9 +17,8 @@ const getStorageItem = (key) => {
 const setStorageItem = (key, value) => {localStorage.setItem(key, JSON.stringify(value))};
 
 export {
-    allProductsUrl,
     getElement,
     getStorageItem,
-    setStorageItem,
-    singleProductUrl,
+    setStorageItem
 }
+

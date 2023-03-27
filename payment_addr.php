@@ -18,6 +18,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <link rel="stylesheet" href="css/styles.css" />
   </head>
     <body>
+       
                
         <!-- hero -->
         <section class="page-hero">
@@ -78,6 +79,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </div>
             </div>
 
+            
             <input type="submit" value="proceed to checkout" class="submit-btn" formaction="payment_test.php">
 
         </form>
