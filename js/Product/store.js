@@ -7,4 +7,4 @@ const findProduct = (id) => {
     return newCartItem;
 };
 
-export { store, product , setupStore, findProduct };
+export { product , findProduct };
