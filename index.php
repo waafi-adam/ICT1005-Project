@@ -9,11 +9,7 @@
   <body>
       
      <?php include "includes/nav-white.inc.php"; ?> 
-     <?php include "includes/checkSession.php"; ?>
-      
-     <!--  Use to store products in localstorage -->
-     <?php // include "includes/fetchProducts.php"; ?>
-      
+     
     
     <?php 
     $username=$_SESSION['username'];
@@ -108,6 +104,33 @@
         </footer>
       </aside>
     </div>
+    <!--numbers section-->
+    <section class="section numbers">
+        <div class="title">
+          <h2><span>/</span> Our Numbers</h2>
+        </div>
+        <div class="numbers-center section-center">
+            <!-- single number -->
+            <article>
+              <span class="number" data-value="500">0</span>
+              <p>Shoes Sold</p>
+            </article>
+            <!-- end of single number -->
+            <!-- single number -->
+            <article>
+              <span class="number" data-value="17140">0</span>
+              <p>Brands Available</p>
+            </article>
+            <!-- end of single number -->
+            <!-- single number -->
+            <article>
+              <span class="number" data-value="1500">0</span>
+              <p>Shoes Available</p>
+            </article>
+            <!-- end of single number -->
+        </div>
+    </section>
+    <!--numbers section end-->
     <!-- featured products -->
     <section class="section featured">
       <div class="title">
