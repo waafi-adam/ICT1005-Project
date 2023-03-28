@@ -25,6 +25,8 @@
         }
         
         $json = json_encode($rowstest);  
-        echo $rowstest;     
+        echo "<script>localStorage.setItem('product', '$json');</script>";
+
+      
     }
 

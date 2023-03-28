@@ -83,15 +83,15 @@ const selectAndListenForm = (row) => {
 
 const renderForm = (type, row) => {
   const formContainer = document.createElement('div');
-//  const id = row.dataset.product_id ? `data-product_id="${row.dataset.product_id}"` : "";
+  const id = row.dataset.product_id ? `${row.dataset.product_id}` : "";
   formContainer.setAttribute('class', `item-form ${type}`);
   const formTitle = (() => {
-    if (type === 'edit') return 'Editting Product ID: 123';
+    if (type === 'edit') return `Editting Product ID: ${id}`;
     else return 'Adding Product:';
   })();
   const submitTxt = (() => {
-    if (type === 'edit') return 'Editting Product ID: 123';
-    else return 'Adding Product:';
+    if (type === 'edit') return "Update";
+    else return 'Add';
   })();
   formContainer.innerHTML = `
     <h3>${formTitle}</h3>
@@ -297,10 +297,11 @@ const displayProducts = (products) =>{
     for (let product of products){
         const {productID, productName, productPrice, productCompany, productDescription, productImagePath} = product;
         const row = document.createElement('div');
-        row.setAttribute('class', `table-row item`);
+        row.setAttribute('class', `table-row item`);        
+        row.dataset.product_id = productID;
         row.innerHTML = `
         <!-- item display -->
-        <div class="item-display" data-product_id="${productID}">
+        <div class="item-display">
             <div class="item-info">
                 <div class="item-col">${productID}</div>
                 <div class="item-col">${productName}</div>
@@ -331,6 +332,7 @@ const editProduct = async(formData, form, id) =>{
         const file = fileInput.files[0];
         formData.append('thumbnail', file);        
         if (id) formData.append('id', id);
+        console.log(id);
         const resp = await postData('process_editProduct.php', formData);
         if (resp.type === "success") form.reset();
         displayAlert(resp.type, resp.msg, form );
