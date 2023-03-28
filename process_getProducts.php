@@ -14,10 +14,10 @@
     else {
         
         // Prepare the query statement
-        $stmt = $conn->prepare("SELECT productID, productName, productPrice, productCompany, productImagePath FROM Product");
+        $stmt = $conn->prepare("SELECT productID, productName, productPrice, productCompany, productImagePath, productDescription FROM Product");
         // Execute the query statement and bind the result columns to variables
         $stmt->execute();
-        $stmt->bind_result($productID, $productName, $productPrice, $productCompany, $productImagePath);
+        $stmt->bind_result($productID, $productName, $productPrice, $productCompany, $productImagePath, $productDescription);
 
         // Fetch the data and store it in an array
         $data = array();
@@ -27,7 +27,8 @@
             'productName' => $productName,
             'productPrice' => $productPrice,
             'productCompany' => $productCompany,
-            'productImagePath' => $productImagePath
+            'productImagePath' => $productImagePath,
+            'productDescription' => $productDescription
           );
         }
 
