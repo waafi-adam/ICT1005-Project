@@ -95,6 +95,9 @@
         </article>
       </div>
     </section>
+    <div class="review">
+        <h4 class="review-tile">Reviews</h4>
+    </div>
     <!-- page loading -->
     <div class="page-loading">
       <h2>Loading...</h2>
