@@ -1133,20 +1133,3 @@ REGISTER PAGE
     color: white;
 
 }
-
-
-/*
-===================
-Review Section
-===================
-*/
-
-.review {
-    height: 100%;
-    width: 500px
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

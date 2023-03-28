@@ -5,7 +5,7 @@ import '../cart/setupCart.js';
 
 // specific
 import { addToCart } from '../cart/setupCart.js';
-import { getElement } from '../utils.js';
+import { singleProductUrl ,getElement } from '../utils.js';
 
 // selections
 const loading = getElement('.page-loading');
@@ -24,14 +24,10 @@ const cartBtn = getElement('.addToCartBtn');
 
 const init = async()=>{
     const data = await fetchProduct();
-<<<<<<< HEAD
-    displayProduct(data);
-    const review = await fetchReview();
-    //displayReview(review);
-=======
-    console.log(data);
     await displayProduct(data);
->>>>>>> 85b98549021d1d7b356298d01275acd4c1cef615
+    
+    const review = await fetchReview();
+    
     loading.style.display = 'none';
 };
 

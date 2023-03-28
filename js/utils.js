@@ -1,5 +1,5 @@
-const productsUrl = 'process_getProducts.php'
-const singleProductUrl = 'process_getSingleProduct.php'
+const productsUrl = 'process_getProducts.php';
+const singleProductUrl = 'process_getSingleProduct.php';
 
 const getElement = (selection) => {
   const element = document.querySelector(selection);
