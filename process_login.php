@@ -48,6 +48,7 @@
                 echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
                 $_SESSION['username'] = $username;
                 $_SESSION['userID']=$userID;
+                $_SESSION['useremail']=$email;
             } else {
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following errors were detected:</h4>";
