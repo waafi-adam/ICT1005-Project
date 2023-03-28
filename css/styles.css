@@ -193,6 +193,13 @@ Navbar
     justify-content: space-between;
     align-items: center;
 }
+.nav-register{
+        display: flex;
+        font-size: 1.5rem;
+        text-transform: capitalize;
+        align-items: center;
+        margin-left: auto;
+    }
 .nav-links {
     display: none;
 }

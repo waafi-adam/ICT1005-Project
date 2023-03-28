@@ -34,24 +34,8 @@
         // Close the statement and database connection
         $stmt->close();
         $conn->close();
-
-        //$res = $conn->query('SELECT * FROM Product');
-        //$rowstest = [];
-        //foreach ($res as $row) {
-        //    $rowstest[] = [
-        //        'productID' => $row['productID'], 
-        //        'productName' => $row['productName'],
-        //        'productPrice' => $row['productPrice'],
-        //        'productCompany' => $row['productCompany'],
-        //        'productImage' => base64_encode($row['productImage']),
-        //        'productDescription' => $row['productDescription'],
-        //        'productImagePath' => $row['productImagePath']
-        //    ];
-        //}
         
         $json = json_encode($data);  
-        echo "<script>localStorage.setItem('product', '$json');</script>";
-
-      
+        echo $json;
     }
 

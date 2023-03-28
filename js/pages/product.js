@@ -24,9 +24,14 @@ const cartBtn = getElement('.addToCartBtn');
 
 const init = async()=>{
     const data = await fetchProduct();
+<<<<<<< HEAD
     displayProduct(data);
     const review = await fetchReview();
     //displayReview(review);
+=======
+    console.log(data);
+    await displayProduct(data);
+>>>>>>> 85b98549021d1d7b356298d01275acd4c1cef615
     loading.style.display = 'none';
 };
 
@@ -45,10 +50,9 @@ const fetchProduct = async()=>{
     let formData = new FormData();
     formData.set("productID", id);
     
-    const resp = await postData('includes/fetchProduct.php', formData);
-    console.log(JSON.stringify(resp));
+    const data = await postData(singleProductUrl, formData);
     
-    return resp[0];
+    return data[0];
 };
 
 //fetch review

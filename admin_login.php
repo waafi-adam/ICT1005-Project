@@ -15,10 +15,10 @@
     </head>
     <body>
 
-        <?php include "includes/nav-session.inc.php"; ?> 
+        <?php include "includes/nav-white.inc.php"; ?> 
         <?php
         $username=$_SESSION['username'];
-        $userID=$_SESSION['userID'];
+        $adminMode=$_SESSION['adminMode'];
         if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="form-group">
                         <label for="otp">One Time Pin:</label>
-                        <input id="otp" name="otp" class="form-control" required maxlength="6" minlength="6"
+                        <input id="otp" name="otp" class="form-control" type="password" required maxlength="6" minlength="6"
                                placeholder="Enter One time Pin">
                     </div>
                     <div class="form-group">
@@ -49,7 +49,7 @@
             </div>
         </section>';
         } 
-        else if($username==="admin"&&$userID===31){
+        else if($username==="admin1"&&$adminMode==1){
              echo'<section class="register-section">
             <div class="register">
                 <h1>

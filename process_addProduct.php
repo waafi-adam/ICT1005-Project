@@ -81,15 +81,14 @@ if($success){
 if ($success){
     
     // Prepare the statement: 
-    $stmt = $conn->prepare("INSERT INTO Product (productName, productPrice, productCompany, productImage, productDescription, productImagePath) VALUES (?, ?, ?, ?, ?, ?)");
-    
+    $stmt = $conn->prepare("INSERT INTO Product (productName, productPrice, productCompany, productDescription, productImagePath) VALUES (?, ?, ?, ?, ?)");
     // Changing price to type double
     if ($dbfields['price']){
         $dbfields['price'] = (double) $dbfields['price'];
     }
     
     // Bind & execute the query statement: 
-    $stmt->bind_param("sdsbss", $dbfields['name'], $dbfields['price'], $dbfields['brand'], $thumbnail, $dbfields['description'], $thumbnail_path);
+    $stmt->bind_param("sdsss", $dbfields['name'], $dbfields['price'], $dbfields['brand'], $dbfields['description'], $thumbnail_path);
     
     // Execute statement and do error checking
 //     $stmt->execute();

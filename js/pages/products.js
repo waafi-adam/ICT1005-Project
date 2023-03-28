@@ -3,38 +3,38 @@
 import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
 
+
 //  filter imports
 import setupSearch from '../filters/search.js';
 import setupCompanies from '../filters/companies.js';
 import setupPrice from '../filters/price.js';
 
 // specific imports
-import { getElement, getStorageItem } from '../utils.js';
-import { product } from '../Product/store.js';
+import { products } from '../Product/store.js';
 import display from '../Product/displayProducts.js';
+import fetchProducts from '../Product/fetchProducts.js';
+import { getStorageItem, setStorageItem, getElement } from '../utils.js';
 
+let productsData = products;
+const load = getElement('.page-loading');
+const haveStore = getStorageItem('products')[0];
 
-const haveStore = getStorageItem('product')[0];
-
-if(haveStore){
-    const load = getElement('.page-loading');
-    console.log("test");
-    display(product, getElement('.products-container'));
-    load.style.display = 'none';
-} else {
+if(!haveStore){
     const init = async()=>{
-        const load = getElement('.page-loading');
-        fetch("http://35.212.148.163/index.php");
-        
-        display(product, getElement('.products-container'));
+        productsData = await fetchProducts();
+        console.log(productsData);
+        setStorageItem("products", productsData);
+        await display(products, getElement('.products-container'));
         load.style.display = 'none';
-        setupSearch(product);
-        setupCompanies(product);
-        setupPrice(product);
+        setupSearch(productsData);
+        setupCompanies(productsData);
+        setupPrice(productsData);
     };
     init();
+}else {
+    display(products, getElement('.products-container'));
+    load.style.display = 'none';
+    setupSearch(productsData);
+    setupCompanies(productsData);
+    setupPrice(productsData);
 }
-
-setupSearch(product);
-setupCompanies(product);
-setupPrice(product);

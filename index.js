@@ -3,13 +3,16 @@ import './js/cart/toggleCart.js';
 
 // specific imports
 import fetchProducts from './js/Product/fetchProducts.js';
-import { setupStore, store, product } from './js/Product/store.js';
+import { products } from './js/Product/store.js';
 import display from './js/Product/displayProducts.js';
-import { getElement } from './js/utils.js';
-
+import { getElement, setStorageItem } from './js/utils.js';
 const init = async()=>{
+    //Get all products
+    const productsData = await fetchProducts();
+    setStorageItem(productsData);
+    
     //Get featured Product
-    const featuredProducts = product.filter(product => product.productCompany == "Nike");
+    const featuredProducts = products.filter(product => product.productCompany == "Nike");
     //Display Product
     display(featuredProducts, getElement('.featured-center'));
 };

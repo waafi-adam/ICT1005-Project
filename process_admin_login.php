@@ -15,7 +15,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/nav-session.inc.php"; ?> 
+        <?php include "includes/nav-white.inc.php"; ?> 
         <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
@@ -85,9 +85,10 @@
                     $success = false;
                 } else {
 // Prepare the statement:
-                    $stmt = $conn->prepare("SELECT * FROM User WHERE
-userEmail=?");
+                    $stmt = $conn->prepare("SELECT * FROM Admin WHERE
+admin_email=?");
 // Bind & execute the query statement:
+        debug_to_console($email);
                     $stmt->bind_param("s", $email);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -95,22 +96,15 @@ userEmail=?");
 // Note that email field is unique, so should only have
 // one row in the result set.
                         $row = $result->fetch_assoc();
-                        $username = $row["userName"];
-                        $pwd_hashed = $row["userPassword"];
-// Check if the password matches:
-                        if (!password_verify($_POST["pwd"], $pwd_hashed)) {
-// Don't be too specific with the error message - hackers don't
-// need to know which one they got right or wrong. :)
-                            $errorMsg = "Email not found or password doesn't match";
+                        $username = $row["admin_name"];
+                        $pwd_hashed = $row["admin_email"];
+                        $otp_hashed=$row["admin_otp"];
+                        debug_to_console($otp_hashed);
+                        debug_to_console($OTP);
+                        if (!password_verify($OTP, $otp_hashed)) {
+                    //Check if hashed OTP matches
+                            $errorMsg = "Email not found or password doesn't match11";
                             $success = false;
-                        }
-                        if($OTP==="123456"){
-                            
-                        }
-                        else{
-                            $errorMsg = "OTP is incorrect";
-                            $success=false;
-                            
                         }
                         $userID=$row["userID"];
                     } else {

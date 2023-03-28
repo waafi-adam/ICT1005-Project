@@ -6,7 +6,7 @@ import addToCartDOM from './addToCartDOM.js';
 // set items
 const cartItemsContainer = getElement('.cart-items');
 let cart = getStorageItem('cart');
-let product = getStorageItem('product');
+let product = getStorageItem('products');
   
 // ADD TO CART
 export const addToCart = (id) => {
