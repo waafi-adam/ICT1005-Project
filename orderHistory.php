@@ -41,7 +41,6 @@
         </style>
     <!--     navbar -->
     <?php include "includes/nav-black.inc.php"; ?>
-    <?php include "includes/checkSession.php"; ?>
     <!-- hero -->
     <section class="page-hero">
       <div class="section-center">
