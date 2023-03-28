@@ -1,3 +1,6 @@
+const productsUrl = 'process_getProducts.php'
+const singleProductUrl = 'process_getSingleProduct.php'
+
 const getElement = (selection) => {
   const element = document.querySelector(selection);
   if (element) return element;
@@ -17,6 +20,8 @@ const getStorageItem = (key) => {
 const setStorageItem = (key, value) => {localStorage.setItem(key, JSON.stringify(value))};
 
 export {
+    productsUrl,
+    singleProductUrl,
     getElement,
     getStorageItem,
     setStorageItem

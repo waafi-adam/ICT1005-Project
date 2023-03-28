@@ -12,7 +12,7 @@
      <?php include "includes/checkSession.php"; ?>
       
      <!--  Use to store products in localstorage -->
-     <?php include "includes/fetchProducts.php"; ?>
+     <?php // include "includes/fetchProducts.php"; ?>
       
     
     <?php 

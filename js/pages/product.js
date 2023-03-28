@@ -24,8 +24,8 @@ const cartBtn = getElement('.addToCartBtn');
 
 const init = async()=>{
     const data = await fetchProduct();
-    //console.log(data);
-    displayProduct(data);
+    console.log(data);
+    await displayProduct(data);
     loading.style.display = 'none';
 };
 
@@ -43,10 +43,9 @@ const fetchProduct = async()=>{
     let formData = new FormData();
     formData.set("productID", id);
     
-    const resp = await postData('includes/fetchProduct.php', formData);
-    console.log(JSON.stringify(resp));
+    const data = await postData(singleProductUrl, formData);
     
-    return resp[0];
+    return data[0];
 };
 
 const displayProduct = (product)=>{

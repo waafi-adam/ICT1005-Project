@@ -1,12 +1,16 @@
-const dashboard = document.querySelector('.dashboard')
-const btns = document.querySelectorAll('.tab-btn')
-const articles = document.querySelectorAll('.content')
+import { getElement, getStorageItem, setStorageItem } from '../utils.js';
+import { products } from '../Product/store.js';
+import fetchProducts from '../Product/fetchProducts.js';
 
 /*
 ================
 ADMIN TAB SELECTION
 ================
 */
+const dashboard = getElement('.dashboard');
+const btns = document.querySelectorAll('.tab-btn');
+const articles = document.querySelectorAll('.content');
+
 dashboard.addEventListener('click', function (e) {
   const id = e.target.dataset.id
   if (id) {
@@ -462,11 +466,21 @@ const getOrderDetails = async () => {
 ADMIN SETUP
 ================
 */
-const setupTable = async () => {
-  const data = await getProducts()
-  displayProducts(data)
+const haveStore = getStorageItem('products')[0];
+let productsData = products;
 
-  const orderData = await getOrderDetails()
-  displayOrders(orderData)
-}
-setupTable()
+const setupTable = async () => {
+    // set up products section
+    
+    if (!haveStore){
+      productsData = await fetchProducts();
+      console.log(productsData);
+      setStorageItem("products", productsData);
+    }
+    displayProducts(productsData);
+  
+    // setup orders section
+    const orderData = await getOrderDetails();
+    displayOrders(orderData);
+};
+setupTable();
