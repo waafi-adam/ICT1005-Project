@@ -1,4 +1,15 @@
-    <!--     navbar -->
+<?php
+include "includes/checkSession.php";
+$loggedin=false;
+$username=$_SESSION['username'];
+if(empty($username)){
+    $loggedin=false;
+}
+else{
+    $loggedin=true;
+}
+?>
+<!--     navbar -->
     <nav class="navbar page">
       <div class="nav-center">
         <!-- links -->
@@ -26,6 +37,32 @@
         </div>
         <!-- logo -->
         <img src="./images/logo-black.svg" class="nav-logo" alt="logo">
+         <?php
+        global $loggedin;
+        if (!$loggedin) {
+            echo '<ul class="nav-register">
+                <li>
+                    <a href="register.php" class="nav-link">
+                        Register
+                    </a>
+                </li>
+                <li>
+                    <a href="login.php" class="nav-link">
+                        Login
+                    </a>
+                </li>
+            </ul>';
+        }
+        else{
+             echo '<ul class="nav-register">
+                <li>
+                    <a href="logout.php" class="nav-link">
+                        Logout
+                    </a>
+                </li>
+            </ul>';
+        }
+        ?>
         <!-- cart icon -->
         <div class="toggle-container">
           <button class="toggle-cart">

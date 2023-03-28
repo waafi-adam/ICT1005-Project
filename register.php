@@ -15,7 +15,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/nav-session.inc.php"; ?> 
+        <?php include "includes/nav-white.inc.php"; ?> 
         <?php
         $username=$_SESSION['username'];
         $userID=$_SESSION['userID'];

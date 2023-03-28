@@ -15,7 +15,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/nav-session.inc.php"; ?> 
+        <?php include "includes/nav-white.inc.php"; ?> 
         <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
@@ -43,12 +43,14 @@
             }
             authenticateUser();
             if ($success) {
-                echo "<h3>Login successful!</h3>";
+                echo "<h1>Login successful!</h3>";
                 echo "<p>Welcome back," . $username . "</p>";
                 echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
                 $_SESSION['username'] = $username;
                 $_SESSION['userID']=$userID;
                 $_SESSION['useremail']=$email;
+                echo "|".$email;
+                echo $_SESSION['useremail'];
             } else {
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following errors were detected:</h4>";
