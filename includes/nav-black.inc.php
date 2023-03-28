@@ -60,6 +60,11 @@ else{
                         Logout
                     </a>
                 </li>
+                <li>
+                    <a href="orderHistory.php" class="nav-link">
+                        Profile
+                    </a>
+                </li>
             </ul>';
         }
         ?>
