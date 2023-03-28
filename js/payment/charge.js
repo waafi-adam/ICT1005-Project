@@ -42,10 +42,34 @@ card.addEventListener('change', function(event) {
   }
 });
 
+
 // Handle form submission
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
   event.preventDefault();
+  
+  //Get cart item from localStorage
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  let formData = new FormData();
+  formData.append("orderItems", JSON.stringify(cart));
+  
+  fetch('includes/postOrder.php', {
+      method: 'POST',
+      body: formData
+  })
+    .then(response => {
+        if(response.ok){
+            localStorage.removeItem("cart");
+            console.log('Data submitted successfully');
+            console.log(response.text());
+        } else {
+            console.error('Error submitting data');
+        }     
+  })
+    .catch(error => console.log(error));
+  
+
+  
 
   stripe.createToken(card).then(function(result) {
     if (result.error) {

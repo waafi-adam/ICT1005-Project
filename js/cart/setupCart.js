@@ -58,6 +58,7 @@ const init = ()=>{
       // update DOM
       //const item = cart.find(item => item.productID == id);
       amountDOM.textContent = amount;
+      
     }
     // decrease btn
     if(parent.classList.contains('cart-item-decrease-btn')){
@@ -65,6 +66,7 @@ const init = ()=>{
       const id = amountDOM.getAttribute('id');
       // update storage
       const amount = decreaseItemStorage(id);
+      console.log("amount: " + amount);
       if(amount == 0){
         removeItemStorage(id);
         amountDOM.parentElement.parentElement.remove();
@@ -115,7 +117,9 @@ function decreaseItemStorage(id){
 }
 
 function removeItemStorage(id){
-  cart = cart.filter(item => item.productID !== id);
+  console.log(id);
+  cart = cart.filter(item => item.productID != id);
+  console.log(cart);
 }
 
 function updateItemCount(){

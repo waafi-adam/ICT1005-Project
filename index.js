@@ -8,17 +8,9 @@ import display from './js/Product/displayProducts.js';
 import { getElement } from './js/utils.js';
 
 const init = async()=>{
-    //const products = await fetchProducts();
-    //if (products){
-    //    setupStore(products);
-    //}
-    //const featuredProducts = store.filter(product=> product.featured == true);
-    //console.log(featuredProducts);
-    //display(featuredProducts, getElement('.featured-center'));
-    //console.log(store);
-    //console.log(test);
-    const featuredProducts = product.filter(product => product.productName == "featured");
-    //console.log(featuredProducts);
+    //Get featured Product
+    const featuredProducts = product.filter(product => product.productCompany == "Nike");
+    //Display Product
     display(featuredProducts, getElement('.featured-center'));
 };
 

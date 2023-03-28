@@ -14,12 +14,10 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/nav-session.inc.php"; ?> 
+        <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
-            //For debugging purposes (Delete once onto production)
-            ini_set('display_errors', 1);
-            error_reporting(E_ALL);
 
             //set up PHPMailer variables
             use PHPMailer\PHPMailer\PHPMailer;
@@ -63,10 +61,7 @@ require 'phpmailer/src/Exception.php';
 
             saveMemberToDB();
             if ($success) {
-                //test
-                $smtpconfig = parse_ini_file('../private/smtp.ini');
-                //prod
-                //$smtpconfig = parse_ini_file('../private/smtp_cred.ini');
+                $smtpconfig = parse_ini_file('../private/smtp_cred.ini');
                 $mail = new PHPMailer(true);
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Port = 465;
@@ -83,13 +78,12 @@ require 'phpmailer/src/Exception.php';
                     <h2>Thank you for registering with Comfy!</h2>
                     <h5>Verify your account with the link below</h5>
                     <br/><br/>
-                    <a href='http://35.212.189.116/verify-email.php?token=$verify_token'>Click me</a>
+                    <a href='http://35.212.148.163/verify-email.php?token=$verify_token'>Click me</a>
                 ";
                 $mail->Body = $email_template;
 
                 if ($mail->send()) {
-                    debug_to_console("inside if");
-                    echo "<main class='jumbotron text-left'>";
+                    
                     echo "<h4>Your registration is successful!</h4>";
                     echo "<p> Thank you for signing up," . $username . "</p>";
                     echo "<p>Email: " . $email . "<br>";
@@ -98,12 +92,12 @@ require 'phpmailer/src/Exception.php';
                     echo "<main class='jumbotron text-left'>";
                     echo "<h4>Can't send email to " . $email . " </h4>";
                 }
-            } else {
-                echo "<main class='jumbotron text-left'>";
+            }
+            else {
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following input errors were detected:</h4>";
                 echo "<p>" . $errorMsg . "</p>";
-                echo '<button class="btn btn-primary"><a href="register.php">Return back to sign-in page</a></button>';
+                echo '<a href="register.php" class="btn btn-primary">Return back to sign-in page</a>';
             }
 
             //Helper function that checks input for malicious or unwanted content.
@@ -130,26 +124,19 @@ require 'phpmailer/src/Exception.php';
             function saveMemberToDB() {
                 global $username, $email, $pwd_hashed, $errorMsg, $success, $verify_token;
                 // Create database connection.prod
-//                $config = parse_ini_file('../private/db-config.ini');
-//                $conn = new mysqli($config['servername'], $config['username'],
-//                        $config['password'], $config['dbname']);
-                //Production
-//                $conn = new mysqli("localhost", "project", "password", "shoeStore");
-                //Test
-                $conn = new mysqli("localhost", "sqldev", "InF1005", "shoeStore");
+                $config = parse_ini_file('../private/db-config.ini');
+                $conn = new mysqli($config['servername'], $config['username'],
+                        $config['password'], $config['dbname']);
+                
                 // Check connection
                 if ($conn->connect_error) {
                     $errorMsg = "Connection failed: " . $conn->connect_error;
                     $success = false;
                 } else {
                     // Prepare the statement:
-                    // prod
-//                    $stmt = $conn->prepare("INSERT INTO User (userName,
-//            userEmail, userPassword,verified,verify_token) VALUES (?, ?, ?, ?,?)");
-                    //test
-                    $stmt = $conn->prepare("INSERT INTO shoeStore_user (userName,
+                    
+                    $stmt = $conn->prepare("INSERT INTO User (userName,
             userEmail, userPassword,verified,verify_token) VALUES (?, ?, ?, ?,?)");
-
                     $notverified = 0;
                     $stmt->bind_param("sssis", $username, $email, $pwd_hashed, $notverified, $verify_token);
                     if (!$stmt->execute()) {
@@ -162,5 +149,6 @@ require 'phpmailer/src/Exception.php';
             }
             ?>
         </section>
+        </main>
     </body>
 </html>

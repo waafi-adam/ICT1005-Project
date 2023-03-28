@@ -1,32 +1,37 @@
 <?php
 
+    $ID = $_POST["productID"];
 
-    $config = parse_ini_file('../private/db-config.ini');
+    $config = parse_ini_file('../../private/db-config.ini');
+    
 
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     
         // Check connection
     if ($conn->connect_error)
     {
-        echo "Connection fail";
+        
+        echo json_encode("Connection fail test");
     }
     else {
-        $res = $conn->query('SELECT * FROM Product');
-        $rowstest = [];
-        foreach ($res as $row) {
-            $rowstest[] = [
-                'productID' => $row['productID'], 
-                'productName' => $row['productName'],
-                'productPrice' => $row['productPrice'],
-                'productCompany' => $row['productCompany'],
-                'productImage' => base64_encode($row['productImage']),
-                'productDescription' => $row['productDescription']
+        
+        $results = $conn->query("SELECT * FROM Product WHERE productID=$ID");
+        $row = [];
+        foreach($results as $result) {
+
+            $row[] = [
+                'productID' => $result['productID'], 
+                'productName' => $result['productName'],
+                'productPrice' => $result['productPrice'],
+                'productCompany' => $result['productCompany'],
+                'productImage' => base64_encode($result['productImage']),
+                'productDescription' => $result['productDescription'],
+                'productImagePath' => $result['productImagePath']
             ];
         }
         
-        $json = json_encode($rowstest);  
-        echo $json;
-
-      
+        echo json_encode($row);
+         
+        $conn->close();
     }
 

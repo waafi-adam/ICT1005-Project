@@ -7,7 +7,7 @@ const addToCartDOM = (item) => {
     newItem.classList.add('cart-item');
     newItem.dataset.id = item.productID;
     newItem.innerHTML = `
-        <img src="data:image/png;base64,${item.productImage}" class="cart-item-img" alt="${item.productName}-img">
+        <img src="${item.productImagePath}" class="cart-item-img" alt="${item.productName}-img">
         <!-- item info -->
         <div>
             <h4 class="cart-item-name">${item.productName}</h4>

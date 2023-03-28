@@ -9,7 +9,7 @@ const display = (products, element, isFilter) => {
             <!-- single product -->
             <article class="product">
             <div class="product-container">
-                <img src="data:image/png;base64,${product.productImage}" alt="${product.productName}-img" class="product-img img">
+                <img src="${product.productImagePath}" alt="${product.productName}-img" class="product-img img">
                 <div class="product-icons">
                     <a href="product.php?id=${product.productID}" class="product-icon">
                         <i class="fas fa-search"></i>

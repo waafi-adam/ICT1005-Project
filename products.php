@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+       <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -72,7 +72,9 @@
           <h3 class="cart-total text-slanted">
             total: $12.00
           </h3>
-          <button class="cart-checkout btn">checkout</button>
+          <form>
+               <button type="submit" class="cart-checkout btn" formaction="payment_addr.php">Checkout</button>
+          </form>
         </footer>
       </aside>
     </div>

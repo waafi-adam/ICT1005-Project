@@ -10,9 +10,9 @@ import setupPrice from '../filters/price.js';
 
 // specific imports
 import { getElement, getStorageItem } from '../utils.js';
-import { product, store, setupStore } from '../Product/store.js';
+import { product } from '../Product/store.js';
 import display from '../Product/displayProducts.js';
-import fetchProducts from '../Product/fetchProducts.js';
+
 
 const haveStore = getStorageItem('product')[0];
 

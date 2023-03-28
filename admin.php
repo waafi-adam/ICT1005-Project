@@ -32,7 +32,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <!-- btn container -->
                 <div class="btn-container">
                     <button class="tab-btn active" data-id="history">Products</button>
-                    <button class="tab-btn" data-id="vision">Orders</button>
+                    <button class="tab-btn" data-id="order">Orders</button>
                     <button class="tab-btn" data-id="goals">Users</button>
                 </div>
                 <div class="dashboard-content">
@@ -65,26 +65,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                             </div>
                         </div>
                     </div>
+                    
                     <!-- end of tab info -->
                     <!-- tab info -->
-                    <div class="content" id="vision">
-                        <h4>vision</h4>
-                        <p>
-                            Man bun PBR&B keytar copper mug prism, hell of helvetica. Synth
-                            crucifix offal deep v hella biodiesel. Church-key listicle
-                            polaroid put a bird on it chillwave palo santo enamel pin,
-                            tattooed meggings franzen la croix cray. Retro yr aesthetic four
-                            loko tbh helvetica air plant, neutra palo santo tofu mumblecore.
-                            Hoodie bushwick pour-over jean shorts chartreuse shabby chic.
-                            Roof party hammock master cleanse pop-up truffaut, bicycle
-                            rights skateboard affogato readymade sustainable deep v
-                            live-edge schlitz narwhal.
-                        </p>
-                        <ul>
-                            <li>list item</li>
-                            <li>list item</li>
-                            <li>list item</li>
-                        </ul>
+                    <div class="content" id="order">
+                        <div class="table-center">
+                            <div class="table">
+                                <div class="table-row">
+                                    <div class="item-display">
+                                        <div class="item-btns"></div>
+                                        <div class="item-info">
+                                            <div class="item-col">Order Detail</div>
+                                            <div class="item-col">Product Name</div>
+                                            <div class="item-col">Price</div>
+                                            <div class="item-col">UserID</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                        
+                        
+                        
                     </div>
                     <!-- end of tab info -->
                     <!-- tab info -->
