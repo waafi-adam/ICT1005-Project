@@ -5,7 +5,7 @@ import '../cart/setupCart.js';
 
 // specific
 import { addToCart } from '../cart/setupCart.js';
-import { singleProductUrl, getElement } from '../utils.js';
+import { singleProductUrl ,getElement } from '../utils.js';
 
 // selections
 const loading = getElement('.page-loading');
@@ -24,8 +24,10 @@ const cartBtn = getElement('.addToCartBtn');
 
 const init = async()=>{
     const data = await fetchProduct();
-    console.log(data);
     await displayProduct(data);
+    
+    const review = await fetchReview();
+    
     loading.style.display = 'none';
 };
 
@@ -37,6 +39,7 @@ const postData = async(url, data) =>{
     return resp.json();
 };
 
+//fetch product
 const fetchProduct = async()=>{
     let id = window.location.search.split('id=')[1];
     
@@ -46,6 +49,16 @@ const fetchProduct = async()=>{
     const data = await postData(singleProductUrl, formData);
     
     return data[0];
+};
+
+//fetch review
+const fetchReview = async()=>{
+    let id = window.location.search.split('id=')[1];
+    let formData = new FormData();
+    formData.set("productID", id);
+    
+    const resp = await postData('../../process_getReview.php', formData);
+    console.log("test: "+JSON.stringify(resp));
 };
 
 const displayProduct = (product)=>{

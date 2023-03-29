@@ -9,12 +9,12 @@
   <body>
       
      <?php include "includes/nav-white.inc.php"; ?> 
-     
+     <?php include "includes/checkSession.php"; ?>
+      
+     <!--  Use to store products in localstorage -->
+     <?php // include "includes/fetchProducts.php"; ?>
+      
     
-    <?php 
-    $username=$_SESSION['username'];
-    echo $username; 
-    ?>
     
     <!-- hero -->
     <section class="hero">
