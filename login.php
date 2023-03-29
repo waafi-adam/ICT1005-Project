@@ -17,6 +17,8 @@
 
         <?php include "includes/nav-white.inc.php"; ?> 
         <?php
+
+        
         $username=$_SESSION['username'];
         $userID=$_SESSION['userID'];
         $email=$_SESSION['useremail'];
@@ -58,6 +60,14 @@
                 </p>
                 </div>
         </section>';
+        }
+        
+        
+        //For displaying pls login message
+        if(isset($_SESSION['message'])){
+            //Change H1 text
+            echo "<script>document.querySelector('h1').innerText = 'Login to Checkout'</script>";
+            unset($_SESSION['message']); // clear the value so that it doesn't display again
         }
         ?>
 

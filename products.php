@@ -66,7 +66,9 @@
           <h3 class="text-slanted">your bag</h3>
         </header>
         <!-- cart items -->
-        <div class="cart-items"></div>
+        <div class="cart-items">
+          
+        </div>
         <!-- footer -->
         <footer>
           <h3 class="cart-total text-slanted">

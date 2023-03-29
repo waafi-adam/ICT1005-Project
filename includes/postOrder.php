@@ -34,12 +34,13 @@
         echo json_encode($cartArray);
         foreach($orderItems AS $orderItem){
             
-            $stmt = $conn->prepare("INSERT INTO orderDetail (orderQuantity, orderName, orderPrice, User_userID) VALUES (?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO orderDetail (orderQuantity, orderName, orderPrice, User_userID, orderProductID) VALUES (?, ?, ?, ?, ?)");
            $orderQuantity = $orderItem['amount'];
             $orderName = $orderItem['productName'];
             $orderPrice = $orderItem['productPrice'];
+            $orderProductID = $orderItem['productID'];
             $User_userID = $userID;
-            $stmt->bind_param("isii", $orderQuantity, $orderName , $orderPrice, $User_userID);
+            $stmt->bind_param("isiii", $orderQuantity, $orderName , $orderPrice, $User_userID, $orderProductID);
             if (!$stmt->execute())
             {
                 echo json_encode("error");

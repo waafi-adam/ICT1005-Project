@@ -67,39 +67,16 @@
         <!-- cart items -->
         <div class="cart-items">
             
-          <!--
-           <article class="cart-item" data-id="">
-            <img src="./images/main-bcg.jpeg" class="cart-item-img" alt="name">
 
-            <div>
-              <h4 class="cart-item-name">high-back bench</h4>
-              <p class="cart-item-price">$13.30</p>
-              <button class="cart-item-remove-btn">remove</button>
-            </div>
-
-            <div>
-              <button class="cart-item-increase-btn">
-                <i class="fas fa-chevron-up"></i>
-              </button>
-              <p class="cart-item-amount">1</p>
-              <button class="cart-item-decrease-btn">
-                <i class="fas fa-chevron-down"></i>
-              </button>
-            </div>
-          </article> 
-           -->
-           
-          <!-- end of single item -->
         </div>
         <!-- footer -->
-        <footer></footer>
+        <footer>
           <h3 class="cart-total text-slanted">
             total: $12.00
           </h3>
             <form>
                 <button type="submit" class="cart-checkout btn" formaction="payment_addr.php">Checkout</button>
             </form>
-<!--          <button class="cart-checkout btn" onclick="payment_addr.php">checkout</button>-->
         </footer>
       </aside>
     </div>

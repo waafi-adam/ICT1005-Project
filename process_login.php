@@ -43,6 +43,8 @@
             }
             authenticateUser();
             if ($success) {
+                //echo "<script>localStorage.setItem('product', '$json');</script>";
+                
                 echo "<h1>Login successful!</h3>";
                 echo "<p>Welcome back," . $username . "</p>";
                 echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
@@ -51,6 +53,13 @@
                 $_SESSION['useremail']=$email;
                 echo "|".$email;
                 echo $_SESSION['useremail'];
+
+                //Cart stuff
+                echo "<script>if(localStorage.getItem('cart')){localStorage.removeItem('cart');}</script>";  //Remove cart
+                //Get array of cart items
+                $array = getCartItems();
+                echo "<script>localStorage.setItem('cart', '$array');</script>";
+
             } else {
                 echo "<h3>Oops!</h3>";
                 echo "<h4>The following errors were detected:</h4>";
@@ -113,6 +122,48 @@ userEmail=?");
                 }
                 $conn->close();
             }
+
+            function getCartItems(){
+
+                //Get cart item
+                $config = parse_ini_file('../private/db-config.ini');
+                $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+                if ($conn->connect_error) {
+                    $errorMsg = "Connection failed: " . $conn->connect_error;
+                    $success = false;
+                } else {
+                    $userstuff = $_SESSION['userID'];
+                    $stmt = $conn->query("SELECT Cart.cartQuantity, Product.productCompany, Product.productID, Product.productImagePath, Product.productName, Product.productPrice FROM Cart INNER JOIN Product ON Cart.Product_productID = Product.productID WHERE Cart.User_userID=$userstuff");
+                    //echo "Connection fail";
+                    //$stmt = $conn->prepare("SELECT * FROM Cart WHERE User_userID=?");
+                    //$stmt->bind_param("i", $userID);
+                    //$stmt->execute();
+                    //$stmt->bind_result($cartQuantity, $productCompany, $productID, $productImagePath, $productName, $productPrice);
+                    //echo "test";
+                    //echo $cartQuantity;
+
+                    $data = array();
+                    foreach ($stmt as $row) {
+                        echo $row['cartQuantity'];
+                        $data[] = array(
+                            'amount' => $row['cartQuantity'],
+                            'productCompany' => $row['productCompany'],
+                            'productID' => $row['productID'],
+                            'productImagePath' => $row['productImagePath'],
+                            'productName' => $row['productName'],
+                            'productPrice' => $row['productPrice']
+                    );
+                    }
+                    $stmt->close();
+                    $conn->close();
+                    return json_encode($data);
+                }
+
+            }
+
+
+
+
             ?>
         </section>
         </main>
