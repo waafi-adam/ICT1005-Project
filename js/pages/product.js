@@ -3,9 +3,11 @@
 import '../cart/toggleCart.js';
 import '../cart/setupCart.js';
 
+
 // specific
 import { addToCart } from '../cart/setupCart.js';
 import { singleProductUrl ,getElement } from '../utils.js';
+import {displayReviews} from '../review/review.js';
 
 // selections
 const loading = getElement('.page-loading');
@@ -27,7 +29,7 @@ const init = async()=>{
     await displayProduct(data);
     
     const review = await fetchReview();
-    
+    displayReviews(review);
     loading.style.display = 'none';
 };
 
@@ -58,7 +60,10 @@ const fetchReview = async()=>{
     formData.set("productID", id);
     
     const resp = await postData('../../process_getReview.php', formData);
+    console.log(resp);
+    
     console.log("test: "+JSON.stringify(resp));
+    return resp;
 };
 
 const displayProduct = (product)=>{

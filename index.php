@@ -16,7 +16,7 @@
     <section class="hero">
       <div class="hero-container">
         <h1 class="text-slanted">
-          rest, relax, unwind
+          All Your Comfort Shoes
         </h1>
         <h3>embrace your choices - we do</h3>
         <a href="/products.php" class="hero-btn">Shop Now</a>
