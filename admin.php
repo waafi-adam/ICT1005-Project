@@ -37,8 +37,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
          
         <?php 
         global $adminMode;
-        if ($adminMode==1){
-            echo'<div class="dashboard-center section-center">
+        if ($adminMode==1){ ?>
+            <div class="dashboard-center section-center">
             <article class="dashboard">
                 <!-- btn container -->
                 <div class="btn-container">
@@ -131,10 +131,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <!-- end of tab info -->
                 </div>
             </article>
-        </div>';
-        }
+        </div>
+        <script type="module" src="js/pages/admin.js"></script>';
+        <?php } ?>
         
         ?>
-        <script type="module" src="js/pages/admin.js"></script>
     </body>
 </html>
