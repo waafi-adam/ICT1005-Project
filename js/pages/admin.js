@@ -1,5 +1,5 @@
 import { getElement, getStorageItem, setStorageItem } from '../utils.js';
-import { products } from '../Product/store.js';
+import { products, findProduct } from '../Product/store.js';
 import fetchProducts from '../Product/fetchProducts.js';
 
 /*
@@ -96,37 +96,41 @@ const selectAndListenForm = (row) => {
 const renderForm = (type, row) => {
   const formContainer = document.createElement('div')
   const id = row.dataset.product_id ? `${row.dataset.product_id}` : ''
-  formContainer.setAttribute('class', `item-form ${type}`)
+  formContainer.setAttribute('class', `item-form ${type}`);
+  let selectedProduct = productsData.find(product => product.productID == id);
+  if (!selectedProduct) selectedProduct = {productName:'', productPrice:'', productCompany:'', productImagePath:'', productDescription:''};
+  const {productName, productPrice, productCompany, productImagePath, productDescription} = selectedProduct;
   const formTitle = (() => {
     if (type === 'edit') return `Editting Product ID: ${id}`
     else return 'Adding Product:'
   })()
+  
   const submitTxt = (() => {
     if (type === 'edit') return 'Update'
     else return 'Add'
   })()
-  formContainer.innerHTML = `
+    formContainer.innerHTML = `
     <h3>${formTitle}</h3>
-    <form class="form" data-form_type="${type}-product" >
+    <form class="form" data-form_type="${type || ''}-product" >
         <div class="form-inputs">
             <p class="alert "></p>
             <div class="form-row">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" id="name" name="name" class="form-input" required pattern="[A-Za-z ]+">
+                <input type="text" id="name" name="name" class="form-input" required pattern="[A-Za-z ]+" value=${productName || ''}>
             </div>
             <div class="form-row">
                 <label for="brand" class="form-label">Brand:</label>
-                <input type="text" id="brand" name="brand" class="form-input"  pattern="[A-Za-z ]+">
+                <input type="text" id="brand" name="brand" class="form-input"  pattern="[A-Za-z ]+" value=${productCompany || ''}>
             </div>
 
             <div class="form-row">
                 <label for="price" class="form-label">Price:</label>
-                <input type="number" id="price" name="price" class="form-input" required>
+                <input type="number" id="price" name="price" class="form-input" value=${productPrice || ''} required>
             </div>
 
             <div class="form-row">
                 <label for="description" class="form-label">Description:</label>
-                <textarea id="description" name="description" class="form-input"></textarea>
+                <textarea id="description" name="description" class="form-input" >${productDescription || ''}</textarea>
             </div>
 
             <div class="form-row">
@@ -145,7 +149,7 @@ const renderForm = (type, row) => {
 
         <div class="form-imgs">
             <div class="thumbnail-container">
-                <img src="./images/sneaker.png" alt="Current Image" class="thumbnail-img">
+                <img src=${productImagePath || ''} alt="Current Image" class="thumbnail-img">
             </div>
             <div class="image-gallery">
                 <div class="image-item" draggable="true">
@@ -161,7 +165,7 @@ const renderForm = (type, row) => {
         </div>
     </form>
   `
-  row.appendChild(formContainer)
+  row.appendChild(formContainer);
 }
 
 const removeForm = (row) => row.removeChild(row.querySelector('.item-form'))
@@ -373,10 +377,13 @@ const getProducts = async () => {
 // UPDATE DATA (EDIT PRODUCTS)
 const editProduct = async (formData, form, id) => {
   try {
+    const {productImagePath:currImgPath} = productsData.find(product => product.productID == id); 
     const fileInput = form.querySelector('input[type="file"]#thumbnail')
     const file = fileInput.files[0]
     formData.append('thumbnail', file)
     if (id) formData.append('id', id)
+    console.log(currImgPath);
+    formData.append('currImgPath', currImgPath);
     console.log(id)
     const resp = await postData('process_editProduct.php', formData)
     if (resp.type === 'success') form.reset()

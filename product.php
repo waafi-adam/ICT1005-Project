@@ -95,9 +95,71 @@
         </article>
       </div>
     </section>
-    <div class="review">
-        <h4 class="review-tile">Reviews</h4>
-    </div>
+    <!-- RATING REVIEWS START -->
+    <section class="section review-rating">
+      <div class="section-center review-rating-center">
+        <div class="title">
+          <h2><spanR>/</spanR>rating & reviews</h2>
+        </div>
+        <!-- ratings start -->
+        <div class="container ratings">
+          <div class="chart">
+            <div class="rate-box">
+              <span class="value">5</span>
+              <div class="progress-bar">
+                <span class="progress"></span>
+              </div>
+              <span class="count">0</span>
+            </div>
+            <div class="rate-box">
+              <span class="value">4</span>
+              <div class="progress-bar"><span class="progress"></span></div>
+              <span class="count">0</span>
+            </div>
+            <div class="rate-box">
+              <span class="value">3</span>
+              <div class="progress-bar"><span class="progress"></span></div>
+              <span class="count">0</span>
+            </div>
+            <div class="rate-box">
+              <span class="value">2</span>
+              <div class="progress-bar"><span class="progress"></span></div>
+              <span class="count">0</span>
+            </div>
+            <div class="rate-box">
+              <span class="value">1</span>
+              <div class="progress-bar"><span class="progress"></span></div>
+              <span class="count">0</span>
+            </div>
+          </div>
+          <div class="global">
+            <span class="global-value">0.0</span>
+            <div class="rating-icons">
+              <span class="one"
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i
+              ></span>
+              <span class="two"
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i
+              ></span>
+            </div>
+            <span class="total-reviews">0</span>
+          </div>
+        </div>
+        <!-- ratings end -->
+        <!-- reviews start -->
+        <div id="reviews">
+          <!--reviews-box-container------>
+          <div class="testimonial-box-container"></div>
+        </div>
+
+        <!-- reviews end -->
+      </div>
+    </section>
+    <!-- RATING REVIEWS END -->
     <!-- page loading -->
     <div class="page-loading">
       <h2>Loading...</h2>

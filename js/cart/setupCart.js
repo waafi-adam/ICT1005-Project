@@ -13,8 +13,7 @@ export const addToCart = (id) => {
   // check if exist in cart
   const cartIds = cart.map(item => item.productID);
   // if doesn't exist
-
-  if(cartIds.includes(parseInt(id)) == false){
+  if(cartIds.includes(id) == false){
     // add to storage
     updateDB(id, "addCart");  //Add to DB*
     let newCartItem = findProduct(id);
@@ -24,8 +23,7 @@ export const addToCart = (id) => {
     addToCartDOM(newCartItem);
   }
   // if exist
-  if(cartIds.includes(parseInt(id)) == true){
-    console.log("pls");
+  if(cartIds.includes(id) == true){
     // update existing storage
     const amount = increaseItemStorage(id);
     //Increase in DB*

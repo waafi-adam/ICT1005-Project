@@ -10,16 +10,13 @@
       
      <?php include "includes/nav-white.inc.php"; ?> 
       
-     <!--  Use to store products in localstorage -->
-     <?php // include "includes/fetchProducts.php"; ?>
-      
     
     
     <!-- hero -->
     <section class="hero">
       <div class="hero-container">
         <h1 class="text-slanted">
-          rest, relax, unwind
+          All Your Comfort Shoes
         </h1>
         <h3>embrace your choices - we do</h3>
         <a href="/products.php" class="hero-btn">Shop Now</a>
@@ -80,6 +77,33 @@
         </footer>
       </aside>
     </div>
+    <!--numbers section-->
+    <section class="section numbers">
+        <div class="title">
+          <h2><span>/</span> Our Numbers</h2>
+        </div>
+        <div class="numbers-center section-center">
+            <!-- single number -->
+            <article>
+              <span class="number" data-value="500">0</span>
+              <p>Shoes Sold</p>
+            </article>
+            <!-- end of single number -->
+            <!-- single number -->
+            <article>
+              <span class="number" data-value="17140">0</span>
+              <p>Brands Available</p>
+            </article>
+            <!-- end of single number -->
+            <!-- single number -->
+            <article>
+              <span class="number" data-value="1500">0</span>
+              <p>Shoes Available</p>
+            </article>
+            <!-- end of single number -->
+        </div>
+    </section>
+    <!--numbers section end-->
     <!-- featured products -->
     <section class="section featured">
       <div class="title">

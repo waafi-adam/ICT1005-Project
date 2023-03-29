@@ -6,6 +6,8 @@ $fields = array("name" => "name", "price" => "price", "brand" => "brand", "descr
 $dbfields = [];
 
 $thumbnail = null;
+$thumbnail_path = $_POST['currImgPath']; // Set the thumbnail path to the current image path by default
+
 // Handle thumbnail upload
 if ($_FILES['thumbnail']['error'] === UPLOAD_ERR_OK) {
     $thumbnail = file_get_contents($_FILES['thumbnail']['tmp_name']);
@@ -21,9 +23,14 @@ if ($_FILES['thumbnail']['error'] === UPLOAD_ERR_OK) {
     $thumbnail_filename = uniqid() . '.' . $thumbnail_extension;
     $thumbnail_path = 'images/' . $thumbnail_filename;
     move_uploaded_file($_FILES['thumbnail']['tmp_name'], $thumbnail_path);
-} else {
-    $thumbnail_path = $_POST['thumbnail_path'];
+} 
+
+// Make sure the thumbnail path is set to a non-empty value
+if (empty($thumbnail_path)) {
+    $msg = "Thumbnail path is required.";
+    die(json_encode(array('msg' => $msg, 'type' => "danger")));
 }
+
 
 //makeConnection();
 $config = parse_ini_file('../private/db-config.ini');
@@ -89,7 +96,7 @@ if ($success) {
         die(json_encode(array('msg' => $msg, 'type' => "danger")));
     } else {
         $msg = "successfully updated";
-        echo json_encode(array('msg' => $msg, 'type' => "success"));
+        echo json_encode(array('msg' => $thumbnail_path, 'type' => "success"));
     }
     $stmt->close();
 }

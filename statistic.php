@@ -16,7 +16,12 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
-
+        <style>
+            .container {
+                display: flex;
+                flex-basis: 50%;
+            }
+        </style>
         <!--     navbar -->
         <?php include "includes/nav-black.inc.php"; ?>
 
@@ -80,18 +85,27 @@
         </div>
         <h2> testing </h2>
         <?php
-            $conn = mysqli_connect("localhost", "project", "password", "shoeStore");
-            $result = $conn->query("SELECT productName, Count(productName) as amount FROM shoeStore.Product GROUP BY productName");
+        $config = parse_ini_file('../private/db-config.ini');
+        $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        // If database connect fail
+        if ($conn->connect_error) {
+            echo "error";
+            $errorMsg = "Connection failed: " . $conn->connect_error;
+            $success = false;
+        } else {
+            $result = $conn->query("SELECT orderName, Count(orderQuantity) as amount FROM shoeStore.orderDetail GROUP BY orderName;");
             
             foreach($result as $data)
             {
-            $product[] = $data['productName'];
+            $product[] = $data['orderName'];
             $amount[] = $data['amount'];
             }
+        }
             ?>
-   <div style="width:20%;height:30%">
-   <canvas id="myChart" width="400" height="400"></canvas> 
-   
+<div class="dashboard-center section-center">
+    <div class="container" style="width:30%;height:50%">
+   <canvas id="myChart" width="5" height="5"></canvas> 
+    <canvas id="pieChart" width="5" height="5"></canvas>
 </div>
 <script>
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -131,18 +145,26 @@ var myChart = new Chart(ctx, {
 });
 </script>
  <?php
-            $conn = mysqli_connect("localhost", "project", "password", "shoeStore");
-            $result2 = $conn->query("SELECT productRating, count(productRating) as ratingcount FROM shoeStore.Product GROUP BY productRating");
+        $config = parse_ini_file('../private/db-config.ini');
+        $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        // If database connect fail
+        if ($conn->connect_error) {
+            echo "error";
+            $errorMsg = "Connection failed: " . $conn->connect_error;
+            $success = false;
+        } else {
+            $result = $conn->query("SELECT reviewRating, count(reviewRating) as ratingcount FROM shoeStore.Review GROUP BY reviewRating;");
             
-            foreach($result2 as $data2)
+            foreach($result as $data)
             {
-            $rating[] = $data2['productRating'];
-            $ratingCount[] = $data2['ratingcount'];
+            $rating[] = $data['reviewRating'];
+            $ratingCount[] = $data['ratingcount'];
             }
+        }
             ?>
-<div style="width:20%;height:30%">
-    <canvas id="pieChart" width="100" height="100"></canvas>
-</div> 
+
+   
+ 
 <script>
     var ctx = document.getElementById('pieChart').getContext('2d');
 var pieChart = new Chart(ctx, {
@@ -164,6 +186,7 @@ var pieChart = new Chart(ctx, {
         }
         });
 </script>
-    <!--<script type="module" src="js/pages/products.js"></script>-->
+</div>
+    <!--<script type="module" src="js/pages/orderHistory.js"></script>-->
     </body>
 </html>

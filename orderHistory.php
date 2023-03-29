@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Products | Comfy</title>
+    <title>Profile | Comfy</title>
     <!-- font-awesome -->
     <link
       rel="stylesheet"
@@ -41,7 +41,6 @@
         </style>
     <!--     navbar -->
     <?php include "includes/nav-black.inc.php"; ?>
-    <?php include "includes/checkSession.php"; ?>
     <!-- hero -->
     <section class="page-hero">
       <div class="section-center">
@@ -103,15 +102,15 @@
       </aside>
     </div>
      <div class="dashboard-center section-center">
-
+            <!-- get user's username and email -->
                 <div class="dashboard-content">
                  <?php
                   $username = $_SESSION['username'];
-                  $email = $_SESSION['email'];
-                  
+                  $email = $_SESSION['useremail'];
                     echo "<p><strong>Username: </strong> $username</p>";
                     echo "<p><strong>Email: </strong> $email</p>";
                   ?>
+                    <!-- display all order placed by user-->
                     <h3><b> Order History: </b></h3>
                     <div class="orderHistory">
                          <table class="orderHistory" >
@@ -121,24 +120,34 @@
                                     <th>Order Name</th>
                                     <th>Order Quantity</th>
                                     <th>Price</th>
+                                    <th>View Order</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
+                            // get session user id
                             $userID = $_SESSION['userID'];
+                            
+                            // connect to database
                             $config = parse_ini_file('../private/db-config.ini');
                             $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+                            // if database connect fail 
                             if ($conn->connect_error) {
                                 $errorMsg = "Connection failed: " . $conn->connect_error;
                                 $success = false;
                             } else {
+                                // retrieve from database
                                 $sql = "SELECT * FROM shoeStore.orderDetail WHERE User_userID = $userID";
                                 $result = $conn->query($sql);
-
+                                 // display result in table format
                                 while ($row = $result->fetch_assoc()) {
-                                    echo "<tr><td> " . $row["DetailID"] . "</td><td>"
-                                    . $row["orderName"] . "</td><td>" . $row["orderQuantity"] . "</td><td>" .
-                                    $row["orderPrice"] . "</td></tr>";
+                                    echo '<tr>';
+                                    echo '<td>' . $row['DetailID'] . '</td>';
+                                    echo '<td>' . $row['orderName']. '</td>';
+                                    echo '<td>' . $row['orderQuantity'] . '</td>';
+                                    echo '<td>' . $row['orderPrice'] . '</td>';
+                                    echo '<td><a href="orderDetail.php?DetailID='.$row['DetailID']. '">View</a></td>';
+                                    echo '</tr>';
                                 }
                                 $conn->close();
                             }
