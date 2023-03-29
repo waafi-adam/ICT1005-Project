@@ -66,7 +66,7 @@
             
           <!--
            <article class="cart-item" data-id="">
-            <img src="./images/main-bcg.jpeg" class="cart-item-img" alt="name">
+            <img src="./images/shoe-hero.jpg" class="cart-item-img" alt="name">
 
             <div>
               <h4 class="cart-item-name">high-back bench</h4>
