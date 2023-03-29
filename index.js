@@ -10,7 +10,7 @@ import {animateNumbersSection} from './js/numbers/numbers.js';
 
 const init = async()=>{
     // animate numbers section
-    animateNumbersSection();
+    animateNumbersSection(products);
     //Get all products
     const productsData = await fetchProducts();
     setStorageItem(productsData);
