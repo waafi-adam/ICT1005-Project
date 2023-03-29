@@ -16,9 +16,10 @@
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
+         <?php include "includes/sidebar.php"; ?>
         <?php
         global $session;
-        $username=$_SESSION['username'];
+        $username = $_SESSION['username'];
         if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
@@ -41,11 +42,13 @@
                     Come again!
                 </h1>
                 <p>
-                    Goodbye '.$username.'</p>';
+                    Goodbye ' . $username . '</p>';
 
-            echo"<script>localStorage.removeItem('cart');</script>";        
+            echo"<script>localStorage.removeItem('cart');</script>";
         }
         ?>
-
+        <script type="module" src="js/toggleSidebar.js"></script>
+        <script type="module" src="js/cart/setupCart.js"></script>
+        <script type="module" src="js/cart/toggleCart.js"></script> 
     </body>
 </html>

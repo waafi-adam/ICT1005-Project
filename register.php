@@ -16,9 +16,10 @@
     </head>
     <body>
         <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/sidebar.php"; ?>
         <?php
-        $username=$_SESSION['username'];
-        $userID=$_SESSION['userID'];
+        $username = $_SESSION['username'];
+        $userID = $_SESSION['userID'];
         if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
@@ -77,6 +78,8 @@
         </section>';
         }
         ?>
-
+       <script type="module" src="js/toggleSidebar.js"></script>
+       <script type="module" src="js/cart/setupCart.js"></script>
+       <script type="module" src="js/cart/toggleCart.js"></script>
     </body>
 </html>

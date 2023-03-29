@@ -16,12 +16,11 @@
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/sidebar.php"; ?>
         <?php
-
-        
-        $username=$_SESSION['username'];
-        $userID=$_SESSION['userID'];
-        $email=$_SESSION['useremail'];
+        $username = $_SESSION['username'];
+        $userID = $_SESSION['userID'];
+        $email = $_SESSION['useremail'];
         if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
@@ -61,15 +60,17 @@
                 </div>
         </section>';
         }
-        
-        
+
+
         //For displaying pls login message
-        if(isset($_SESSION['message'])){
+        if (isset($_SESSION['message'])) {
             //Change H1 text
             echo "<script>document.querySelector('h1').innerText = 'Login to Checkout'</script>";
             unset($_SESSION['message']); // clear the value so that it doesn't display again
         }
         ?>
-
+        <script type="module" src="js/toggleSidebar.js"></script>
+        <script type="module" src="js/cart/setupCart.js"></script>
+        <script type="module" src="js/cart/toggleCart.js"></script> 
     </body>
 </html>
