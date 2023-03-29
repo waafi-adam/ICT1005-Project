@@ -123,8 +123,9 @@ userEmail=?");
                 $conn->close();
             }
 
-            function getCartItems(){
 
+            //Function to get cart item
+            function getCartItems(){
                 //Get cart item
                 $config = parse_ini_file('../private/db-config.ini');
                 $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
@@ -132,33 +133,29 @@ userEmail=?");
                     $errorMsg = "Connection failed: " . $conn->connect_error;
                     $success = false;
                 } else {
-                    $userstuff = $_SESSION['userID'];
-                    $stmt = $conn->query("SELECT Cart.cartQuantity, Product.productCompany, Product.productID, Product.productImagePath, Product.productName, Product.productPrice FROM Cart INNER JOIN Product ON Cart.Product_productID = Product.productID WHERE Cart.User_userID=$userstuff");
-                    //echo "Connection fail";
-                    //$stmt = $conn->prepare("SELECT * FROM Cart WHERE User_userID=?");
-                    //$stmt->bind_param("i", $userID);
-                    //$stmt->execute();
-                    //$stmt->bind_result($cartQuantity, $productCompany, $productID, $productImagePath, $productName, $productPrice);
-                    //echo "test";
-                    //echo $cartQuantity;
+                    //$userstuff = $_SESSION['userID'];
+                    $stmt = $conn->prepare("SELECT Cart.cartQuantity, Product.productCompany, Product.productID, Product.productImagePath, Product.productName, Product.productPrice FROM Cart INNER JOIN Product ON Cart.Product_productID = Product.productID WHERE Cart.User_userID=?");
+
+                    $stmt->bind_param("i", $_SESSION['userID']);
+                    $stmt->execute();
+                    $stmt->bind_result($cartQuantity, $productCompany, $productID, $productImagePath, $productName, $productPrice);
 
                     $data = array();
-                    foreach ($stmt as $row) {
-                        echo $row['cartQuantity'];
+                    while ($stmt->fetch()) {
                         $data[] = array(
-                            'amount' => $row['cartQuantity'],
-                            'productCompany' => $row['productCompany'],
-                            'productID' => $row['productID'],
-                            'productImagePath' => $row['productImagePath'],
-                            'productName' => $row['productName'],
-                            'productPrice' => $row['productPrice']
-                    );
+                            'amount' => $cartQuantity,
+                            'productCompany' => $productCompany,
+                            'productID' => $productID,
+                            'productImagePath' => $productImagePath,
+                            'productName' => $productName,
+                            'productPrice' => $productPrice
+                        );
                     }
+                    
                     $stmt->close();
                     $conn->close();
                     return json_encode($data);
                 }
-
             }
 
 

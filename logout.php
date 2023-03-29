@@ -42,6 +42,8 @@
                 </h1>
                 <p>
                     Goodbye '.$username.'</p>';
+
+            echo"<script>localStorage.removeItem('cart');</script>";        
         }
         ?>
 
