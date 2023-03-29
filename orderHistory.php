@@ -111,6 +111,9 @@
                     echo "<p><strong>Email: </strong> $email</p>";
                   ?>
                     <!-- display all order placed by user-->
+                                    
+            
+        
                     <h3><b> Order History: </b></h3>
                     <div class="orderHistory">
                          <table class="orderHistory" >
@@ -156,10 +159,8 @@
                          </table>
 
                     </div>
-                        
-                </div>
-            
-        </div>
+              </div>          
+</div>
     <!-- page loading -->
     <script type="module" src="js/pages/orderhistory.js"></script>
   </body>
