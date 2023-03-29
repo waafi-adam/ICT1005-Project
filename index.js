@@ -1,5 +1,6 @@
 // global imports
 import './js/cart/toggleCart.js';
+import './js/toggleSidebar.js';
 
 // specific imports
 import fetchProducts from './js/Product/fetchProducts.js';
@@ -18,7 +19,6 @@ const init = async()=>{
     const featuredProducts = products.filter(product => product.productCompany == "Nike");
     //Display Product
     display(featuredProducts, getElement('.featured-center'));
-    
 };
 
 window.addEventListener('DOMContentLoaded', init);

@@ -15,12 +15,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <body>
          <?php include "includes/nav-black.inc.php"; ?>
         <!-- modal -->
-        <div class="modal-overlay">
+        <?php global $adminMode;
+        if($adminMode==1){
+            echo'<div class="modal-overlay">
             <div class="modal-container">
                 <form class="form"  data-form_type="delete-product">
                     <h3>Product ID: 123</h3>
                     <div class="form-row">
-                        <label for="delete" class="form-label">Type the product id to comfirm delete:</label>
+                        <label for="delete" class="form-label">Type the product id to confirm delete:</label>
                         <input type="email" name="delete" class="form-input" value="">
                     </div>
                     <button type="submit" class="btn btn-block">comfirm</button>
@@ -28,10 +30,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </form>
                 <button class="close-btn"><i class="fas fa-times"></i></button>
                 </div>
-        </div>
+        </div>';
+        }?>
         <!-- end modal -->
         <!-- dashboard tab -->
-        <div class="dashboard-center section-center">
+         
+        <?php 
+        global $adminMode;
+        if ($adminMode==1){
+            echo'<div class="dashboard-center section-center">
             <article class="dashboard">
                 <!-- btn container -->
                 <div class="btn-container">
@@ -124,15 +131,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <!-- end of tab info -->
                 </div>
             </article>
-        </div>
-        <?php 
-//            echo "hello";
-//            $config = parse_ini_file('../../private/db-config.ini');
-//            echo $config['servername'];
-//            echo $config['username'];
-//            echo $config['password'];
-//            echo $config['dbname'];
-//            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        </div>';
+        }
+        
         ?>
         <script type="module" src="js/pages/admin.js"></script>
     </body>

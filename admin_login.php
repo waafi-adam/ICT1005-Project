@@ -16,9 +16,10 @@
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/sidebar.php"; ?>
         <?php
-        $username=$_SESSION['username'];
-        $adminMode=$_SESSION['adminMode'];
+        $username = $_SESSION['username'];
+        $adminMode = $_SESSION['adminMode'];
         if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
@@ -48,9 +49,8 @@
                 </form>
             </div>
         </section>';
-        } 
-        else if($username==="admin1"&&$adminMode==1){
-             echo'<section class="register-section">
+        } else if ($username === "admin1" && $adminMode == 1) {
+            echo'<section class="register-section">
             <div class="register">
                 <h1>
                     Welcome back Admin!
@@ -63,8 +63,7 @@
                 </p>
                 </div>
         </section>';
-        }
-        else {
+        } else {
             echo'<section class="register-section">
             <div class="register">
                 <h1>
@@ -80,6 +79,8 @@
         </section>';
         }
         ?>
-
+        <script type="module" src="js/toggleSidebar.js"></script>
+        <script type="module" src="js/cart/setupCart.js"></script>
+        <script type="module" src="js/cart/toggleCart.js"></script> 
     </body>
 </html>

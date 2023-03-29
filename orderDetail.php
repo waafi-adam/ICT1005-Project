@@ -14,31 +14,6 @@
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-      <style>
-            .orderHistory{
-                position: relative;
-                z-index: 2;
-                
-                width: 100%;
-                height: 500px;
-                margin: 0;
-                padding: 0;
-                outline: 0;
-            }
-            
-            .orderHistory thead tr {
-                background-color: #009879;
-                color: #ffffff;
-                text-align: left;
-                
-            }
-            tr:nth-child(odd){
-                background-color: #eeeeee;
-            }
-            th, td {
-                padding: 12px 15px;
-            }
-        </style>
     <!--     navbar -->
     <?php include "includes/nav-black.inc.php"; ?>
     <!-- hero -->
@@ -50,35 +25,7 @@
       </div>
     </section>
     <!-- sidebar -->
-    <div class="sidebar-overlay">
-      <aside class="sidebar">
-        <!-- close -->
-        <button class="sidebar-close">
-          <i class="fas fa-times"></i>
-        </button>
-        <!-- links -->
-        <ul class="sidebar-links">
-          <li>
-            <a href="index.html" class="sidebar-link">
-              <i class="fas fa-home fa-fw"></i>
-              home
-            </a>
-          </li>
-          <li>
-            <a href="products.html" class="sidebar-link">
-              <i class="fas fa-couch fa-fw"></i>
-              products
-            </a>
-          </li>
-          <li>
-            <a href="about.html" class="sidebar-link">
-              <i class="fas fa-book fa-fw"></i>
-              about
-            </a>
-          </li>
-        </ul>
-      </aside>
-    </div>
+    <?php include "includes/sidebar.php"; ?>
     <!-- cart -->
     <div class="cart-overlay">
       <aside class="cart">
@@ -106,7 +53,7 @@
         <?php
         // Get user order detail 
         $order_id = $_GET['DetailID'];
-        
+        $username = $_SESSION['username'];
         // Connect to database
         $config = parse_ini_file('../private/db-config.ini');
         $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
@@ -117,24 +64,35 @@
             $success = false;
         } else {
             // Retrieve from database
-            $sql = "SELECT * FROM shoeStore.orderDetail WHERE DetailID = $order_id";
+            //$sql = "SELECT * FROM shoeStore.orderDetail WHERE DetailID = $order_id";
+            $sql = "SELECT  * FROM shoeStore.orderDetail INNER JOIN shoeStore.Product ON 
+                shoeStore.orderDetail.orderProductID = shoeStore.Product.productID WHERE DetailID = $order_id";
             $result = $conn->query($sql);
 
             $row = mysqli_fetch_assoc($result);
+            $imageLink = $row['productImagePath'];
             // Display order name, quantity and price for specified item 
             echo '<p><strong>Order Name: </strong>' . $row['orderName'] . "</p>";
             echo '<p><strong>Quantity: </strong>' . $row['orderQuantity'] . "</p>";
             echo '<p><strong>Price: </strong>' . $row['orderPrice'] . "</p>";
-            echo '<p><strong>Review Left: </strong>' . $row['Review']. "</p>";
+            echo "<img src='$imageLink' alt='Image' width='300' height='300'>";
             $conn->close();
         }
         ?>
         <!-- Review section -->
         <h2>Leave a Review</h2>
         <form method="post" action="save_Review.php">
-            <input type="hidden" name="DetailID" value="<?php echo $row['DetailID']; ?>">
+            <input type="hidden" name="orderProductID" value="<?php echo $row['orderProductID']; ?>">
+            <input type="hidden" name="username" value"<?php echo $username ?>">
             <label for="review_text">Review:</label>
             <textarea id="review_text" name="review_text"></textarea>
+             <select id="review_rating" name="review_rating">
+                 <option value="1">1 star</option>
+                 <option value="2">2 stars</option>
+                 <option value="3">3 stars</option>
+                 <option value="4">4 stars</option>
+                 <option value="5">5 stars</option>
+            </select>
             <button type="submit">Submit Review</button>
         </form>
 

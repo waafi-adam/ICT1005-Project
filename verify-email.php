@@ -16,6 +16,7 @@
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/sidebar.php"; ?>
         <section class="register-section">
 
             <?php
@@ -27,14 +28,21 @@
                 verifyUser();
                 if ($success) {
                     echo "<main class='jumbotron text-left'>";
-                    echo "<h1>Your verification is successful!</h4>";
+                    echo "<h1>Your verification is successful!</h1>";
                     echo "<div>";
                     echo "<p>Click on the button below to login in now!</p>";
                     echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
                     echo"</div>";
                 }
+                else{
+                    echo "<main class='jumbotron text-left'>";
+                    echo "<h1>Your verification is unsuccessful!</h1>";
+                }
             }
-
+                else{
+                    echo "<main class='jumbotron text-left'>";
+                    echo "<h1>You have reached an incorrect page!</h1>";
+                }
             function debug_to_console($data) {
                 $output = $data;
                 if (is_array($output)) {
@@ -88,5 +96,8 @@ verify_token=? LIMIT 1");
             }
             ?>
         </section>
+        <script type="module" src="js/toggleSidebar.js"></script>
+       <script type="module" src="js/cart/setupCart.js"></script>
+       <script type="module" src="js/cart/toggleCart.js"></script>
     </body>
 </html>

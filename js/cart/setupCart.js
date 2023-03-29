@@ -5,7 +5,7 @@ import { findProduct } from '../Product/store.js';
 import addToCartDOM from './addToCartDOM.js';
 // set items
 const cartItemsContainer = getElement('.cart-items');
-let cart = getStorageItem('cart');
+let cart = getStorageItem("cart");
 let product = getStorageItem('products');
   
 // ADD TO CART
@@ -15,6 +15,7 @@ export const addToCart = (id) => {
   // if doesn't exist
   if(cartIds.includes(parseInt(id)) == false){
     // add to storage
+    updateDB(id, "addCart");  //Add to DB*
     let newCartItem = findProduct(id);
     newCartItem = {...newCartItem, amount: 1};
     cart = [...cart, newCartItem];
@@ -25,11 +26,14 @@ export const addToCart = (id) => {
   if(cartIds.includes(parseInt(id)) == true){
     // update existing storage
     const amount = increaseItemStorage(id);
+    //Increase in DB*
+    updateDB(id, "updateCart"); 
     // update existing DOM
     const itemAmountDOM = document.getElementById(`${id}`);
     
     itemAmountDOM.textContent = amount;
   }
+  console.log(cart);
   updateItemCount();
   updateTotalPrice();
   setStorageItem('cart', cart);
@@ -38,6 +42,7 @@ export const addToCart = (id) => {
 
 // INIT
 const init = ()=>{
+  console.log("set up cart");
   // display cart item from local storage
   for (const item of cart){
     addToCartDOM(item);
@@ -55,6 +60,8 @@ const init = ()=>{
       const id = amountDOM.getAttribute('id');
       // update storage
       const amount = increaseItemStorage(id);
+      //Increase in DB
+      updateDB(id, "updateCart");
       // update DOM
       //const item = cart.find(item => item.productID == id);
       amountDOM.textContent = amount;
@@ -62,12 +69,16 @@ const init = ()=>{
     }
     // decrease btn
     if(parent.classList.contains('cart-item-decrease-btn')){
+
       const amountDOM = parent.previousElementSibling;
       const id = amountDOM.getAttribute('id');
       // update storage
       const amount = decreaseItemStorage(id);
+      //Decrease in DB
+      updateDB(id, "updateCart");
       console.log("amount: " + amount);
       if(amount == 0){
+        updateDB(id, "removeCart"); //Remove from DB
         removeItemStorage(id);
         amountDOM.parentElement.parentElement.remove();
       }
@@ -78,6 +89,7 @@ const init = ()=>{
     if(e.target.classList.contains('cart-item-remove-btn')){
       const itemDOM = e.target.parentElement.parentElement;
       const id = itemDOM.dataset.id;
+      updateDB(id, "removeCart");//Remove in DB
       // update storage
       removeItemStorage(id);
       // update DOM
@@ -101,8 +113,10 @@ function increaseItemStorage(id){
       }
       return item;
     });
+    console.log(cart)
   return newAmount;
 }
+
 function decreaseItemStorage(id){
   let newAmount;
   cart = cart.map(item =>{
@@ -135,3 +149,42 @@ function updateTotalPrice(){
   const totalCount = eachItemPrice.reduce((acc, curr) => acc + curr, 0);
   cartTotalDOM.textContent = "$" + totalCount;
 }
+
+const postData = async(url, data) =>{
+  const resp = await fetch(url, {
+      method: 'POST',
+      body: data
+  });
+  console.log(resp.text())
+  //return resp.body;
+};
+
+//Add/Update cart in DB
+const updateDB = async(id, action) => {
+    let formData = new FormData();
+    formData.set('productID', id);
+    console.log(action);
+    formData.set('DBaction', action);
+
+    //If decrease or increase, get quantity
+    let quantity;
+    if(action == "updateCart"){
+      //Get quantity
+      cart.map(item =>{
+        if(item.productID == id){
+          quantity = item.amount
+        }
+      })
+      //Set quantity
+      console.log(quantity);
+      formData.set("cartQuantity", quantity);
+    }
+
+    //Post Data
+    const data = await postData('../../process_cart.php', formData);
+    console.log("test: ");
+};
+
+//Remove/Update cart in DB
+
+
