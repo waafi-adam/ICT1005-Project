@@ -176,7 +176,6 @@ userEmail=?");
                               <form class="account-form">
                                 <h3>Login Successfull, welcome back ' . $username . '!</h3>
                                 <button class="btn"><a href="index.php">Back Home</a></button>
-                                <button class="btn"><a href="orderHistory.php">Profile</a></button>
                               </form>
                             </div>
                           </section>';

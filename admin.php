@@ -135,6 +135,5 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <script type="module" src="js/pages/admin.js"></script>';
         <?php } ?>
         
-        ?>
     </body>
 </html>
