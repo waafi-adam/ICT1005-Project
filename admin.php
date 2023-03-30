@@ -16,14 +16,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
          <?php include "includes/nav-black.inc.php"; ?>
         <!-- modal -->
         <?php global $adminMode;
-        if($adminMode==1){
+        if($adminMode==0){
             echo'<div class="modal-overlay">
             <div class="modal-container">
-                <form class="form"  data-form_type="delete-product">
+                <form class="form delete"  data-form_type="delete-product">
                     <h3>Product ID: 123</h3>
+                    <p class="alert "></p>
                     <div class="form-row">
                         <label for="delete" class="form-label">Type the product id to confirm delete:</label>
-                        <input type="email" name="delete" class="form-input" value="">
+                        <input type="number" name="productID" class="form-input" value="">
                     </div>
                     <button type="submit" class="btn btn-block">comfirm</button>
                     <button type="button" class="btn btn-block btn-hipster">cancel</button>
@@ -37,7 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
          
         <?php 
         global $adminMode;
-        if ($adminMode==1){ ?>
+        if ($adminMode==0){ ?>
             <div class="dashboard-center section-center">
             <article class="dashboard">
                 <!-- btn container -->

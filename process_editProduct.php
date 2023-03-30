@@ -95,7 +95,7 @@ if ($success) {
         $success = false;
         die(json_encode(array('msg' => $msg, 'type' => "danger")));
     } else {
-        $msg = "successfully updated";
+        $msg = "successfully updated, refreshing pg";
         echo json_encode(array('msg' => $msg, 'type' => "success"));
     }
     $stmt->close();

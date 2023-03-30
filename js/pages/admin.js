@@ -10,6 +10,8 @@ ADMIN TAB SELECTION
 const dashboard = getElement('.dashboard');
 const btns = document.querySelectorAll('.tab-btn');
 const articles = document.querySelectorAll('.content');
+const modal = document.querySelector('.modal-overlay');
+const deleteForm = modal.querySelector('.form.delete');
 
 dashboard.addEventListener('click', function (e) {
   const id = e.target.dataset.id
@@ -34,30 +36,30 @@ PRODUCTS SECTION
 ================
 */
 const selectAndListenRows = () => {
-  console.log('selecting and listening rows')
-  const rows = document.querySelectorAll('.table-row:not(:first-of-type)')
-  const modal = document.querySelector('.modal-overlay')
-  const modalCloseBtn = document.querySelector('.close-btn')
+  console.log('selecting and listening rows');
+  const rows = document.querySelectorAll('.table-row:not(:first-of-type)');
+  const modalCloseBtn = document.querySelector('.close-btn');
 
   rows.forEach((row) => {
-    const editOpenBtn = row.querySelector('.product_form-open-btn')
-    let modalOpenBtn = null
+    const editOpenBtn = row.querySelector('.product_form-open-btn');
+    let modalOpenBtn = null;
     if (row.classList.contains('item')) {
-      modalOpenBtn = row.querySelector('.delete-btn')
+      modalOpenBtn = row.querySelector('.delete-btn');
     }
 
     // form toggle
     editOpenBtn.addEventListener('click', () => {
-      renderForm(editOpenBtn.dataset.form_type, row)
-      selectAndListenForm(row)
-      row.classList.add('show-form')
-    })
+      renderForm(editOpenBtn.dataset.form_type, row);
+      selectAndListenForm(row);
+      row.classList.add('show-form');
+    });
 
     // modal toggle
     if (modalOpenBtn) {
       modalOpenBtn.addEventListener('click', () => {
-        modal.classList.add('open-modal')
-      })
+        modal.classList.add('open-modal');
+        deleteForm.dataset.product_id = row.dataset.product_id;
+      });
     }
     modalCloseBtn.addEventListener('click', () =>
       modal.classList.remove('open-modal')
@@ -93,12 +95,34 @@ const selectAndListenForm = (row) => {
   })
 }
 
+const listenHandleDeleteForm = () => {
+        
+        deleteForm.addEventListener('submit', async(e) => {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const toDeleteID = deleteForm.dataset.product_id; 
+            let isDeleted = false;
+            if (formData.get('productID') != toDeleteID)
+                displayAlert('danger', 'ID does not match', form);
+            else {
+                displayAlert('load', 'loading', form)
+                isDeleted = await deleteProduct(formData, form);
+            }
+            if (isDeleted) setTimeout(() => location.reload(), 3000);
+        })
+}
+
+
 const renderForm = (type, row) => {
   const formContainer = document.createElement('div')
   const id = row.dataset.product_id ? `${row.dataset.product_id}` : ''
   formContainer.setAttribute('class', `item-form ${type}`);
   let selectedProduct = productsData.find(product => product.productID == id);
-  if (!selectedProduct) selectedProduct = {productName:'', productPrice:'', productCompany:'', productImagePath:'', productDescription:''};
+  console.log('selected: ')  
+  console.log(selectedProduct);
+;
+  if (!selectedProduct) selectedProduct = {productName:"", productPrice:"", productCompany:"", productImagePath:"", productDescription:""};
   const {productName, productPrice, productCompany, productImagePath, productDescription} = selectedProduct;
   const formTitle = (() => {
     if (type === 'edit') return `Editting Product ID: ${id}`
@@ -111,26 +135,27 @@ const renderForm = (type, row) => {
   })()
     formContainer.innerHTML = `
     <h3>${formTitle}</h3>
-    <form class="form" data-form_type="${type || ''}-product" >
+    <form class="form" data-form_type="${type || ""}-product" >
         <div class="form-inputs">
             <p class="alert "></p>
             <div class="form-row">
                 <label for="name" class="form-label">Name:</label>
-                <input type="text" id="name" name="name" class="form-input" required pattern="[A-Za-z ]+" value=${productName || ''}>
+                <input type="text" id="name" name="name" class="form-input" required pattern="[A-Za-z0-9,.!? ]+"
+ value=${productName || ""}>
             </div>
             <div class="form-row">
                 <label for="brand" class="form-label">Brand:</label>
-                <input type="text" id="brand" name="brand" class="form-input"  pattern="[A-Za-z ]+" value=${productCompany || ''}>
+                <input type="text" id="brand" name="brand" class="form-input"  pattern="[A-Za-z ]+" value=${productCompany || ""}>
             </div>
 
             <div class="form-row">
                 <label for="price" class="form-label">Price:</label>
-                <input type="number" id="price" name="price" class="form-input" value=${productPrice || ''} required>
+                <input type="number" id="price" name="price" class="form-input" value=${productPrice || ""} required>
             </div>
 
             <div class="form-row">
                 <label for="description" class="form-label">Description:</label>
-                <textarea id="description" name="description" class="form-input" >${productDescription || ''}</textarea>
+                <textarea id="description" name="description" class="form-input" >${productDescription || ""}</textarea>
             </div>
 
             <div class="form-row">
@@ -166,71 +191,21 @@ const replaceImage = (img, fileInput) => {
   reader.readAsDataURL(file)
 }
 
-// GALLERY
-const imageItems = document.querySelectorAll('.image-item')
-
-let draggedItem = null
-
-imageItems.forEach((item) => {
-  item.addEventListener('dragstart', () => {
-    draggedItem = item
-    setTimeout(() => {
-      item.style.display = 'none'
-    }, 0)
-  })
-
-  item.addEventListener('dragend', () => {
-    setTimeout(() => {
-      draggedItem.style.display = 'inline-block'
-      draggedItem = null
-    }, 0)
-  })
-
-  item.addEventListener('dragover', (e) => {
-    e.preventDefault()
-    const afterElement = getDragAfterElement(item, e.clientY)
-    const parent = item.parentNode
-    if (afterElement === null) {
-      parent.appendChild(draggedItem)
-    } else {
-      parent.insertBefore(draggedItem, afterElement)
-    }
-  })
-})
-
-function getDragAfterElement(item, y) {
-  const draggableElements = [
-    ...document.querySelectorAll('.image-item:not(.dragging)'),
-  ]
-
-  return draggableElements.reduce(
-    (closest, child) => {
-      const box = child.getBoundingClientRect()
-      const offset = y - box.top - box.height / 2
-      if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child }
-      } else {
-        return closest
-      }
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).element
-}
-// GALLERY END
 
 // HANDLE FORMS
 const handleSubmit = async (e, id) => {
-  console.log('handling submit')
-  e.preventDefault()
-  const form = e.target
-  const formData = new FormData(form)
-  if (validateForm(formData, form)) return
-  const formType = form.dataset.form_type
-  if (formType === 'add-product') await addProduct(formData, form)
-  if (formType === 'edit-product') await editProduct(formData, form, id)
+  console.log('handling submit');
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  if (validateForm(formData, form)) return;
+  const formType = form.dataset.form_type;
+  let success = false;
+  if (formType === 'add-product') success = await addProduct(formData, form);
+  if (formType === 'edit-product') success = await editProduct(formData, form, id);
 
 //  clearInputs(form)
-  setTimeout(() => location.reload(), 3000);
+  if (success) setTimeout(() => location.reload(), 3000);
 }
 
 const validateForm = (formData, form) => {
@@ -289,7 +264,8 @@ const displayProducts = (products) => {
   for (let product of products) {
     insertProductRow(product);
   }
-  selectAndListenRows()
+  selectAndListenRows();
+  listenHandleDeleteForm();
 }
 
 const insertProductRow = (product) =>{
@@ -342,10 +318,12 @@ const addProduct = async (formData, form) => {
     displayAlert(resp.type, resp.msg, form)
     console.log(resp)
     console.log(JSON.stringify(resp))
+    if (resp.type === "success") return true;
   } catch (error) {
     displayAlert('danger', error.msg, form)
     console.log(error)
     console.log(JSON.stringify(error))
+    return false;
   }
 }
 
@@ -378,10 +356,28 @@ const editProduct = async (formData, form, id) => {
     displayAlert(resp.type, resp.msg, form)
     console.log(resp)
     console.log(JSON.stringify(resp))
+    if (resp.type === "success") return true;
   } catch (error) {
     displayAlert('danger', error.msg, form)
     console.log(error)
     console.log(JSON.stringify(error))
+    return false;
+  }
+}
+
+// DELETE DATA (DELETE PRODUCTS)
+const deleteProduct = async (formData, form) => {
+  try {
+    const resp = await postData('process_deleteProduct.php', formData);
+    console.log("deleting product");
+    console.log(resp);
+    displayAlert(resp.type, resp.msg, form);
+    if (resp.type === "success") return true;
+  } catch (error) {
+    console.log(error)
+    displayAlert('danger', error.msg, form);
+//    console.log(JSON.stringify(error))
+    return false;
   }
 }
 
@@ -513,13 +509,6 @@ let productsData = [];
 
 const setupTable = async () => {
     // set up products section
-    
-//    if (!haveStore){
-//      productsData = await fetchProducts();
-//      console.log(productsData);
-//      setStorageItem("products", productsData);
-//    }
-//    displayProducts(productsData);
     productsData = await fetchProducts();
     displayProducts(productsData);
   
