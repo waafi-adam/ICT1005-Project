@@ -17,8 +17,26 @@
 
         <?php include "includes/nav-white.inc.php"; ?> 
         <?php include "includes/sidebar.php"; ?>
+        <div class="cart-overlay">
+            <aside class="cart">
+                <button class="cart-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <header>
+                    <h3 class="text-slanted">your bag</h3>
+                </header>
+                <!-- cart items -->
+                <div class="cart-items"></div>
+                <!-- footer -->
+                <footer>
+                    <h3 class="cart-total text-slanted">
+                        total: $12.00
+                    </h3>
+                    <button class="cart-checkout btn">checkout</button>
+                </footer>
+            </aside>
+        </div>
         <section class="register-section">
-
             <?php
             $token = $username = $success = "";
             $success = true;
@@ -27,30 +45,19 @@
                 $token = $_GET['token'];
                 verifyUser();
                 if ($success) {
-                    echo "<main class='jumbotron text-left'>";
                     echo "<h1>Your verification is successful!</h1>";
                     echo "<div>";
                     echo "<p>Click on the button below to login in now!</p>";
                     echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
                     echo"</div>";
-                }
-                else{
-                    echo "<main class='jumbotron text-left'>";
+                } else {
                     echo "<h1>Your verification is unsuccessful!</h1>";
                 }
+            } else {
+                echo "<h1>You have reached an incorrect page!</h1>";
             }
-                else{
-                    echo "<main class='jumbotron text-left'>";
-                    echo "<h1>You have reached an incorrect page!</h1>";
-                }
-            function debug_to_console($data) {
-                $output = $data;
-                if (is_array($output)) {
-                    $output = implode(',', $output);
-                }
 
-                echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-            }
+            
 
             function verifyUser() {
                 global $token, $username;
@@ -97,7 +104,7 @@ verify_token=? LIMIT 1");
             ?>
         </section>
         <script type="module" src="js/toggleSidebar.js"></script>
-       <script type="module" src="js/cart/setupCart.js"></script>
-       <script type="module" src="js/cart/toggleCart.js"></script>
+        <script type="module" src="js/cart/setupCart.js"></script>
+        <script type="module" src="js/cart/toggleCart.js"></script>
     </body>
 </html>

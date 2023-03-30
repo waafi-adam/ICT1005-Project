@@ -14,7 +14,8 @@
         <title>Home | Comfy</title>
     </head>
     <body>
-        <?php include "includes/checkSession.php";
+        <?php
+        include "includes/checkSession.php";
         $username = $_SESSION['username'];
         ?>
         <!-- navbar -->
@@ -42,18 +43,18 @@
                             </a>
                         </li>
                     </ul>
-                        <ul class="nav-links">
-                            <li>
-                                <a href="register.php" class="nav-link">
-                                    Register
-                                </a>
-                            </li>
-                            <li>
-                                <a href="login.php" class="nav-link">
-                                    Login
-                                </a>
-                            </li>
-                        </ul>
+                    <ul class="nav-links">
+                        <li>
+                            <a href="register.php" class="nav-link">
+                                Register
+                            </a>
+                        </li>
+                        <li>
+                            <a href="login.php" class="nav-link">
+                                Login
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <!-- logo -->
                 <img src="images/logo-white.svg" class="nav-logo" alt="logo">
@@ -66,7 +67,26 @@
                 </div>
             </div>
         </nav>
-        <?php include "includes/sidebar.php"; ?>
+<?php include "includes/sidebar.php"; ?>
+        <div class="cart-overlay">
+            <aside class="cart">
+                <button class="cart-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <header>
+                    <h3 class="text-slanted">your bag</h3>
+                </header>
+                <!-- cart items -->
+                <div class="cart-items"></div>
+                <!-- footer -->
+                <footer>
+                    <h3 class="cart-total text-slanted">
+                        total: $12.00
+                    </h3>
+                    <button class="cart-checkout btn">checkout</button>
+                </footer>
+            </aside>
+        </div>
         <?php $session->stop(); ?>
         <?php
         global $username;

@@ -17,6 +17,25 @@
 
         <?php include "includes/nav-white.inc.php"; ?> 
         <?php include "includes/sidebar.php"; ?>
+        <div class="cart-overlay">
+            <aside class="cart">
+                <button class="cart-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <header>
+                    <h3 class="text-slanted">your bag</h3>
+                </header>
+                <!-- cart items -->
+                <div class="cart-items"></div>
+                <!-- footer -->
+                <footer>
+                    <h3 class="cart-total text-slanted">
+                        total: $12.00
+                    </h3>
+                    <button class="cart-checkout btn">checkout</button>
+                </footer>
+            </aside>
+        </div>
         <?php
         $username = $_SESSION['username'];
         $adminMode = $_SESSION['adminMode'];
