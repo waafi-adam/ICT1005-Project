@@ -1287,6 +1287,11 @@ Register/Login/Verification Pages
     padding: 1rem 1.5rem;
   }
 }
+
+.accessibility-link {
+    color: #d9534f;
+    text-decoration: underline;
+}
 /*
 ===================
 Admin Page
