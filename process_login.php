@@ -171,9 +171,15 @@ userEmail=?");
                 if ($success) {
                     //echo "<script>localStorage.setItem('product', '$json');</script>";
 
-                    echo "<h1>Login successful!</h3>";
-                    echo "<p>Welcome back," . $username . "</p>";
-                    echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Login Successfull, welcome back ' . $username . '!</h3>
+                                <button class="btn"><a href="index.php">Back Home</a></button>
+                                <button class="btn"><a href="orderHistory.php">Profile</a></button>
+                              </form>
+                            </div>
+                          </section>';
 
                     //Cart stuff
                     echo "<script>if(localStorage.getItem('cart')){localStorage.removeItem('cart');}</script>";  //Remove cart
@@ -181,10 +187,16 @@ userEmail=?");
                     $array = getCartItems();
                     echo "<script>localStorage.setItem('cart', '$array');</script>";
                 } else {
-                    echo "<h3>Oops!</h3>";
-                    echo "<h4>The following errors were detected:</h4>";
-                    echo "<p>" . $errorMsg . "</p>";
-                    echo '<a href="login.php" class="btn btn-primary">Return back to login page</a>';
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Oops! Following Error Detected:</h3>
+                                <p>'.$errorMsg.'</P>
+                                <button class="btn"><a href="index.php">Back Home</a></button>
+                                <button class="btn"><a href="login.php">Return Login</a></button>
+                              </form>
+                            </div>
+                          </section>';
                 }
 
                 function debug_to_console($data) {

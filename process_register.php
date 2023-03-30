@@ -85,20 +85,32 @@ require 'phpmailer/src/Exception.php';
 
                 if ($mail->send()) {
                     
-                    echo "<h4>Your registration is successful!</h4>";
-                    echo "<p> Thank you for signing up," . $username . "</p>";
-                    echo "<p>Email: " . $email . "<br>";
-                    echo "<p> Please check your email to verify your account! </p>";
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Registration Successful, Welcome '.$username.'!</h3>
+                                <p> Email: '.$email.'</P>
+                                <p> Please check your email to verify your account! </p>
+                                <button class="btn"><a href="login.php">Login</a></button>
+                              </form>
+                            </div>
+                          </section>';
                 } else {
                     echo "<main class='jumbotron text-left'>";
                     echo "<h4>Can't send email to " . $email . " </h4>";
                 }
             }
             else {
-                echo "<h3>Oops!</h3>";
-                echo "<h4>The following input errors were detected:</h4>";
-                echo "<p>" . $errorMsg . "</p>";
-                echo '<a href="register.php" class="btn btn-primary">Return back to sign-in page</a>';
+                echo '<section class="register-section">
+                        <div class="register">
+                          <form class="account-form">
+                            <h3>Oops! Following Error Detected:</h3>
+                            <p>'.$errorMsg.'</P>
+                            <button class="btn"><a href="index.php">Back Home</a></button>
+                            <button class="btn"><a href="login.php">Return Login</a></button>
+                          </form>
+                        </div>
+                      </section>';
             }
 
             //Helper function that checks input for malicious or unwanted content.
