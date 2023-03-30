@@ -28,8 +28,8 @@
     <?php include "includes/sidebar.php"; ?>
     <!-- cart -->
     <div class="cart-overlay">
-      <aside class="cart">
-        <button class="cart-close">
+      <aside class="cart" aria-label="Shopping Cart">
+        <button class="cart-close" aria-label="Close Cart">
           <i class="fas fa-times"></i>
         </button>
         <header>
