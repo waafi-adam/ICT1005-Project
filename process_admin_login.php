@@ -15,6 +15,7 @@
         <title>Home | Comfy</title>
     </head>
     <body>
+        <?php include "includes/checkSession.php"; ?>
         <?php include "includes/sidebar.php"; ?>
         <div class="cart-overlay">
             <aside class="cart">
