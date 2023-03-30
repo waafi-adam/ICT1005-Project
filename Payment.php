@@ -18,7 +18,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <link rel="stylesheet" href="css/styles.css" />
   </head>
     <body>
-            <!--     navbar -->
+        <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/sidebar.php"; ?>
+        
         
           
         <!-- hero -->

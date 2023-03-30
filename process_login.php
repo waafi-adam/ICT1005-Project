@@ -91,9 +91,6 @@ userEmail=?");
             $conn->close();
         }
         ?>
-
-
-
         <!-- navbar -->
         <nav class="navbar">
             <div class="nav-center">
@@ -118,11 +115,12 @@ userEmail=?");
                                 about
                             </a>
                         </li>
+                        </ul>
                         <?php
                         global $success;
                         $loggedin=$success;
                         if (!$loggedin) {
-                            echo '<ul class="nav-links-right">
+                            echo '<ul class="nav-links">
                 <li>
                     <a href="register.php" class="nav-link">
                         Register
@@ -135,7 +133,7 @@ userEmail=?");
                 </li>
             </ul>';
                         } else {
-                            echo '<ul class="nav-links-right">
+                            echo '<ul class="nav-links">
                 <li>
                     <a href="logout.php" class="nav-link">
                         Logout
@@ -149,7 +147,7 @@ userEmail=?");
             </ul>';
                         }
                         ?>
-                    </ul>
+                    
                 </div>
                 <!-- logo -->
                 <img src="images/logo-white.svg" class="nav-logo" alt="logo">
@@ -171,9 +169,14 @@ userEmail=?");
                 if ($success) {
                     //echo "<script>localStorage.setItem('product', '$json');</script>";
 
-                    echo "<h1>Login successful!</h3>";
-                    echo "<p>Welcome back," . $username . "</p>";
-                    echo '<a href="orderHistory.php" class="btn btn-primary">Order History</a>';
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Login Successful, welcome back ' . $username . '!</h3>
+                                <button class="btn"><a href="index.php">Back Home</a></button>
+                              </form>
+                            </div>
+                          </section>';
 
                     //Cart stuff
                     echo "<script>if(localStorage.getItem('cart')){localStorage.removeItem('cart');}</script>";  //Remove cart
@@ -181,10 +184,16 @@ userEmail=?");
                     $array = getCartItems();
                     echo "<script>localStorage.setItem('cart', '$array');</script>";
                 } else {
-                    echo "<h3>Oops!</h3>";
-                    echo "<h4>The following errors were detected:</h4>";
-                    echo "<p>" . $errorMsg . "</p>";
-                    echo '<a href="login.php" class="btn btn-primary">Return back to login page</a>';
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Oops! Following Error Detected:</h3>
+                                <p>'.$errorMsg.'</P>
+                                <button class="btn"><a href="index.php">Back Home</a></button>
+                                <button class="btn"><a href="login.php">Return Login</a></button>
+                              </form>
+                            </div>
+                          </section>';
                 }
 
                 function debug_to_console($data) {

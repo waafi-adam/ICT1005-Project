@@ -22,60 +22,88 @@
         $userID = $_SESSION['userID'];
         if (empty($username)) {
             echo'<section class="register-section">
-            <div class="register">
-                <h1>
-                    Sign up now!
-                </h1>
-                <form id="form" class= "text-slanted" action="process_register.php" method="post">
-                    <div class="form-group">
-                        <label for="username">User Name:</label>
-                        <input type="text" id="username" name="username" class="form-control" required maxlength="45"
-                               placeholder="Enter user name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control"  required
-                               placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input id="pwd" name="pwd" class="form-control" type="password" required
-                               placeholder="Enter password">
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd_confirm">Confirm Password:</label>
-                        <input id="pwd_confirm" name="pwd_confirm" class="form-control" 
-                               required type="password" placeholder="Confirm password">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                             <label>
-                            <input type="checkbox" name="agree" required>
-                            I agree to the terms and conditions.
-                            </label>
+                    <div class="register">
+                      <form
+                        id="form"
+                        class="account-form"
+                        action="process_register.php"
+                        method="post"
+                      >
+                        <img    
+                          src="images/logo-black.svg"
+                          alt="logo-black"
+                        />
+                        <h3>Register</h3>
+                        <div class="form-group">
+                          <label for="username">User Name:</label>
+                          <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            class="form-control"
+                            required
+                            maxlength="45"
+                            placeholder="Enter user name"
+                          />
                         </div>
+                        <div class="form-group">
+                          <label for="email">Email:</label>
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            required
+                            placeholder="Enter email"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd">Password:</label>
+                          <input
+                            id="pwd"
+                            name="pwd"
+                            class="form-control"
+                            type="password"
+                            required
+                            placeholder="Enter password"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <label for="pwd_confirm">Confirm Password:</label>
+                          <input
+                            id="pwd_confirm"
+                            name="pwd_confirm"
+                            class="form-control"
+                            required
+                            type="password"
+                            placeholder="Confirm password"
+                          />
+                        </div>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <label>
+                              <input type="checkbox" name="agree" required />
+                              I agree to the terms and conditions.
+                            </label>
+                          </div>
+                        </div>
+                        <button class="btn btn-primary" id="submit" type="submit">
+                          Submit
+                        </button>
+                        <p>Already a member? <a href="login.php">Login</a></p>
+                      </form>
                     </div>
-                    <button class="btn btn-primary" id="submit"  type="submit">Submit</button>
-                    <p>
-                        Already a member with us? <a href="login.php">Login here.</a>.
-                    </p>
-                </form>
-            </div>
-        </section>';
+                  </section>';
         } else {
-            echo'<section class="register-section">
-            <div class="register">
-                <h1>
-                    You are already logged in!
-                </h1>
-                <p>
-                    Go back to homepage <a href="index.php">Click here to go back to the homepage.</a>.
-                </p>
-                <p>
-                    Logout instead?<a href="logout.php">Click here to logout.</a>.
-                </p>
-                </div>
-        </section>';
+            echo' <section class="register-section">
+                    <div class="register">
+                      <form class="account-form">
+                        <h3>You are already logged in!</h3>
+                        <button class="btn"><a href="index.php">Back Home</a></button>
+                        <button class="btn"><a href="logout.php">Log out</a></button>
+                      </form>
+                    </div>
+                  </section>';
         }
         ?>
        <script type="module" src="js/toggleSidebar.js"></script>

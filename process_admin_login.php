@@ -50,17 +50,29 @@
                 authenticateUser();
                 if ($success) {
                     $adminMode = 1;
-                    echo "<h3>Login successful!</h3>";
-                    echo "<p>Welcome back," . $username . "</p>";
-                    echo '<a href="admin.php" class="btn btn-primary">View User Order History</a>';
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Login Successful, welcome back ' . $username . '!</h3>
+                                <button class="btn"><a href="index.php">Back Home</a></button>
+                                <button class="btn"><a href="admin.php">Admin Page</a></button>
+                              </form>
+                            </div>
+                          </section>';
                     $_SESSION['username'] = $username;
                     $_SESSION['userID'] = $userID;
                     $_SESSION['adminMode'] = $adminMode;
                 } else {
-                    echo "<h3>Oops!</h3>";
-                    echo "<h4>The following errors were detected:</h4>";
-                    echo "<p>" . $errorMsg . "</p>";
-                    echo '<a href="login.php" class="btn btn-primary">Return back to login page</a>';
+                    echo '<section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Oops! Following Error(s) Detected:</h3>
+                                <p>'.$errorMsg.'</P>
+                                <button class="btn"><a href="index.php">Back Home</a></button>
+                                <button class="btn"><a href="login.php">Return Login</a></button>
+                              </form>
+                            </div>
+                          </section>';
                 }
 
                 function debug_to_console($data) {

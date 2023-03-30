@@ -24,10 +24,12 @@
         if (empty($username)) {
             echo'<section class="register-section">
             <div class="register">
-                <h1>
-                    Login to your account
-                </h1>
-                <form class= "text-slanted" action="process_login.php" method="post">
+                <form class= "account-form" action="process_login.php" method="post">
+                    <img
+                        src="images/logo-black.svg"
+                        alt="logo-black"
+                    />
+                    <h3>Login</h3>
                     <div class="form-group">
                         <label for="email">Enter your email:</label>
                         <input type="email" id="email" name="email" class="form-control"  required
@@ -40,25 +42,21 @@
                     </div>
                     <button class="btn btn-primary" id="submit" type="submit">Submit</button>
                     <p>
-                        Not registered yet? <a href="register.php">Register here!</a>.
+                        Not a member yet? <a href="register.php">Register</a>.
                     </p>
                 </form>
             </div>
         </section>';
         } else {
             echo'<section class="register-section">
-            <div class="register">
-                <h1>
-                    You are already logged in!
-                </h1>
-                <p>
-                    Go back to homepage <a href="index.php">Click here to go back to the homepage.</a>.
-                </p>
-                <p>
-                    Logout instead?<a href="logout.php">Click here to logout.</a>.
-                </p>
-                </div>
-        </section>';
+                    <div class="register">
+                      <form class="account-form">
+                        <h3>You are already logged in!</h3>
+                        <button class="btn"><a href="index.php">Back Home</a></button>
+                        <button class="btn"><a href="logout.php">Log out</a></button>
+                      </form>
+                    </div>
+                  </section>';
         }
 
 

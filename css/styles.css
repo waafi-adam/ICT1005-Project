@@ -1214,15 +1214,16 @@ Single Product Page
 Register/Login/Verification Pages
 ===============
 */
-
 .register-section {
     min-height: 100vh;
     margin-top: -6rem;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url(../images/shoe-hero.jpg) center/cover;
-    display: grid;
-    place-items: center;
     color: var(--clr-white);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .verification {
     min-height: 100vh;
@@ -1232,7 +1233,60 @@ Register/Login/Verification Pages
     place-items: center;
     color: var(--clr-white);
 }
+.register-section .register{
+  width: 90%;
+  max-width: 450px;
+  margin-top: 25px;
+}
 
+.account-form{
+  background-color: var(--clr-white);
+  padding: 2rem 2.5rem;
+  border-radius: var(--radius);
+  border-top: 5px solid var(--clr-red-light);
+  box-shadow: var(--dark-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--clr-black);
+}
+.account-form .form-group{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: .5rem;
+  width: 100%;
+}
+.account-form .form-group > *{
+  margin-bottom: .5rem;
+}
+
+.account-form .form-group input{
+  padding: 0.375rem .75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--clr-grey-8);
+}
+.account-form .btn{
+  width: 100%;
+  margin-bottom: .5rem;
+}
+.account-form a{
+  color: var(--clr-red-dark);
+}
+.account-form a:hover{
+  color: var(--clr-red-light);
+}
+.account-form .btn a{
+  color: var(--clr-white);
+}
+@media (max-width: 767px) {
+  .register-section .register{
+    margin-top: 100px;
+  }
+  .account-form{
+    padding: 1rem 1.5rem;
+  }
+}
 /*
 ===================
 Admin Page

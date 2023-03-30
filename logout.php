@@ -15,7 +15,6 @@
     </head>
     <body>
         <?php include "includes/checkSession.php";
-
         $username = $_SESSION['username'];
         ?>
         <!-- navbar -->
@@ -42,7 +41,8 @@
                                 about
                             </a>
                         </li>
-                        <ul class="nav-links-right">
+                    </ul>
+                        <ul class="nav-links">
                             <li>
                                 <a href="register.php" class="nav-link">
                                     Register
@@ -72,26 +72,23 @@
         global $username;
         if (empty($username)) {
             echo'<section class="register-section">
-            <div class="register">
-                <h1>
-                    You are not logged in!
-                </h1>
-                <p>
-                    Login here <a href="login.php">Click here to login.</a>.
-                </p>
-                <p>
-                    Not registered? <a href="register.php">Click here to register.</a>.
-                </p>
-                </div>
+                    <div class="register">
+                      <form class="account-form">
+                        <h3>You are not logged in!</h3>
+                        <button class="btn"><a href="login.php">Login</a></button>
+                        <button class="btn"><a href="register.php">Register</a></button>
+                      </form>
+                    </div>
                 </section>';
         } else {
             echo'<section class="register-section">
-            <div class="register">
-                <h1>
-                    Come again!
-                </h1>
-                <p>
-                    Goodbye ' . $username . '</p>';
+                    <div class="register">
+                      <form class="account-form">
+                        <h3>Goodbye, Come Again ' . $username . '!</h3>
+                        <button class="btn"><a href="index.php">Back Home</a></button>
+                      </form>
+                    </div>
+                  </section>';
             echo"<script>localStorage.removeItem('cart');</script>";
         }
         ?>

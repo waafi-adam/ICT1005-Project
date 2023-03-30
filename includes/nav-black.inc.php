@@ -33,11 +33,11 @@ if (empty($username)) {
                         about
                     </a>
                 </li>
-            
+            </ul>
             <?php
         global $loggedin;
         if (!$loggedin) {
-            echo '<ul class="nav-links-right">
+            echo '<ul class="nav-links">
                 <li>
                     <a href="register.php" class="nav-link">
                         Register
@@ -51,7 +51,7 @@ if (empty($username)) {
             </ul>';
         }
         else{
-             echo '<ul class="nav-links-right">
+             echo '<ul class="nav-links">
                 <li>
                     <a href="logout.php" class="nav-link">
                         Logout
@@ -59,13 +59,13 @@ if (empty($username)) {
                 </li>
                 <li>
                     <a href="orderHistory.php" class="nav-link">
-                        Profile
+                        '.$username.'
                     </a>
                 </li>
             </ul>';
         }
         ?>
-                </ul>
+                
         </div>
         <!-- logo -->
         <img src="./images/logo-black.svg" class="nav-logo" alt="logo">
