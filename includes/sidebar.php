@@ -7,19 +7,19 @@
         <!-- links -->
         <ul class="sidebar-links">
           <li>
-            <a href="index.html" class="sidebar-link">
+            <a href="index.php" class="sidebar-link">
               <i class="fas fa-home fa-fw"></i>
               home
             </a>
           </li>
           <li>
-            <a href="products.html" class="sidebar-link">
+            <a href="products.php" class="sidebar-link">
               <i class="fas fa-couch fa-fw"></i>
               products
             </a>
           </li>
           <li>
-            <a href="about.html" class="sidebar-link">
+            <a href="about.php" class="sidebar-link">
               <i class="fas fa-book fa-fw"></i>
               about
             </a>
