@@ -45,11 +45,14 @@
                 $token = $_GET['token'];
                 verifyUser();
                 if ($success) {
-                    echo "<h1>Your verification is successful!</h1>";
-                    echo "<div>";
-                    echo "<p>Click on the button below to login in now!</p>";
-                    echo '<button class="btn btn-primary"><a href="login.php">Log in now!</a></button>';
-                    echo"</div>";
+                    echo '<div class="register">
+                          <form class="account-form">
+                           <h3>Your verification is successful!</h3>
+                            <p>Click on the button below to login in now!</p>  
+                            <button class="btn" type="button" onclick="location.href=\'login.php\';">Return Login</button>
+                          </form>
+                        </div>';
+                   
                 } else {
                     echo "<h1>Your verification is unsuccessful!</h1>";
                 }

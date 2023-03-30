@@ -16,7 +16,7 @@
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
-         <?php include "includes/sidebar.php"; ?>
+        <?php include "includes/sidebar.php"; ?>
         <div class="cart-overlay">
             <aside class="cart">
                 <button class="cart-close">
@@ -71,8 +71,8 @@
                     <div class="register">
                       <form class="account-form">
                         <h3>You are already logged in!</h3>
-                        <button class="btn"><a href="index.php">Back Home</a></button>
-                        <button class="btn"><a href="logout.php">Log out</a></button>
+                        <button class="btn" type="button" onclick="location.href=\'index.php\';">Back Home</button>
+                        <button class="btn" type="button" onclick="location.href=\'logout.php\';">Log out</button>
                       </form>
                     </div>
                   </section>';

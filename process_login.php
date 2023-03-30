@@ -268,7 +268,6 @@ userEmail=?");
             }
         }
         ?>
-    </section>
     <script type="module" src="js/toggleSidebar.js"></script>
     <script type="module" src="js/cart/setupCart.js"></script>
     <script type="module" src="js/cart/toggleCart.js"></script> 

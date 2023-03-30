@@ -103,32 +103,41 @@ require 'phpmailer/src/Exception.php';
                     $mail->Body = $email_template;
 
                     if ($mail->send()) {
-
-                        echo '<section class="register-section">
+                        echo '<div>
+                           <section class="register-section">
                             <div class="register">
                               <form class="account-form">
                                 <h3>Registration Successful, Welcome ' . $username . '!</h3>
                                 <p> Email: ' . $email . '</P>
                                 <p> Please check your email to verify your account! </p>
-                                <button class="btn"><a href="login.php">Login</a></button>
+                                <button class="btn" type="button" onclick="location.href=\'login.php\';">Login</button>
                               </form>
                             </div>
-                          </section>';
+                          </section>
+                          </div>';
                     } else {
-                        echo "<main class='jumbotron text-left'>";
-                        echo "<h4>Can't send email to " . $email . " </h4>";
+                        echo '<div><section class="register-section">
+                            <div class="register">
+                              <form class="account-form">
+                                <h3>Unable to send email to ' . $email . '!</h3>
+                              </form>
+                            </div>
+                          </section>
+                          </div>';
                     }
                 } else {
-                    echo '<section class="register-section">
+                    echo '<div>
+                        <section class="register-section">
                         <div class="register">
                           <form class="account-form">
                            <h3>Oops! Following Error Detected:</h3>
                             <p>' . $errorMsg . '</P>
-                            <button class="btn"><a href="index.php">Back Home</a></button>
-                            <button class="btn"><a href="login.php">Return Login</a></button>
+                            <button class="btn" type="button" onclick="location.href=\'index.php\';">Back Home</button>    
+                            <button class="btn" type="button" onclick="location.href=\'login.php\';">Return Login</button>
                           </form>
                         </div>
-                      </section>';
+                      </section>
+                      </div>';
                 }
 
                 //Helper function that checks input for malicious or unwanted content.
