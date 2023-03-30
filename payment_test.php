@@ -19,6 +19,18 @@
 
 
 <body>  
+    <!-- To check if user is login else redirect -->
+    <?php include "includes/checkSession.php"; 
+       $userID=$_SESSION['userID'];
+       if(!$userID){
+           $_SESSION['message'] = "Please login before checking out.";
+           header("Location: http://35.212.148.163/login.php");
+           exit();
+       }
+    ?>
+
+
+
     <main class="container">
         <form action="" method="post" id="payment-form">
             <div class="form-rowrow">
