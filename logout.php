@@ -75,8 +75,8 @@
                     <div class="register">
                       <form class="account-form">
                         <h3>You are not logged in!</h3>
-                        <button class="btn"><a href="login.php">Login</a></button>
-                        <button class="btn"><a href="register.php">Register</a></button>
+                        <button class="btn" type="button" onclick="location.href=\'register.php\';">Return Register</button>
+<button class="btn" type="button" onclick="location.href=\'login.php\';">Return Login</button>
                       </form>
                     </div>
                 </section>';
@@ -85,7 +85,7 @@
                     <div class="register">
                       <form class="account-form">
                         <h3>Goodbye, Come Again ' . $username . '!</h3>
-                        <button class="btn"><a href="index.php">Back Home</a></button>
+                        <button class="btn" type="button" onclick="location.href=\'index.php\';">Back Home</button>
                       </form>
                     </div>
                   </section>';
