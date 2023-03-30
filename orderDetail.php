@@ -99,5 +99,6 @@
     </div>
     <!-- page loading -->
     <script type="module" src="js/pages/orderhistory.js"></script>
+    <script type="module" src="js/toggleSidebar.js"></script>
   </body>
 </html>
