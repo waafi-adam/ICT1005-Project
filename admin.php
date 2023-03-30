@@ -16,7 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
          <?php include "includes/nav-black.inc.php"; ?>
         <!-- modal -->
         <?php global $adminMode;
-        if($adminMode==0){
+        if($adminMode==1){
             echo'<div class="modal-overlay">
             <div class="modal-container">
                 <form class="form delete"  data-form_type="delete-product">
@@ -37,7 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <!-- dashboard tab -->
         <?php 
         global $adminMode;
-        if ($adminMode==0){ ?>
+        if ($adminMode==1){ ?>
             <div class="dashboard-center section-center">
             <article class="dashboard">
                 <!-- btn container -->
