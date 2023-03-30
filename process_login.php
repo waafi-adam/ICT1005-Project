@@ -117,8 +117,8 @@ userEmail=?");
                         </li>
                     </ul>
                     <?php
-                    global $success;
-                    $loggedin = $success;
+                    global $success, $username, $adminMode;
+                    $loggedin=$success;
                     if (!$loggedin) {
                         echo '<ul class="nav-links">
                 <li>
@@ -132,6 +132,19 @@ userEmail=?");
                     </a>
                 </li>
             </ul>';
+                    } else if ($adminMode == 1) {
+                        echo '<ul class="nav-links">
+                <li>
+                    <a href="logout.php" class="nav-link">
+                        Logout
+                    </a>
+                </li>
+                <li>
+                    <a href="admin.php" class="nav-link">
+                        Admin
+                    </a>
+                </li>
+            </ul>';
                     } else {
                         echo '<ul class="nav-links">
                 <li>
@@ -141,7 +154,7 @@ userEmail=?");
                 </li>
                 <li>
                     <a href="orderHistory.php" class="nav-link">
-                        Profile
+                        ' . $username . '
                     </a>
                 </li>
             </ul>';
@@ -159,72 +172,14 @@ userEmail=?");
                 </div>
             </div>
         </nav> 
-        <div class="sidebar-overlay">
-            <aside class="sidebar">
-                <!-- close -->
-                <button class="sidebar-close">
-                    <i class="fas fa-times"></i>
-                </button>
-                <!-- links -->
-                <ul class="sidebar-links">
-                    <li>
-                        <a href="index.php" class="sidebar-link">
-                            <i class="fas fa-home fa-fw"></i>
-                            home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="products.php" class="sidebar-link">
-                            <i class="fas fa-couch fa-fw"></i>
-                            products
-                        </a>
-                    </li>
-                    <li>
-                        <a href="about.php" class="sidebar-link">
-                            <i class="fas fa-book fa-fw"></i>
-                            about
-                        </a>
-                    </li>
-                    <?php
-                    global $loggedin;
-                    if (!$loggedin) {
-                        echo '<li>
-            <a href="register.php" class="sidebar-link">
-              <i class="fas fa-couch fa-fw"></i>
-              Register
-            </a>
-          </li>
-          <li>
-            <a href="login.php" class="sidebar-link">
-              <i class="fas fa-book fa-fw"></i>
-              Login
-            </a>
-          </li>';
-                    } else {
-                        echo'<li>
-            <a href="logout.php" class="sidebar-link">
-              <i class="fas fa-couch fa-fw"></i>
-              logout
-            </a>
-          </li>
-          <li>
-            <a href="orderHistory.php" class="sidebar-link">
-              <i class="fas fa-book fa-fw"></i>
-              order history
-            </a>
-          </li>';
-                    }
-                    ?>
-                </ul>
-            </aside>
-        </div>
-                <?php
-                global $username, $email, $pwd_hashed, $errorMsg, $success;
-                global $userID;
-                if ($success) {
-                    //echo "<script>localStorage.setItem('product', '$json');</script>";
+        <?php include "includes/sidebar.php"; ?>
+        <?php
+        global $username, $email, $pwd_hashed, $errorMsg, $success;
+        global $userID;
+        if ($success) {
+            //echo "<script>localStorage.setItem('product', '$json');</script>";
 
-                    echo '<section class="register-section">
+            echo '<section class="register-section">
                             <div class="register">
                               <form class="account-form">
                                 <h3>Login Successful, welcome back ' . $username . '!</h3>
@@ -233,13 +188,13 @@ userEmail=?");
                             </div>
                           </section>';
 
-                    //Cart stuff
-                    echo "<script>if(localStorage.getItem('cart')){localStorage.removeItem('cart');}</script>";  //Remove cart
-                    //Get array of cart items
-                    $array = getCartItems();
-                    echo "<script>localStorage.setItem('cart', '$array');</script>";
-                } else {
-                    echo '<section class="register-section">
+            //Cart stuff
+            echo "<script>if(localStorage.getItem('cart')){localStorage.removeItem('cart');}</script>";  //Remove cart
+            //Get array of cart items
+            $array = getCartItems();
+            echo "<script>localStorage.setItem('cart', '$array');</script>";
+        } else {
+            echo '<section class="register-section">
                             <div class="register">
                               <form class="account-form">
                                 <h3>Oops! Following Error Detected:</h3>
@@ -249,54 +204,54 @@ userEmail=?");
                               </form>
                             </div>
                           </section>';
-                }
+        }
 
-                function debug_to_console($data) {
-                    $output = $data;
-                    if (is_array($output)) {
-                        $output = implode(',', $output);
-                    }
+        function debug_to_console($data) {
+            $output = $data;
+            if (is_array($output)) {
+                $output = implode(',', $output);
+            }
 
-                    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-                }
+            echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+        }
 
 //Function to get cart item
-                function getCartItems() {
-                    //Get cart item
-                    $config = parse_ini_file('../private/db-config.ini');
-                    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
-                    if ($conn->connect_error) {
-                        $errorMsg = "Connection failed: " . $conn->connect_error;
-                        $success = false;
-                    } else {
-                        //$userstuff = $_SESSION['userID'];
-                        $stmt = $conn->prepare("SELECT Cart.cartQuantity, Product.productCompany, Product.productID, Product.productImagePath, Product.productName, Product.productPrice FROM Cart INNER JOIN Product ON Cart.Product_productID = Product.productID WHERE Cart.User_userID=?");
+        function getCartItems() {
+            //Get cart item
+            $config = parse_ini_file('../private/db-config.ini');
+            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+            if ($conn->connect_error) {
+                $errorMsg = "Connection failed: " . $conn->connect_error;
+                $success = false;
+            } else {
+                //$userstuff = $_SESSION['userID'];
+                $stmt = $conn->prepare("SELECT Cart.cartQuantity, Product.productCompany, Product.productID, Product.productImagePath, Product.productName, Product.productPrice FROM Cart INNER JOIN Product ON Cart.Product_productID = Product.productID WHERE Cart.User_userID=?");
 
-                        $stmt->bind_param("i", $_SESSION['userID']);
-                        $stmt->execute();
-                        $stmt->bind_result($cartQuantity, $productCompany, $productID, $productImagePath, $productName, $productPrice);
+                $stmt->bind_param("i", $_SESSION['userID']);
+                $stmt->execute();
+                $stmt->bind_result($cartQuantity, $productCompany, $productID, $productImagePath, $productName, $productPrice);
 
-                        $data = array();
-                        while ($stmt->fetch()) {
-                            $data[] = array(
-                                'amount' => $cartQuantity,
-                                'productCompany' => $productCompany,
-                                'productID' => $productID,
-                                'productImagePath' => $productImagePath,
-                                'productName' => $productName,
-                                'productPrice' => $productPrice
-                            );
-                        }
-
-                        $stmt->close();
-                        $conn->close();
-                        return json_encode($data);
-                    }
+                $data = array();
+                while ($stmt->fetch()) {
+                    $data[] = array(
+                        'amount' => $cartQuantity,
+                        'productCompany' => $productCompany,
+                        'productID' => $productID,
+                        'productImagePath' => $productImagePath,
+                        'productName' => $productName,
+                        'productPrice' => $productPrice
+                    );
                 }
-                ?>
-            </section>
-        <script type="module" src="js/toggleSidebar.js"></script>
-        <script type="module" src="js/cart/setupCart.js"></script>
-        <script type="module" src="js/cart/toggleCart.js"></script> 
-    </body>
+
+                $stmt->close();
+                $conn->close();
+                return json_encode($data);
+            }
+        }
+        ?>
+    </section>
+    <script type="module" src="js/toggleSidebar.js"></script>
+    <script type="module" src="js/cart/setupCart.js"></script>
+    <script type="module" src="js/cart/toggleCart.js"></script> 
+</body>
 </html>

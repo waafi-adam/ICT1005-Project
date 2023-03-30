@@ -35,9 +35,9 @@
                                            placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="otp">One Time Pin:</label>
+                                    <label for="otp">Security Pin:</label>
                                     <input id="otp" name="otp" class="form-control" type="password" required maxlength="6" minlength="6"
-                                           placeholder="Enter One time Pin">
+                                           placeholder="Enter Security Pin">
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">Password:</label>
