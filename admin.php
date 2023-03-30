@@ -34,7 +34,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         }?>
         <!-- end modal -->
         <!-- dashboard tab -->
-         
         <?php 
         global $adminMode;
         if ($adminMode==1){ ?>

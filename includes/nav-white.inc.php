@@ -33,10 +33,11 @@ else{
                         about
                     </a>
                 </li>
+                </ul>
             <?php
-        global $loggedin;
+        global $loggedin,$username;
         if (!$loggedin) {
-            echo '<ul class="nav-links-right">
+            echo '<ul class="nav-links">
                 <li>
                     <a href="register.php" class="nav-link">
                         Register
@@ -50,7 +51,7 @@ else{
             </ul>';
         }
         else{
-             echo '<ul class="nav-links-right">
+             echo '<ul class="nav-links">
                 <li>
                     <a href="logout.php" class="nav-link">
                         Logout
@@ -58,13 +59,12 @@ else{
                 </li>
                 <li>
                     <a href="orderHistory.php" class="nav-link">
-                        Profile
+                        '.$username.'
                     </a>
                 </li>
             </ul>';
         }
         ?>
-                </ul>
         </div>
         <!-- logo -->
         <img src="images/logo-white.svg" class="nav-logo" alt="logo">

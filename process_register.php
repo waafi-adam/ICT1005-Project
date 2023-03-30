@@ -34,7 +34,7 @@ require 'phpmailer/src/Exception.php';
                 $errorMsg .= "User name is required.<br>";
                 $success = false;
             } else {
-                $username = sanitize_input($_POST['username']); //This is input validation
+                $username = sanitize_input($_POST['username']); 
             }
             if (empty($_POST["email"])) {
                 $errorMsg .= "Email is required.<br>";
@@ -59,7 +59,7 @@ require 'phpmailer/src/Exception.php';
                 }
             }
             $pwd_hashed = password_hash($pwd, PASSWORD_DEFAULT);
-
+            
             saveMemberToDB();
             if ($success) {
                 $smtpconfig = parse_ini_file('../private/smtp_cred.ini');
@@ -104,7 +104,7 @@ require 'phpmailer/src/Exception.php';
                 echo '<section class="register-section">
                         <div class="register">
                           <form class="account-form">
-                            <h3>Oops! Following Error Detected:</h3>
+                           <h3>Oops! Following Error Detected:</h3>
                             <p>'.$errorMsg.'</P>
                             <button class="btn"><a href="index.php">Back Home</a></button>
                             <button class="btn"><a href="login.php">Return Login</a></button>

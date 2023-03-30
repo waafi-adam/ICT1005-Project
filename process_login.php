@@ -91,9 +91,6 @@ userEmail=?");
             $conn->close();
         }
         ?>
-
-
-
         <!-- navbar -->
         <nav class="navbar">
             <div class="nav-center">
@@ -118,11 +115,12 @@ userEmail=?");
                                 about
                             </a>
                         </li>
+                        </ul>
                         <?php
                         global $success;
                         $loggedin=$success;
                         if (!$loggedin) {
-                            echo '<ul class="nav-links-right">
+                            echo '<ul class="nav-links">
                 <li>
                     <a href="register.php" class="nav-link">
                         Register
@@ -135,7 +133,7 @@ userEmail=?");
                 </li>
             </ul>';
                         } else {
-                            echo '<ul class="nav-links-right">
+                            echo '<ul class="nav-links">
                 <li>
                     <a href="logout.php" class="nav-link">
                         Logout
@@ -149,7 +147,7 @@ userEmail=?");
             </ul>';
                         }
                         ?>
-                    </ul>
+                    
                 </div>
                 <!-- logo -->
                 <img src="images/logo-white.svg" class="nav-logo" alt="logo">
@@ -174,7 +172,7 @@ userEmail=?");
                     echo '<section class="register-section">
                             <div class="register">
                               <form class="account-form">
-                                <h3>Login Successfull, welcome back ' . $username . '!</h3>
+                                <h3>Login Successful, welcome back ' . $username . '!</h3>
                                 <button class="btn"><a href="index.php">Back Home</a></button>
                               </form>
                             </div>

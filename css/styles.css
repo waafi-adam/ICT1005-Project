@@ -1236,6 +1236,7 @@ Register/Login/Verification Pages
 .register-section .register{
   width: 90%;
   max-width: 450px;
+  margin-top: 25px;
 }
 
 .account-form{
