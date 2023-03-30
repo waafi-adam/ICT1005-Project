@@ -5,7 +5,7 @@ $review_text = $_POST['review_text'];
 $order_id = $_POST['DetailID'];
 $review_rating = $_POST['review_rating'];
 $product_id = $_POST['orderProductID'];
-$username = $_SESSION['username'];
+$username = $_POST['username'];
 
 // Connect to database
 $config = parse_ini_file('../private/db-config.ini');
@@ -17,7 +17,7 @@ if ($conn->connect_error) {
     $success = false;
 } else {
     // Update reviews in database
-    $sql = "INSERT INTO shoeStore.Review (productID, reviewDescription, reviewRating) VALUES ('$product_id' , '$review_text','$review_rating')";
+    $sql = "INSERT INTO shoeStore.Review (productID, reviewDescription, reviewRating, reviewUsername) VALUES ('$product_id' , '$review_text','$review_rating', '$username')";
     $result = $conn->query($sql);
 }
 

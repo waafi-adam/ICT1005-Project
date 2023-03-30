@@ -16,10 +16,10 @@
     else {
         
         // Prepare the query statement
-        $stmt = $conn->prepare("SELECT reviewID, reviewTitle, reviewDescription, reviewRating FROM Review WHERE productID=$ID");
+        $stmt = $conn->prepare("SELECT reviewID, reviewTitle, reviewDescription, reviewRating, reviewUsername FROM Review WHERE productID=$ID");
         // Execute the query statement and bind the result columns to variables
         $stmt->execute();
-        $stmt->bind_result($reviewID, $reviewTitle, $reviewDescription, $reviewRating);
+        $stmt->bind_result($reviewID, $reviewTitle, $reviewDescription, $reviewRating, $reviewUsername);
 
         // Fetch the data and store it in an array
         $data = array();
@@ -28,7 +28,8 @@
             'reviewID' => $reviewID,
             'reviewTitle' => $reviewTitle,
             'reviewDescription' => $reviewDescription,
-            'reviewRating' => $reviewRating
+            'reviewRating' => $reviewRating,
+            'reviewUsername' => $reviewUsername
           );
         }
 
