@@ -1,12 +1,12 @@
 <?php
 include "includes/checkSession.php";
-$loggedin=false;
-$username=$_SESSION['username'];
-if(empty($username)){
-    $loggedin=false;
-}
-else{
-    $loggedin=true;
+$loggedin = false;
+$username = $_SESSION['username'];
+$adminMode=$_SESSION['adminMode'];
+if (empty($username)) {
+    $loggedin = false;
+} else {
+    $loggedin = true;
 }
 ?>
 <!-- navbar -->
@@ -35,7 +35,7 @@ else{
                 </li>
                 </ul>
             <?php
-        global $loggedin,$username;
+        global $loggedin,$username,$adminMode;
         if (!$loggedin) {
             echo '<ul class="nav-links">
                 <li>
@@ -46,6 +46,20 @@ else{
                 <li>
                     <a href="login.php" class="nav-link">
                         Login
+                    </a>
+                </li>
+            </ul>';
+        }
+        else if ($adminMode==1){
+            echo '<ul class="nav-links">
+                <li>
+                    <a href="logout.php" class="nav-link">
+                        Logout
+                    </a>
+                </li>
+                <li>
+                    <a href="admin.php" class="nav-link">
+                        Admin
                     </a>
                 </li>
             </ul>';

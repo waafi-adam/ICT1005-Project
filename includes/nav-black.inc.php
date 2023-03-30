@@ -35,7 +35,7 @@ if (empty($username)) {
                 </li>
             </ul>
             <?php
-        global $loggedin;
+        global $loggedin,$username,$adminMode;
         if (!$loggedin) {
             echo '<ul class="nav-links">
                 <li>
@@ -46,6 +46,20 @@ if (empty($username)) {
                 <li>
                     <a href="login.php" class="nav-link">
                         Login
+                    </a>
+                </li>
+            </ul>';
+        }
+        else if ($adminMode==1){
+            echo '<ul class="nav-links">
+                <li>
+                    <a href="logout.php" class="nav-link">
+                        Logout
+                    </a>
+                </li>
+                <li>
+                    <a href="admin.php" class="nav-link">
+                        Admin
                     </a>
                 </li>
             </ul>';

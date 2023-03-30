@@ -115,12 +115,12 @@ userEmail=?");
                                 about
                             </a>
                         </li>
-                        </ul>
-                        <?php
-                        global $success;
-                        $loggedin=$success;
-                        if (!$loggedin) {
-                            echo '<ul class="nav-links">
+                    </ul>
+                    <?php
+                    global $success;
+                    $loggedin = $success;
+                    if (!$loggedin) {
+                        echo '<ul class="nav-links">
                 <li>
                     <a href="register.php" class="nav-link">
                         Register
@@ -132,8 +132,8 @@ userEmail=?");
                     </a>
                 </li>
             </ul>';
-                        } else {
-                            echo '<ul class="nav-links">
+                    } else {
+                        echo '<ul class="nav-links">
                 <li>
                     <a href="logout.php" class="nav-link">
                         Logout
@@ -145,9 +145,8 @@ userEmail=?");
                     </a>
                 </li>
             </ul>';
-                        }
-                        ?>
-                    
+                    }
+                    ?>
                 </div>
                 <!-- logo -->
                 <img src="images/logo-white.svg" class="nav-logo" alt="logo">
@@ -160,9 +159,65 @@ userEmail=?");
                 </div>
             </div>
         </nav> 
-        <?php include "includes/sidebar.php"; ?>
-        <main class='jumbotron text-left'>
-            <section class="register-section">
+        <div class="sidebar-overlay">
+            <aside class="sidebar">
+                <!-- close -->
+                <button class="sidebar-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <!-- links -->
+                <ul class="sidebar-links">
+                    <li>
+                        <a href="index.php" class="sidebar-link">
+                            <i class="fas fa-home fa-fw"></i>
+                            home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="products.php" class="sidebar-link">
+                            <i class="fas fa-couch fa-fw"></i>
+                            products
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.php" class="sidebar-link">
+                            <i class="fas fa-book fa-fw"></i>
+                            about
+                        </a>
+                    </li>
+                    <?php
+                    global $loggedin;
+                    if (!$loggedin) {
+                        echo '<li>
+            <a href="register.php" class="sidebar-link">
+              <i class="fas fa-couch fa-fw"></i>
+              Register
+            </a>
+          </li>
+          <li>
+            <a href="login.php" class="sidebar-link">
+              <i class="fas fa-book fa-fw"></i>
+              Login
+            </a>
+          </li>';
+                    } else {
+                        echo'<li>
+            <a href="logout.php" class="sidebar-link">
+              <i class="fas fa-couch fa-fw"></i>
+              logout
+            </a>
+          </li>
+          <li>
+            <a href="orderHistory.php" class="sidebar-link">
+              <i class="fas fa-book fa-fw"></i>
+              order history
+            </a>
+          </li>';
+                    }
+                    ?>
+                </ul>
+            </aside>
+        </div>
                 <?php
                 global $username, $email, $pwd_hashed, $errorMsg, $success;
                 global $userID;
@@ -188,7 +243,7 @@ userEmail=?");
                             <div class="register">
                               <form class="account-form">
                                 <h3>Oops! Following Error Detected:</h3>
-                                <p>'.$errorMsg.'</P>
+                                <p>' . $errorMsg . '</P>
                                 <button class="btn" type="button" onclick="location.href=\'index.php\';">Back Home</button>
                                 <button class="btn" type="button" onclick="location.href=\'login.php\';">Return Login</button>
                               </form>
@@ -240,7 +295,6 @@ userEmail=?");
                 }
                 ?>
             </section>
-        </main>
         <script type="module" src="js/toggleSidebar.js"></script>
         <script type="module" src="js/cart/setupCart.js"></script>
         <script type="module" src="js/cart/toggleCart.js"></script> 

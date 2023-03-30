@@ -16,7 +16,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
          <?php include "includes/nav-black.inc.php"; ?>
         <!-- modal -->
         <?php global $adminMode;
+        //Check if admin is enabled
         if($adminMode==1){
+                
             echo'<div class="modal-overlay">
             <div class="modal-container">
                 <form class="form delete"  data-form_type="delete-product">
