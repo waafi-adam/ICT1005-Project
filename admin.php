@@ -16,8 +16,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
         <?php include "includes/nav-black.inc.php"; ?>
         <!-- modal -->
     </div>
-    <!-- logo -->
-    <img src="images/logo-white.svg" class="nav-logo" alt="logo">
+    
     <!-- cart icon -->
     <div class="toggle-container">
         <button class="toggle-cart">
