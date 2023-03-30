@@ -2,7 +2,7 @@
 include "includes/checkSession.php";
 $loggedin = false;
 $username = $_SESSION['username'];
-$adminmode=$_SESSION['adminMode'];
+$adminMode=$_SESSION['adminMode'];
 if (empty($username)) {
     $loggedin = false;
 } else {
