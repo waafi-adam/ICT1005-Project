@@ -29,7 +29,7 @@
                         action="process_register.php"
                         method="post"
                       >
-                        <img
+                        <img    
                           src="images/logo-black.svg"
                           alt="logo-black"
                         />

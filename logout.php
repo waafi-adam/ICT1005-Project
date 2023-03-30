@@ -15,7 +15,6 @@
     </head>
     <body>
         <?php include "includes/checkSession.php";
-
         $username = $_SESSION['username'];
         ?>
         <!-- navbar -->
@@ -42,7 +41,8 @@
                                 about
                             </a>
                         </li>
-                        <ul class="nav-links-right">
+                    </ul>
+                        <ul class="nav-links">
                             <li>
                                 <a href="register.php" class="nav-link">
                                     Register

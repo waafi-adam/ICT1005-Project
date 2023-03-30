@@ -53,8 +53,9 @@
                     echo '<section class="register-section">
                             <div class="register">
                               <form class="account-form">
-                                <h3>Login Successfull, welcome back ' . $username . '!</h3>
+                                <h3>Login Successful, welcome back ' . $username . '!</h3>
                                 <button class="btn"><a href="index.php">Back Home</a></button>
+                                <button class="btn"><a href="admin.php">Admin Page</a></button>
                               </form>
                             </div>
                           </section>';
@@ -65,7 +66,7 @@
                     echo '<section class="register-section">
                             <div class="register">
                               <form class="account-form">
-                                <h3>Oops! Following Error Detected:</h3>
+                                <h3>Oops! Following Error(s) Detected:</h3>
                                 <p>'.$errorMsg.'</P>
                                 <button class="btn"><a href="index.php">Back Home</a></button>
                                 <button class="btn"><a href="login.php">Return Login</a></button>

@@ -27,6 +27,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                  exit();
              }
        ?>
+       <?php include "includes/nav-white.inc.php"; ?> 
+       <?php include "includes/sidebar.php"; ?>
+        
        
                
         <!-- hero -->
@@ -43,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
             <!-- display errors returned by createToken -->
             <span class="payment-errors"></span>
             
-            <form action="">
+            <form action="process_payment.php" method="post">
 
             <div class="row">
 
@@ -59,7 +62,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <div class="inputBox">
                         <span>Email:</span>
                         <input type="email" id="email" name="email"
-                               placeholder="example@example.com">
+                               required placeholder="Enter email" class="form-control">
                     </div>
                     <div class="inputBox">
                         <span>Address:</span>
