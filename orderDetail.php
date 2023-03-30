@@ -43,7 +43,7 @@
             total: $12.00
           </h3>
           <form>
-               <button type="submit" class="cart-checkout btn" formaction="payment_addr.php">Checkout</button>
+               <button type="submit" class="cart-checkout btn" formaction="payment_test.php">Checkout</button>
           </form>
         </footer>
       </aside>
