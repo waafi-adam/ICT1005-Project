@@ -111,7 +111,7 @@
         <h2>Leave a Review</h2>
         <form method="post" action="save_Review.php">
             <input type="hidden" name="orderProductID" value="<?php echo $row['orderProductID']; ?>">
-            <input type="hidden" name="username" value"<?php echo $username ?>">
+            <input type="hidden" name="username" value="<?php echo $username ?>">
             <label for="review_text">Review:</label>
             <textarea id="review_text" name="review_text"></textarea>
              <select id="review_rating" name="review_rating">
