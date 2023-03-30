@@ -1,7 +1,7 @@
 <div class="sidebar-overlay">
       <aside class="sidebar">
         <!-- close -->
-        <button class="sidebar-close">
+        <button class="sidebar-close" aria-label="Close Side Bar">
           <i class="fas fa-times"></i>
         </button>
         <!-- links -->

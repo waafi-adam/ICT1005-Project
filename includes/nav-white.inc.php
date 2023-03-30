@@ -14,7 +14,7 @@ if (empty($username)) {
     <div class="nav-center">
         <!-- links -->
         <div>
-            <button class="toggle-nav">
+            <button class="toggle-nav" aria-label="Toggle Menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
@@ -84,7 +84,7 @@ if (empty($username)) {
         <img src="images/logo-white.svg" class="nav-logo" alt="logo">
         <!-- cart icon -->
         <div class="toggle-container">
-            <button class="toggle-cart">
+            <button class="toggle-cart" aria-label="View Shopping Cart">
                 <i class="fas fa-shopping-cart"></i>
             </button>
             <span class="cart-item-count">0</span>
