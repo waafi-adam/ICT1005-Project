@@ -137,30 +137,12 @@ const renderForm = (type, row) => {
                 <label for="thumbnail" class="form-label">Add/Change Thumbnail:</label>
                 <input type="file" id="thumbnail" name="thumbnail" class="form-input" accept="image/png, image/jpeg">
             </div>
-
-            <div class="form-row">
-                <label for="images" class="form-label">Add Images to Gallery:</label>
-                <input type="file" id="images" name="images"
-                    class="form-input" accept="image/png, image/jpeg" multiple>
-            </div>
             <input type="submit" class="btn " value=${submitTxt}>
             <input type="button" class="btn product_form-close-btn" value="Cancel">
         </div>
-
         <div class="form-imgs">
             <div class="thumbnail-container">
-                <img src=${productImagePath || ''} alt="Current Image" class="thumbnail-img">
-            </div>
-            <div class="image-gallery">
-                <div class="image-item" draggable="true">
-                    <img src="./images/sneaker.png" alt="Image 1">
-                </div>
-                <div class="image-item" draggable="true">
-                    <img src="./images/sneaker.png" alt="Image 2">
-                </div>
-                <div class="image-item" draggable="true">
-                    <img src="./images/sneaker.png" alt="Image 3">
-                </div>
+                <img src=${productImagePath || 'images/sneaker.png'} alt="Current Image" class="thumbnail-img">
             </div>
         </div>
     </form>
@@ -247,8 +229,8 @@ const handleSubmit = async (e, id) => {
   if (formType === 'add-product') await addProduct(formData, form)
   if (formType === 'edit-product') await editProduct(formData, form, id)
 
-  clearInputs(form)
-  location.reload()
+//  clearInputs(form)
+  setTimeout(() => location.reload(), 3000);
 }
 
 const validateForm = (formData, form) => {
@@ -283,7 +265,7 @@ const postData = async (url, data) => {
 }
 
 const displayProducts = (products) => {
-  const table = document.querySelector('.table')
+  const table = document.querySelector('.table.product')
   table.innerHTML = `
         <div class="table-row" >
             <div class="item-display">
@@ -303,8 +285,16 @@ const displayProducts = (products) => {
             <!-- edit form -->
         </div>
     `
-  const addRow = table.querySelector('.table-row.add')
+  
   for (let product of products) {
+    insertProductRow(product);
+  }
+  selectAndListenRows()
+}
+
+const insertProductRow = (product) =>{
+    const table = document.querySelector('.table.product')
+    const addRow = table.querySelector('.table-row.add')
     const {
       productID,
       productName,
@@ -338,8 +328,6 @@ const displayProducts = (products) => {
         <!-- item end -->
         `
     table.insertBefore(row, addRow)
-  }
-  selectAndListenRows()
 }
 
 // CRUD below
@@ -404,7 +392,7 @@ ORDERS SECTION
 */
 
 const displayOrders = (orders) => {
-  const table = document.querySelectorAll('.table')[1]
+  const table = document.querySelector('.table.order');
   table.innerHTML = `
         <div class="table-row">
             <div class="item-display">
@@ -420,14 +408,12 @@ const displayOrders = (orders) => {
         </div>
        <!--Items here-->
 
-    `
-
-  const addRow = table.querySelector('.table-row')
+    `;
 
   for (let order of orders) {
-    const { orderID, orderQuantity, orderName, orderPrice, orderUserID } = order
-    const row = document.createElement('div')
-    row.setAttribute('class', `table-row item`)
+    const { orderID, orderQuantity, orderName, orderPrice, orderUserID } = order;
+    const row = document.createElement('div');
+    row.setAttribute('class', `table-row item`);
     row.innerHTML = `
         <!-- item display -->
         <div class="item-display">
@@ -438,56 +424,111 @@ const displayOrders = (orders) => {
                 <div class="item-col">${orderQuantity}</div>
                 <div class="item-col">${orderUserID}</div>
             </div>
-            <div class="item-btns item">
-                <button type="button" class="product_form-open-btn btn" data-form_type="edit">
-                    <i class="fas fa-edit"></i>
-                </button>
-                <button type="button" class="delete-btn btn">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
+            
             <!-- edit form -->
         </div>
         <!-- item end -->
-        `
-    addRow.parentNode.insertBefore(row, addRow.nextSibling)
+        `;
+    table.appendChild(row);
     //table.insertBefore(row, addRow);
   }
-}
+};
 
 //GET Order Data
 const getOrderDetails = async () => {
   try {
-    const resp = await fetch('process_getOrders.php')
-    const data = await resp.json()
-    console.log(resp)
-    console.log(data)
-    return data
+    const resp = await fetch('process_getOrders.php');
+    const data = await resp.json();
+    console.log(resp);
+    console.log(data);
+    return data;
   } catch (err) {
-    console.log('Error: ' + err)
+    console.log('Error: ' + err);
   }
-}
+};
+
+/*
+================
+USERS SECTION
+================
+*/
+//userID, userName, userEmail, userPassword, verified, verify_token
+const displayUsers = (users) => {
+  const table = document.querySelector('.table.user');
+  table.innerHTML = `
+        <div class="table-row">
+            <div class="item-display">
+                <div class="item-btns"></div>
+                <div class="item-info">
+                    <div class="item-col">ID</div>
+                    <div class="item-col">userName</div>
+                    <div class="item-col">userEmail</div>
+                </div>
+            </div>
+        </div>
+       <!--Items here-->
+    `;
+    
+  for (let user of users) {
+    const row = document.createElement('div');
+    const { userID, userName, userEmail } = user;
+    row.setAttribute('class', `table-row item`);
+    row.innerHTML = `
+        <!-- item display -->
+        <div class="item-display">
+            <div class="item-info">
+                <div class="item-col">${userID}</div>
+                <div class="item-col">${userName}</div>
+                <div class="item-col">${userEmail}</div>
+            </div>
+        </div>
+        <!-- item end -->
+        `;
+    table.appendChild(row);
+    //table.insertBefore(row, addRow);
+  }
+};
+
+//GET Order Data
+const getUsers = async () => {
+  try {
+    const resp = await fetch('process_getUsers.php');
+    const data = await resp.json();
+    console.log(resp);
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.log('Error: ' + err);
+  }
+};
 
 /*
 ================
 ADMIN SETUP
 ================
 */
-const haveStore = getStorageItem('products')[0];
-let productsData = products;
+//const haveStore = getStorageItem('products')[0];
+////let productsData = products;
+let productsData = [];
 
 const setupTable = async () => {
     // set up products section
     
-    if (!haveStore){
-      productsData = await fetchProducts();
-      console.log(productsData);
-      setStorageItem("products", productsData);
-    }
+//    if (!haveStore){
+//      productsData = await fetchProducts();
+//      console.log(productsData);
+//      setStorageItem("products", productsData);
+//    }
+//    displayProducts(productsData);
+    productsData = await fetchProducts();
     displayProducts(productsData);
   
     // setup orders section
     const orderData = await getOrderDetails();
     displayOrders(orderData);
+    
+    // setup users section
+    const usersData = await getUsers();
+    displayUsers(usersData);
 };
 setupTable();

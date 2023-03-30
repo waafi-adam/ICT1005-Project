@@ -7,16 +7,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <head>
         <?php include "./includes/head.inc.php" ?>
         <title>Admin</title>
+
+        <!-- libraries for statistics section -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
          <?php include "includes/nav-black.inc.php"; ?>
         <!-- modal -->
-        <div class="modal-overlay">
+        <?php global $adminMode;
+        if($adminMode==1){
+            echo'<div class="modal-overlay">
             <div class="modal-container">
                 <form class="form"  data-form_type="delete-product">
                     <h3>Product ID: 123</h3>
                     <div class="form-row">
-                        <label for="delete" class="form-label">Type the product id to comfirm delete:</label>
+                        <label for="delete" class="form-label">Type the product id to confirm delete:</label>
                         <input type="email" name="delete" class="form-input" value="">
                     </div>
                     <button type="submit" class="btn btn-block">comfirm</button>
@@ -24,22 +30,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 </form>
                 <button class="close-btn"><i class="fas fa-times"></i></button>
                 </div>
-        </div>
+        </div>';
+        }?>
         <!-- end modal -->
         <!-- dashboard tab -->
-        <div class="dashboard-center section-center">
+         
+        <?php 
+        global $adminMode;
+        if ($adminMode==1){ ?>
+            <div class="dashboard-center section-center">
             <article class="dashboard">
                 <!-- btn container -->
                 <div class="btn-container">
-                    <button class="tab-btn active" data-id="history">Products</button>
+                    <button class="tab-btn active" data-id="product">Products</button>
                     <button class="tab-btn" data-id="order">Orders</button>
-                    <button class="tab-btn" data-id="goals">Users</button>
+                    <button class="tab-btn" data-id="user">Users</button>
+                    <button class="tab-btn" data-id="statistic">Statistics</button>
                 </div>
                 <div class="dashboard-content">
                     <!-- tab info -->
-                    <div class="content active" id="history">
+                    <div class="content active" id="product">
                         <div class="table-center">
-                            <div class="table">
+                            <div class="table product">
                                 <div class="table-row">
                                     <div class="item-display">
                                         <div class="item-btns"></div>
@@ -70,7 +82,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     <!-- tab info -->
                     <div class="content" id="order">
                         <div class="table-center">
-                            <div class="table">
+                            <div class="table order">
                                 <div class="table-row">
                                     <div class="item-display">
                                         <div class="item-btns"></div>
@@ -92,33 +104,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                     </div>
                     <!-- end of tab info -->
                     <!-- tab info -->
-                    <div class="content" id="goals">
-                        <h4>goals</h4>
-                        <p>
-                            Chambray authentic truffaut, kickstarter brunch taxidermy vape
-                            heirloom four dollar toast raclette shoreditch church-key.
-                            Poutine etsy tote bag, cred fingerstache leggings cornhole
-                            everyday carry blog gastropub. Brunch biodiesel sartorial mlkshk
-                            swag, mixtape hashtag marfa readymade direct trade man braid
-                            cold-pressed roof party. Small batch adaptogen coloring book
-                            heirloom. Letterpress food truck hammock literally hell of wolf
-                            beard adaptogen everyday carry. Dreamcatcher pitchfork yuccie,
-                            banh mi salvia venmo photo booth quinoa chicharrones.
-                        </p>
+                    <div class="content" id="user">
+                        <div class="table-center">
+                            <div class="table user">
+                                <div class="table-row">
+                                    <div class="item-display">
+                                        <div class="item-btns"></div>
+                                        <div class="item-info">
+                                            <div class="item-col">Order Detail</div>
+                                            <div class="item-col">Product Name</div>
+                                            <div class="item-col">Price</div>
+                                            <div class="item-col">UserID</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of tab info -->
+                    <!-- tab info -->
+                    <div class="content" id="statistic">
+                        <?php include "includes/statistics.php"; ?>
                     </div>
                     <!-- end of tab info -->
                 </div>
             </article>
         </div>
-        <?php 
-//            echo "hello";
-//            $config = parse_ini_file('../../private/db-config.ini');
-//            echo $config['servername'];
-//            echo $config['username'];
-//            echo $config['password'];
-//            echo $config['dbname'];
-//            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        <script type="module" src="js/pages/admin.js"></script>';
+        <?php } ?>
+        
         ?>
-        <script type="module" src="js/pages/admin.js"></script>
     </body>
 </html>

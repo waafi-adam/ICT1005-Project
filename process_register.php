@@ -15,6 +15,7 @@
     </head>
     <body>
         <?php include "includes/nav-white.inc.php"; ?> 
+        <?php include "includes/sidebar.php"; ?>
         <main class='jumbotron text-left'>
         <section class="register-section">
             <?php
@@ -150,5 +151,8 @@ require 'phpmailer/src/Exception.php';
             ?>
         </section>
         </main>
+        <script type="module" src="js/toggleSidebar.js"></script>
+       <script type="module" src="js/cart/setupCart.js"></script>
+       <script type="module" src="js/cart/toggleCart.js"></script>
     </body>
 </html>

@@ -33,14 +33,10 @@ else{
                         about
                     </a>
                 </li>
-            </ul>
-        </div>
-        <!-- logo -->
-        <img src="images/logo-white.svg" class="nav-logo" alt="logo">
-        <?php
+            <?php
         global $loggedin;
         if (!$loggedin) {
-            echo '<ul class="nav-register">
+            echo '<ul class="nav-links-right">
                 <li>
                     <a href="register.php" class="nav-link">
                         Register
@@ -54,7 +50,7 @@ else{
             </ul>';
         }
         else{
-             echo '<ul class="nav-register">
+             echo '<ul class="nav-links-right">
                 <li>
                     <a href="logout.php" class="nav-link">
                         Logout
@@ -68,6 +64,10 @@ else{
             </ul>';
         }
         ?>
+                </ul>
+        </div>
+        <!-- logo -->
+        <img src="images/logo-white.svg" class="nav-logo" alt="logo">
         <!-- cart icon -->
         <div class="toggle-container">
             <button class="toggle-cart">

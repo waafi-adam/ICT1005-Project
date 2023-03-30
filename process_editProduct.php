@@ -96,7 +96,7 @@ if ($success) {
         die(json_encode(array('msg' => $msg, 'type' => "danger")));
     } else {
         $msg = "successfully updated";
-        echo json_encode(array('msg' => $thumbnail_path, 'type' => "success"));
+        echo json_encode(array('msg' => $msg, 'type' => "success"));
     }
     $stmt->close();
 }
