@@ -98,12 +98,8 @@ function displayReview(review) {
     <div class="testimonial-box">
       <div class="box-top">
         <div class="profile">
-          <div class="profile-img">
-            <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"/>
-          </div>
           <div class="name-user">
-            <strong>Barry Allen</strong>
-            <span>@barryallen</span>
+            <strong>${review.reviewUsername}</strong>
           </div>
         </div>
         <div class="reviews">
