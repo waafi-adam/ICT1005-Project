@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Stripe JavaScript library -->
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="https://js.stripe.com/v2/"></script>
     <?php include "includes/head.inc.php" ?>
     <title>Home | Comfy</title>
   </head>
@@ -58,19 +58,19 @@
                 <!-- single number -->
                 <article>
                   <span class="number" data-value="500">0</span>
-                  <p>Shoes Sold</p>
+                  <h3>Shoes Sold</h3>
                 </article>
                 <!-- end of single number -->
                 <!-- single number -->
                 <article>
                   <span class="number" data-value="17140">0</span>
-                  <p>Brands Available</p>
+                  <h3>Brands Available</h3>
                 </article>
                 <!-- end of single number -->
                 <!-- single number -->
                 <article>
                   <span class="number" data-value="1500">0</span>
-                  <p>Shoes Available</p>
+                  <h3>Shoes Available</h3>
                 </article>
                 <!-- end of single number -->
             </div>

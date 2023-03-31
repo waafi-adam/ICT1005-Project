@@ -2,16 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- font-awesome -->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-            />
+            >
 
         <!-- styles css -->
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css">
         <title>Home | Comfy</title>
     </head>
     <body>
@@ -52,7 +52,7 @@
                             <img    
                               src="images/logo-black.svg"
                               alt="logo-black"
-                            />
+                            >
                             <h3>Register</h3>
                             <div class="form-group">
                               <label for="username">User Name:</label>
@@ -64,7 +64,7 @@
                                 required
                                 maxlength="45"
                                 placeholder="Enter user name"
-                              />
+                              >
                             </div>
                             <div class="form-group">
                               <label for="email">Email:</label>
@@ -75,7 +75,7 @@
                                 class="form-control"
                                 required
                                 placeholder="Enter email"
-                              />
+                              >
                             </div>
                             <div class="form-group">
                               <label for="pwd">Password:</label>
@@ -86,7 +86,7 @@
                                 type="password"
                                 required
                                 placeholder="Enter password"
-                              />
+                              >
                             </div>
                             <div class="form-group">
                               <label for="pwd_confirm">Confirm Password:</label>
@@ -97,12 +97,12 @@
                                 required
                                 type="password"
                                 placeholder="Confirm password"
-                              />
+                              >
                             </div>
                             <div class="form-group">
                               <div class="form-check">
                                 <label>
-                                  <input type="checkbox" name="agree" required />
+                                  <input type="checkbox" name="agree" required>
                                   I agree to the terms and conditions.
                                 </label>
                               </div>

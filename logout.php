@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- font-awesome -->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-            />
+            >
 
         <!-- styles css -->
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css">
         <title>Home | Comfy</title>
     </head>
     <body>
@@ -69,7 +69,7 @@
                     </div>
                 </div>
             </nav>
-    <?php include "includes/sidebar.php"; ?>
+            <?php include "includes/sidebar.php"; ?>
             <div class="cart-overlay">
                 <aside class="cart" aria-label="Shopping Cart">
                     <button class="cart-close" aria-label="Close Cart">
@@ -98,7 +98,7 @@
                           <form class="account-form">
                             <h3>You are not logged in!</h3>
                             <button class="btn" type="button" onclick="location.href=\'register.php\';">Return Register</button>
-    <button class="btn" type="button" onclick="location.href=\'login.php\';">Return Login</button>
+                            <button class="btn" type="button" onclick="location.href=\'login.php\';">Return Login</button>
                           </form>
                         </div>
                     </section>';
@@ -117,6 +117,6 @@
             <script type="module" src="js/toggleSidebar.js"></script>
             <script type="module" src="js/cart/setupCart.js"></script>
             <script type="module" src="js/cart/toggleCart.js"></script> 
-        </body>
-    </main>
+        </main>
+    </body>
 </html>

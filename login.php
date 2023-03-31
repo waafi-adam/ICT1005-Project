@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- font-awesome -->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-            />
+            >
 
         <!-- styles css -->
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css">
         <title>Home | Comfy</title>
     </head>
     <body>
@@ -48,7 +48,7 @@
                         <img
                             src="images/logo-black.svg"
                             alt="logo-black"
-                        />
+                        >
                         <h3>Login</h3>
                         <div class="form-group">
                             <label for="email">Enter your email:</label>

@@ -1,17 +1,17 @@
        <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products | Comfy</title>
     <!-- font-awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
+    >
 
     <!-- styles css -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css" >
   </head>
   <body>
       
@@ -65,6 +65,7 @@
               <!-- categories -->
               <h4>Company</h4>
               <article class="companies">
+                  <h2>Shoe Companies</h2>
                 <button class="company-btn" aria-label="Shoe Companies">all</button>
               </article>
               <!-- price -->

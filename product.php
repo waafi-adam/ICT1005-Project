@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Single Product</title>
     <!-- font-awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
+    >
 
     <!-- styles css -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/styles.css">
   </head>
   <body>
     <!--     navbar -->
@@ -50,7 +50,9 @@
         <!-- product info -->
         <section class="single-product section">
           <div class="section-center single-product-center">
-            <img src="" alt="" class="single-product-img img">
+            <img src="https://via.placeholder.com/300x200" alt="Placeholder image" class="single-product-img img">
+
+           <!-- <img src="" alt="" class="single-product-img img"> -->
             <article class="single-product-info">
               <div>
                 <h2 class="single-product-title"></h2>
@@ -72,7 +74,7 @@
         <section class="section review-rating">
           <div class="section-center review-rating-center">
             <div class="title">
-              <h2><spanR>/</spanR>rating & reviews</h2>
+              <h2><span>/</span>rating &amp; reviews</h2>
             </div>
             <!-- ratings start -->
             <div class="container ratings">
@@ -125,7 +127,7 @@
             <!-- ratings end -->
             <!-- reviews start -->
             <div id="reviews">
-              <!--reviews-box-container------>
+              <!--reviews-box-container-->
               <div class="testimonial-box-container"></div>
             </div>
 
