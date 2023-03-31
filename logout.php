@@ -25,7 +25,7 @@
                 <div class="nav-center">
                     <!-- links -->
                     <div>
-                        <button class="toggle-nav">
+                        <button class="toggle-nav" aria-label="Toggle Menu">
                             <i class="fas fa-bars"></i>
                         </button>
                         <ul class="nav-links">

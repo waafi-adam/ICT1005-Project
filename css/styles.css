@@ -28,7 +28,7 @@ Variables
     --clr-grey-5: hsl(210, 22%, 40%);
     --clr-grey-6: hsl(209, 23%, 60%);
     --clr-grey-7: hsl(211, 27%, 70%);
-    --clr-grey-8: hsl(210, 31%, 80%);
+    --clr-grey-8: hsl(210, 31%, 40%);
     --clr-grey-9: hsl(212, 33%, 89%);
     --clr-grey-10: hsl(210, 36%, 96%);
     --clr-white: #fff;
@@ -1180,7 +1180,7 @@ Single Product Page
 }
 .single-product-company {
     font-size: 1.2rem;
-    color: var(--clr-grey-8);
+    color: var(--clr-grey-5);
     text-transform: uppercase;
     letter-spacing: var(--spacing);
     margin-bottom: 1.25rem;
