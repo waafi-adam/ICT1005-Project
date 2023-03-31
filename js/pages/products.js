@@ -24,7 +24,7 @@ if(!haveStore){
         productsData = await fetchProducts();
         console.log(productsData);
         setStorageItem("products", productsData);
-        await display(products, getElement('.products-container'));
+        await display(productsData, getElement('.products-container'));
         load.style.display = 'none';
         setupSearch(productsData);
         setupCompanies(productsData);
@@ -32,7 +32,8 @@ if(!haveStore){
     };
     init();
 }else {
-    display(products, getElement('.products-container'));
+    setStorageItem("products", productsData);
+    display(productsData, getElement('.products-container'));
     load.style.display = 'none';
     setupSearch(productsData);
     setupCompanies(productsData);

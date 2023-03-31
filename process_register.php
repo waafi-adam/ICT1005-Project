@@ -148,14 +148,7 @@ require 'phpmailer/src/Exception.php';
                     return $data;
                 }
 
-                function debug_to_console($data) {
-                    $output = $data;
-                    if (is_array($output)) {
-                        $output = implode(',', $output);
-                    }
-
-                    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-                }
+                
 
                 /*
                  * Helper function to write the member data to the DB

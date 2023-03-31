@@ -61,7 +61,6 @@ if ($adminMode == 1) {
                         <input type="number" name="productID" class="form-input" value="">
                     </div>
                     <button type="submit" class="btn btn-block">comfirm</button>
-                    <button type="button" class="btn btn-block btn-hipster">cancel</button>
                 </form>
                 <button class="close-btn"><i class="fas fa-times"></i></button>
                 </div>
@@ -105,11 +104,6 @@ if ($adminMode == 1) {
                                 <button class="btn add_product-btn product_form-open-btn" data-form_type="add">Add Products</button>
                                 <!-- edit form -->
                             </div>
-                        </div>
-                        <!-- delete all & import csv -->
-                        <div class="products-btns">
-                            <button class="btn deleteAll-btn">Delete All Products</button>
-                            <button class="btn importCSV-btn">import CSV</button>
                         </div>
                     </div>
                 </div>

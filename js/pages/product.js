@@ -17,7 +17,6 @@ const imgDOM = getElement('.single-product-img');
 const titleDOM = getElement('.single-product-title');
 const companyDOM = getElement('.single-product-company');
 const priceDOM = getElement('.single-product-price');
-//const colorsDOM = getElement('.single-product-colors');
 const descDOM = getElement('.single-product-desc');
 const cartBtn = getElement('.addToCartBtn');
 
@@ -71,15 +70,9 @@ const displayProduct = (product)=>{
     pageTitleDOM.textContent = `home / ${product.productName}`;
     imgDOM.src = product.productImagePath;
     titleDOM.textContent = product.productName;
-    companyDOM.textContent = `by ${product.productCompany}`;
-    
+    companyDOM.textContent = `by ${product.productCompany}`;    
     priceDOM.textContent = `$${product.productPrice}`;
-    //colorsDOM.innerHTML = colors.map(color =>{
-    //    return `
-    //        <span class="single-product-color" style="background-color:red;"></span>
-    //    `;
-    //}).join('');
-    descDOM.textContent = product.productName;
+    descDOM.textContent = product.productDescription;
     cartBtn.addEventListener('click', (e)=>{
         if(e.currentTarget.classList.contains('addToCartBtn')){
             addToCart(product.productID);
