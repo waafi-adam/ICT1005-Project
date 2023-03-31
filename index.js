@@ -4,20 +4,19 @@ import './js/toggleSidebar.js';
 
 // specific imports
 import fetchProducts from './js/Product/fetchProducts.js';
-import { products } from './js/Product/store.js';
 import display from './js/Product/displayProducts.js';
 import { getElement, setStorageItem } from './js/utils.js';
 import {animateNumbersSection} from './js/numbers/numbers.js';
 
 const init = async()=>{
-    // animate numbers section
-    animateNumbersSection(products);
     //Get all products
     const productsData = await fetchProducts();
     setStorageItem(productsData);
+    // animate numbers section
+    animateNumbersSection(productsData);
     //Get featured Product
-    const featuredProducts = products.filter(product => product.productCompany == "Nike");
-    //Display Product
+    const featuredProducts = products.filter(productsData => product.productCompany === "Nike");
+    //Display featured Product
     display(featuredProducts, getElement('.featured-center'));
 };
 
