@@ -55,12 +55,53 @@
         <section class="section sectoin-center about-page">
           <div class="title">
             <h2>
-              <span>/</span>
-              our history
+              Comfy
             </h2>
             <p class="about-text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate est rerum nulla numquam. Earum necessitatibus delectus dolore quo laboriosam! Voluptas, praesentium! Cupiditate quos maxime, qui sint accusantium modi quas velit quis suscipit laudantium veniam tempora molestias. Officia voluptas ad rem laboriosam nemo tempora quisquam optio architecto, earum iusto officiis maiores velit! Repudiandae voluptate beatae consequuntur. Soluta numquam, sint quos quo id nulla aspernatur autem adipisci, nostrum, doloremque dolor nobis animi repellat repudiandae ea ut. Possimus odio quibusdam sint esse illum.
+            Welcome to our shoestore! We are passionate about shoes and believe that the right pair can make all the difference. Our mission is to help you find the perfect pair of shoes that not only look great but also fit comfortably and suit your lifestyle.
+            <br>
+            At our shoestore, we offer a wide variety of shoes for men, women, and children. From casual to dressy, athletic to outdoor, we have something for everyone. We carry top brands known for their quality and durability, so you can trust that your shoes will last for years to come.
             </p>
+
+
+          </div>
+
+
+
+          <div>
+          <h2 style="text-align: center; margin-top: 30px">
+                Our Team
+          </h2>
+          <div class="about-organization">
+            <div class="individual-organization">
+              <h5 style="font-weight: bold;">Director</h5>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/1200px-Elon_Musk_Royal_Society_%28crop2%29.jpg">
+              <p>John Smith</p>
+              <p>John is responsible for overseeing the day-to-day operations of our shoe company.</p>
+            </div>
+            <div class="individual-organization">
+              <h5 style="font-weight: bold;">Sales Manager</h5>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/1200px-Elon_Musk_Royal_Society_%28crop2%29.jpg">
+              <p>John Doe</p>
+              <p>John is responsible for overseeing the day-to-day operations of our shoe company.</p>
+              <p>
+            </div>
+            <div class="individual-organization">
+              <h5 style="font-weight: bold;">Technical Manager</h5>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/1200px-Elon_Musk_Royal_Society_%28crop2%29.jpg">
+              <p>John James</p>
+              <p>John is responsible for overseeing the day-to-day operations of our shoe company.</p>
+            </div>
+          </div>
+          </div>
+
+
+
+          <div>
+
+
+
+
           </div>
         </section>
         <script type="module" src="js/pages/about.js"></script>

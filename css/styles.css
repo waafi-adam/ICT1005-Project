@@ -1530,6 +1530,27 @@ Admin Page
   }
 }
 
+/* about */
+.about-organization {
+  display: flex;
+  justify-content: space-around;
+}
+
+.about-organization img {
+  width: 30%;
+}
+
+.individual-organization {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.individual-organization p {
+  width: 80%;
+  text-align: center;
+}
+
 /* form gallery */
 .form-imgs .image-gallery .image-item {
   display: inline-block;
