@@ -1,8 +1,10 @@
 <?php
 
 // Retrieve the review text and order ID from the form
+
 $review_text = $_POST['review_text'];
-$order_id = $_POST['DetailID'];
+//$order_id = $_POST['DetailID'];
+$review_title = $_POST['review_title'];
 $review_rating = $_POST['review_rating'];
 $product_id = $_POST['orderProductID'];
 $username = $_POST['username'];
@@ -17,7 +19,7 @@ if ($conn->connect_error) {
     $success = false;
 } else {
     // Update reviews in database
-    $sql = "INSERT INTO shoeStore.Review (productID, reviewDescription, reviewRating, reviewUsername) VALUES ('$product_id' , '$review_text','$review_rating', '$username')";
+    $sql = "INSERT INTO shoeStore.Review (productID, reviewTitle, reviewDescription, reviewRating, reviewUsername) VALUES ('$product_id', '$review_title' , '$review_text','$review_rating', '$username')";
     $result = $conn->query($sql);
 }
 

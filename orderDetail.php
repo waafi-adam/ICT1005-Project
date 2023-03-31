@@ -84,9 +84,14 @@
         <form method="post" action="save_Review.php">
             <input type="hidden" name="orderProductID" value="<?php echo $row['orderProductID']; ?>">
             <input type="hidden" name="username" value="<?php echo $username ?>">
+
+            <label for="review_title">Review Title:</label>
+            <textarea id="review_title" name="review_title"></textarea>
+            <br>
             <label for="review_text">Review:</label>
             <textarea id="review_text" name="review_text"></textarea>
-             <select id="review_rating" name="review_rating">
+            <br>
+            <select id="review_rating" name="review_rating">
                  <option value="1">1 star</option>
                  <option value="2">2 stars</option>
                  <option value="3">3 stars</option>
