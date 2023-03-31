@@ -11,11 +11,11 @@ import {animateNumbersSection} from './js/numbers/numbers.js';
 const init = async()=>{
     //Get all products
     const productsData = await fetchProducts();
-    setStorageItem(productsData);
+    setStorageItem('products', productsData);
     // animate numbers section
     animateNumbersSection(productsData);
     //Get featured Product
-    const featuredProducts = products.filter(productsData => product.productCompany === "Nike");
+    const featuredProducts = productsData.filter(product => product.productCompany === "Nike");
     //Display featured Product
     display(featuredProducts, getElement('.featured-center'));
 };
