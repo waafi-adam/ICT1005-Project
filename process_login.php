@@ -40,10 +40,17 @@
             }
             authenticateUser();
             if ($success) {
-                $_SESSION['username'] = $username;
+                $_SESSION['username'] = sanitize_input($username);
                 $_SESSION['userID'] = $userID;
                 $_SESSION['useremail'] = $email;
             }
+            
+            function sanitize_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
 
             function authenticateUser() {
                 global $username, $email, $pwd_hashed, $errorMsg, $success;
@@ -118,8 +125,9 @@
                             </li>
                         </ul>
                         <?php
-                        global $success, $username, $adminMode;
+                        global $success, $adminMode;
                         $loggedin = $success;
+                        $name=$_SESSION['username'];
                         if (!$loggedin) {
                             echo '<ul class="nav-links">
                     <li>
@@ -155,7 +163,7 @@
                     </li>
                     <li>
                         <a href="orderHistory.php" class="nav-link">
-                            ' . $username . '
+                            ' . $name . '
                         </a>
                     </li>
                 </ul>';
@@ -195,15 +203,16 @@
                 </aside>
             </div>
             <?php
-            global $username, $email, $pwd_hashed, $errorMsg, $success;
+            global $email, $pwd_hashed, $errorMsg, $success;
             global $userID;
+            $name=$_SESSION['username'];
             if ($success) {
                 //echo "<script>localStorage.setItem('product', '$json');</script>";
 
                 echo '<section class="register-section">
                                 <div class="register">
                                   <form class="account-form">
-                                    <h3>Login Successful, welcome back ' . $username . '!</h3>
+                                    <h3>Login Successful, welcome back ' . $name . '!</h3>
                                     <button class="btn" type="button" onclick="location.href=\'index.php\';">Back Home</button>
                                   </form>
                                 </div>
@@ -227,15 +236,7 @@
                               </section>';
             }
 
-            function debug_to_console($data) {
-                $output = $data;
-                if (is_array($output)) {
-                    $output = implode(',', $output);
-                }
-
-                echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-            }
-
+            
     //Function to get cart item
             function getCartItems() {
                 //Get cart item
