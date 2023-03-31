@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- font-awesome -->
         <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-            />
+            >
 
         <!-- styles css -->
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href="css/styles.css">
         <title>Home | Comfy</title>
     </head>
     <body>
 
         <?php include "includes/nav-white.inc.php"; ?> 
         <?php include "includes/sidebar.php"; ?>
+        <div class="cart-overlay">
+            <aside class="cart">
+                <button class="cart-close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <header>
+                    <h3 class="text-slanted">your bag</h3>
+                </header>
+                <!-- cart items -->
+                <div class="cart-items"></div>
+                <!-- footer -->
+                <footer>
+                    <h3 class="cart-total text-slanted">
+                        total: $12.00
+                    </h3>
+                    <button class="cart-checkout btn">checkout</button>
+                </footer>
+            </aside>
+        </div>
         <?php
         $username = $_SESSION['username'];
         $adminMode = $_SESSION['adminMode'];
@@ -35,9 +54,9 @@
                                            placeholder="Enter email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="otp">One Time Pin:</label>
+                                    <label for="otp">Security Pin:</label>
                                     <input id="otp" name="otp" class="form-control" type="password" required maxlength="6" minlength="6"
-                                           placeholder="Enter One time Pin">
+                                           placeholder="Enter Security Pin">
                                 </div>
                                 <div class="form-group">
                                     <label for="pwd">Password:</label>

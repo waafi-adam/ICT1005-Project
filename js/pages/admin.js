@@ -59,6 +59,7 @@ const selectAndListenRows = () => {
       modalOpenBtn.addEventListener('click', () => {
         modal.classList.add('open-modal');
         deleteForm.dataset.product_id = row.dataset.product_id;
+        deleteForm.querySelector('h3').textContent = 'Product ID: ' + row.dataset.product_id;
       });
     }
     modalCloseBtn.addEventListener('click', () =>

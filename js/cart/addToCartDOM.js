@@ -12,15 +12,15 @@ const addToCartDOM = (item) => {
         <div>
             <h4 class="cart-item-name">${item.productName}</h4>
             <p class="cart-item-price">$${item.productPrice}</p>
-            <button class="cart-item-remove-btn">remove</button>
+            <button class="cart-item-remove-btn" aria-label="Remove Items from Cart">remove</button>
         </div>
         <!-- amount toggle -->
         <div>
-            <button class="cart-item-increase-btn">
+            <button class="cart-item-increase-btn" aria-label="Increase quantity">
                 <i class="fas fa-chevron-up"></i>
             </button>
             <p class="cart-item-amount" id="${item.productID}">1</p>
-            <button class="cart-item-decrease-btn">
+            <button class="cart-item-decrease-btn" aria-label="Decrease quantity>
                 <i class="fas fa-chevron-down"></i>
             </button>
         </div>
