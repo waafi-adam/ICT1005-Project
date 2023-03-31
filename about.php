@@ -54,7 +54,6 @@
         <!-- about -->
         <section class="section sectoin-center about-page">
         <div class="title">
-          <h2>Comfy</h2>
           <p class="about-text">
             Welcome to our shoestore! We are passionate about shoes and believe
             that the right pair can make all the difference. Our mission is to
